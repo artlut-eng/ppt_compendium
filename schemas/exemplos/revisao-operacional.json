@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "title": "Reunião diária - Linha 2",
+    "audience": "operacional",
+    "type": "revisao-operacional",
+    "palette": "operacional-alto-contraste",
+    "date": "2026-09-01",
+    "font_scale": 1.25
+  },
+  "slides": [
+    {
+      "type": "kpi_row",
+      "title": "Ontem: 3 de 6 indicadores no verde; OEE em 68%",
+      "kpis": [
+        {
+          "label": "Segurança",
+          "value": "0 inc.",
+          "delta": "142 dias",
+          "status": "success"
+        },
+        {
+          "label": "Produção",
+          "value": "4.120 pç",
+          "delta": "meta 4.500",
+          "status": "danger"
+        },
+        {
+          "label": "Qualidade",
+          "value": "1,8% refugo",
+          "delta": "meta 2%",
+          "status": "success"
+        },
+        {
+          "label": "OEE",
+          "value": "68%",
+          "delta": "meta 75%",
+          "status": "danger"
+        },
+        {
+          "label": "Entregas",
+          "value": "96% OTIF",
+          "delta": "meta 95%",
+          "status": "success"
+        },
+        {
+          "label": "Paradas",
+          "value": "310 min",
+          "delta": "meta 180",
+          "status": "danger"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "title": "Produção abaixo da meta em 4 dos últimos 7 dias",
+      "chart_type": "line",
+      "categories": [
+        "26/08",
+        "27/08",
+        "28/08",
+        "29/08",
+        "30/08",
+        "31/08",
+        "01/09"
+      ],
+      "series": [
+        {
+          "name": "Produzido",
+          "values": [
+            4600,
+            4300,
+            4100,
+            4550,
+            4200,
+            3900,
+            4120
+          ]
+        },
+        {
+          "name": "Meta",
+          "values": [
+            4500,
+            4500,
+            4500,
+            4500,
+            4500,
+            4500,
+            4500
+          ]
+        }
+      ],
+      "source": "MES, turnos A+B+C"
+    },
+    {
+      "type": "chart",
+      "title": "Troca de ferramenta e falta de material = 70% das paradas",
+      "chart_type": "bar",
+      "categories": [
+        "Troca de ferramenta",
+        "Falta de material",
+        "Falha hidráulica",
+        "Ajuste",
+        "Outros"
+      ],
+      "series": [
+        {
+          "name": "min",
+          "values": [
+            120,
+            95,
+            50,
+            30,
+            15
+          ]
+        }
+      ],
+      "source": "Apontamento de paradas"
+    },
+    {
+      "type": "table",
+      "title": "Prensa 3: 4h de parada por falha hidráulica; manutenção corretiva hoje",
+      "columns": [
+        "Desvio",
+        "Valor",
+        "Meta",
+        "Causa",
+        "Ação",
+        "Dono",
+        "Prazo"
+      ],
+      "rows": [
+        [
+          "Paradas Prensa 3",
+          "240 min",
+          "60 min",
+          "Vazamento no cilindro",
+          "Trocar vedação",
+          "Manutenção",
+          "Hoje 14h"
+        ],
+        [
+          "Falta de material L2",
+          "95 min",
+          "0",
+          "Atraso do almoxarifado",
+          "Kit de 2h na linha",
+          "Logística",
+          "02/09"
+        ]
+      ]
+    },
+    {
+      "type": "action_plan",
+      "title": "5 ações abertas, 2 atrasadas",
+      "actions": [
+        {
+          "action": "Trocar vedação Prensa 3",
+          "owner": "Manutenção",
+          "due": "01/09 14h",
+          "status": "warning"
+        },
+        {
+          "action": "Kit de material 2h na linha",
+          "owner": "Logística",
+          "due": "02/09",
+          "status": "neutral"
+        },
+        {
+          "action": "Treinar turno C em SMED",
+          "owner": "Supervisor C",
+          "due": "28/08",
+          "status": "danger"
+        }
+      ]
+    }
+  ]
+}

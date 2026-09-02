@@ -1,0 +1,20 @@
+{
+  "name": "vendas-energetica",
+  "description": "Cor quente de destaque e azul profundo. Para vendas, propostas, pitch e marketing.",
+  "use_for": ["relatorio-de-vendas", "proposta-comercial", "pitch-investidores", "externo"],
+  "font": {"title": "Segoe UI", "body": "Segoe UI"},
+  "colors": {
+    "primary": "1B2A49",
+    "primary_dark": "111B30",
+    "secondary": "2E86AB",
+    "accent": "F26419",
+    "neutral_dark": "2D2D2D",
+    "neutral_mid": "858585",
+    "neutral_light": "F4F4F4",
+    "background": "FFFFFF",
+    "success": "2E7D32",
+    "warning": "F9A825",
+    "danger": "C62828",
+    "chart": ["1B2A49", "2E86AB", "F26419", "8FB8DE", "F6AE2D", "858585"]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "corporativa-azul",
+  "description": "Paleta neutra e confiavel para decks corporativos, projetos e relatorios taticos.",
+  "use_for": ["relatorio-de-projeto", "kickoff-de-projeto", "licoes-aprendidas", "treinamento", "all-hands", "tatico"],
+  "font": {"title": "Calibri", "body": "Calibri"},
+  "colors": {
+    "primary": "1F3A5F",
+    "primary_dark": "14273F",
+    "secondary": "4F81BD",
+    "accent": "F2A900",
+    "neutral_dark": "333333",
+    "neutral_mid": "8C8C8C",
+    "neutral_light": "F2F2F2",
+    "background": "FFFFFF",
+    "success": "2E7D32",
+    "warning": "F9A825",
+    "danger": "C62828",
+    "chart": ["1F3A5F", "4F81BD", "F2A900", "8C8C8C", "9DC3E6", "C9A227"]
+  }
+}

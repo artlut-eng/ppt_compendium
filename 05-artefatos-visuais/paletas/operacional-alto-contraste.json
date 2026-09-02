@@ -1,0 +1,21 @@
+{
+  "name": "operacional-alto-contraste",
+  "description": "Cores saturadas e semaforo forte, legivel de longe em TV. Para revisoes operacionais e gestao a vista.",
+  "use_for": ["revisao-operacional", "operacional"],
+  "font": {"title": "Arial", "body": "Arial"},
+  "font_scale": 1.25,
+  "colors": {
+    "primary": "003366",
+    "primary_dark": "00224A",
+    "secondary": "0072CE",
+    "accent": "FF8C00",
+    "neutral_dark": "1A1A1A",
+    "neutral_mid": "666666",
+    "neutral_light": "E8E8E8",
+    "background": "FFFFFF",
+    "success": "00A651",
+    "warning": "FFC000",
+    "danger": "E00000",
+    "chart": ["003366", "0072CE", "FF8C00", "666666", "7FB3E6", "FFC000"]
+  }
+}

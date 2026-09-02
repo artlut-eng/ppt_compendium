@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "title": "All-hands 3T26",
+    "audience": "operacional",
+    "type": "all-hands",
+    "palette": "corporativa-azul",
+    "font_scale": 1.15
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "All-hands 3T26",
+      "subtitle": "Resultados, direção e novidades"
+    },
+    {
+      "type": "agenda",
+      "items": [
+        "Resultados do trimestre",
+        "Conquistas dos times",
+        "Onde estamos no plano",
+        "O que muda",
+        "Boas-vindas e reconhecimentos",
+        "Perguntas"
+      ]
+    },
+    {
+      "type": "kpi_row",
+      "title": "Melhor trimestre em receita; NPS subiu para 72",
+      "kpis": [
+        {
+          "label": "Receita",
+          "value": "R$ 41 mi",
+          "delta": "+12% vs. 3T25",
+          "status": "success"
+        },
+        {
+          "label": "Clientes ativos",
+          "value": "1.240",
+          "delta": "+85",
+          "status": "success"
+        },
+        {
+          "label": "Entregas no prazo",
+          "value": "96%",
+          "delta": "+3 p.p.",
+          "status": "success"
+        },
+        {
+          "label": "NPS",
+          "value": "72",
+          "delta": "+6",
+          "status": "success"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "title": "Receita cresce pelo 5º trimestre seguido",
+      "chart_type": "column",
+      "categories": [
+        "3T25",
+        "4T25",
+        "1T26",
+        "2T26",
+        "3T26"
+      ],
+      "series": [
+        {
+          "name": "Receita (R$ mi)",
+          "values": [
+            36.5,
+            37.2,
+            38.0,
+            39.8,
+            41.3
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bullets",
+      "title": "Time de logística cortou o lead time em 25%",
+      "bullets": [
+        "Projeto Atlas: de 12 para 9 dias",
+        "Time de suporte: SLA de 98% no trimestre",
+        "Fábrica: 142 dias sem acidente"
+      ]
+    },
+    {
+      "type": "bullets",
+      "title": "O que muda no seu dia a dia",
+      "bullets": [
+        "Nova estrutura comercial por região a partir de 01/10",
+        "Portal de pedidos B2B em piloto com 10 clientes",
+        "Horário flexível estendido para todas as áreas administrativas"
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Perguntas?",
+      "subtitle": "Canal #all-hands para dúvidas depois"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "title": "Plano estratégico 2027-2029",
+    "audience": "estrategico",
+    "type": "plano-estrategico",
+    "palette": "financeira-sobria",
+    "date": "2026-11-10"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Plano estratégico 2027-2029",
+      "subtitle": "Proposta para aprovação do conselho"
+    },
+    {
+      "type": "executive_summary",
+      "headline": "Dobrar receita até 2029 com 3 pilares e R$ 15 mi de investimento",
+      "points": [
+        "Eficiência: -15% custo unitário via automação",
+        "Novos mercados: entrar em 2 estados com canal indireto",
+        "Digital: 30% das vendas por plataforma própria"
+      ],
+      "ask": "Aprovar o plano e o orçamento de R$ 5 mi do ano 1"
+    },
+    {
+      "type": "section",
+      "number": "1",
+      "title": "Onde estamos"
+    },
+    {
+      "type": "chart",
+      "title": "Perdemos 2 p.p. de share em 3 anos",
+      "chart_type": "line",
+      "categories": [
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "series": [
+        {
+          "name": "Nós (% a.a.)",
+          "values": [
+            10,
+            8,
+            8,
+            7
+          ]
+        },
+        {
+          "name": "Mercado (% a.a.)",
+          "values": [
+            11,
+            12,
+            12,
+            13
+          ]
+        }
+      ],
+      "source": "Relatórios setoriais, dados internos"
+    },
+    {
+      "type": "section",
+      "number": "2",
+      "title": "Para onde vamos"
+    },
+    {
+      "type": "comparison",
+      "title": "Três pilares: eficiência, novos mercados, digital",
+      "options": [
+        {
+          "name": "Eficiência",
+          "points": [
+            "Automação linhas 2 e 4",
+            "SMED em toda a planta",
+            "Indicador: custo unitário -15%"
+          ]
+        },
+        {
+          "name": "Novos mercados",
+          "points": [
+            "Canal indireto em PR e SC",
+            "2 distribuidores por estado",
+            "Indicador: R$ 20 mi de receita nova"
+          ]
+        },
+        {
+          "name": "Digital",
+          "points": [
+            "Portal de pedidos B2B",
+            "Integração com ERP dos clientes",
+            "Indicador: 30% das vendas online"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "timeline",
+      "title": "Ano 1 constrói base; anos 2 e 3 escalam",
+      "milestones": [
+        {
+          "date": "2027",
+          "label": "Automação L2, portal B2B v1, 1º distribuidor",
+          "status": "neutral"
+        },
+        {
+          "date": "2028",
+          "label": "Automação L4, canal PR/SC completo",
+          "status": "neutral"
+        },
+        {
+          "date": "2029",
+          "label": "30% digital, receita 2x",
+          "status": "neutral"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "R$ 15 mi com payback de 2,5 anos no cenário base",
+      "columns": [
+        "Pilar",
+        "Investimento",
+        "Receita adicional 2029",
+        "Payback"
+      ],
+      "rows": [
+        [
+          "Eficiência",
+          "R$ 8 mi",
+          "-",
+          "2,0 anos"
+        ],
+        [
+          "Novos mercados",
+          "R$ 4 mi",
+          "R$ 20 mi",
+          "2,5 anos"
+        ],
+        [
+          "Digital",
+          "R$ 3 mi",
+          "R$ 10 mi",
+          "3,0 anos"
+        ]
+      ]
+    },
+    {
+      "type": "action_plan",
+      "title": "Aprovar o plano e o orçamento do ano 1",
+      "actions": [
+        {
+          "action": "Aprovação do conselho",
+          "owner": "Conselho",
+          "due": "Dez/26",
+          "status": "warning"
+        },
+        {
+          "action": "Definir donos por iniciativa",
+          "owner": "CEO",
+          "due": "Jan/27",
+          "status": "neutral"
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Obrigado"
+    }
+  ]
+}

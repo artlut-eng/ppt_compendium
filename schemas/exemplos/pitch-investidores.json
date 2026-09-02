@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "title": "Pitch - Série A",
+    "audience": "externo",
+    "type": "pitch-investidores",
+    "palette": "vendas-energetica"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Fabrisense",
+      "subtitle": "Visibilidade industrial em tempo real | Série A"
+    },
+    {
+      "type": "big_number",
+      "title": "Indústrias médias perdem 8% de capacidade por falta de dados",
+      "value": "8%",
+      "label": "de capacidade perdida",
+      "context": "Estudo com 120 plantas, 2025"
+    },
+    {
+      "type": "process",
+      "title": "Sensores plug-and-play + plataforma em 1 semana",
+      "steps": [
+        "Instala sensores",
+        "Conecta ao MES",
+        "Vê tudo em tempo real",
+        "Recebe alertas"
+      ]
+    },
+    {
+      "type": "big_number",
+      "title": "R$ 4 bi de mercado endereçável no Brasil",
+      "value": "R$ 4 bi",
+      "label": "SAM",
+      "context": "12 mil plantas × R$ 78 mil/ano (bottom-up)"
+    },
+    {
+      "type": "chart",
+      "title": "MRR cresceu 4x em 12 meses",
+      "chart_type": "column",
+      "categories": [
+        "set",
+        "out",
+        "nov",
+        "dez",
+        "jan",
+        "fev",
+        "mar",
+        "abr",
+        "mai",
+        "jun",
+        "jul",
+        "ago"
+      ],
+      "series": [
+        {
+          "name": "MRR (R$ mil)",
+          "values": [
+            50,
+            58,
+            70,
+            82,
+            95,
+            110,
+            128,
+            145,
+            160,
+            175,
+            190,
+            205
+          ]
+        }
+      ],
+      "source": "Dados internos"
+    },
+    {
+      "type": "bullets",
+      "title": "Captando R$ 5 mi para chegar a 100 plantas em 18 meses",
+      "bullets": [
+        "40% produto e engenharia",
+        "35% vendas e canais",
+        "15% operações e suporte",
+        "10% reserva"
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Vamos conversar",
+      "subtitle": "fundadores@fabrisense.com"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "title": "Vendas agosto/26",
+    "audience": "tatico",
+    "type": "relatorio-de-vendas",
+    "palette": "vendas-energetica",
+    "date": "2026-09-01"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Vendas agosto/26",
+      "subtitle": "Diretoria Comercial"
+    },
+    {
+      "type": "executive_summary",
+      "headline": "Atingimos 94% da meta; Sul superou, Sudeste ficou 12% abaixo",
+      "points": [
+        "Ticket médio +8% com novo mix",
+        "Sudeste perdeu 3 contas grandes para concorrente por preço",
+        "Pipeline cobre 2,1x a meta de setembro"
+      ],
+      "ask": "Aprovar campanha de retenção no Sudeste (R$ 120 mil)"
+    },
+    {
+      "type": "kpi_row",
+      "title": "Ticket médio subiu 8%, volume caiu 5%",
+      "kpis": [
+        {
+          "label": "Receita",
+          "value": "R$ 4,7 mi",
+          "delta": "94% da meta",
+          "status": "warning"
+        },
+        {
+          "label": "Ticket médio",
+          "value": "R$ 18,2 mil",
+          "delta": "+8%",
+          "status": "success"
+        },
+        {
+          "label": "Novos clientes",
+          "value": "23",
+          "delta": "+4",
+          "status": "success"
+        },
+        {
+          "label": "Churn",
+          "value": "2,1%",
+          "delta": "+0,6 p.p.",
+          "status": "danger"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "title": "Sudeste responde por todo o gap da meta",
+      "chart_type": "bar",
+      "categories": [
+        "Sul",
+        "Nordeste",
+        "Centro-Oeste",
+        "Sudeste"
+      ],
+      "series": [
+        {
+          "name": "Meta",
+          "values": [
+            1.2,
+            0.8,
+            0.6,
+            2.4
+          ]
+        },
+        {
+          "name": "Real",
+          "values": [
+            1.35,
+            0.8,
+            0.58,
+            2.0
+          ]
+        }
+      ],
+      "source": "CRM, extração 01/09/2026"
+    },
+    {
+      "type": "chart",
+      "title": "Pipeline de R$ 18 mi cobre 2,1x a meta de setembro",
+      "chart_type": "bar",
+      "categories": [
+        "Qualificação",
+        "Proposta",
+        "Negociação",
+        "Fechamento"
+      ],
+      "series": [
+        {
+          "name": "R$ mi",
+          "values": [
+            8.0,
+            5.5,
+            3.0,
+            1.5
+          ]
+        }
+      ],
+      "source": "CRM"
+    },
+    {
+      "type": "action_plan",
+      "title": "Três ações para fechar o gap do Sudeste",
+      "actions": [
+        {
+          "action": "Campanha de retenção nas 20 maiores contas",
+          "owner": "Ger. Sudeste",
+          "due": "15/09",
+          "status": "neutral"
+        },
+        {
+          "action": "Revisar tabela de preço para produto B",
+          "owner": "Pricing",
+          "due": "10/09",
+          "status": "warning"
+        },
+        {
+          "action": "Contratar 1 vendedor para interior de SP",
+          "owner": "RH",
+          "due": "30/09",
+          "status": "neutral"
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Próxima revisão: 01/10"
+    }
+  ]
+}

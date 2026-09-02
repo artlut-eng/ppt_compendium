@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "title": "Resultado 2T26",
+    "audience": "estrategico",
+    "type": "relatorio-financeiro",
+    "palette": "financeira-sobria",
+    "date": "2026-07-15"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Resultado 2T26",
+      "subtitle": "Diretoria Financeira - base gerencial"
+    },
+    {
+      "type": "executive_summary",
+      "headline": "EBITDA de R$ 8,2 mi, 6% acima do orçamento, apesar de receita 2% abaixo",
+      "points": [
+        "Custo unitário caiu 4% com renegociação de insumos",
+        "Receita abaixo por volume na Divisão A",
+        "Caixa líquido de R$ 12 mi, cobertura de 8 meses"
+      ],
+      "ask": "Aprovar antecipação de capex de R$ 2 mi para a linha 4"
+    },
+    {
+      "type": "kpi_row",
+      "title": "Todos os indicadores acima do ano anterior",
+      "kpis": [
+        {
+          "label": "Receita líquida",
+          "value": "R$ 41,3 mi",
+          "delta": "-2% vs. orç.",
+          "status": "warning"
+        },
+        {
+          "label": "EBITDA",
+          "value": "R$ 8,2 mi",
+          "delta": "+6% vs. orç.",
+          "status": "success"
+        },
+        {
+          "label": "Margem EBITDA",
+          "value": "19,9%",
+          "delta": "+1,5 p.p.",
+          "status": "success"
+        },
+        {
+          "label": "Caixa líquido",
+          "value": "R$ 12,0 mi",
+          "delta": "+R$ 1,1 mi",
+          "status": "success"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "title": "Ganho de custo compensou volume menor",
+      "chart_type": "column",
+      "categories": [
+        "EBITDA orçado",
+        "Volume",
+        "Preço",
+        "Custo",
+        "Despesas",
+        "EBITDA real"
+      ],
+      "series": [
+        {
+          "name": "R$ mi",
+          "values": [
+            7.7,
+            -0.9,
+            0.3,
+            1.4,
+            -0.3,
+            8.2
+          ]
+        }
+      ],
+      "source": "DRE gerencial, jun/26",
+      "notes": "Substituir por waterfall nativo quando disponível"
+    },
+    {
+      "type": "table",
+      "title": "Margem bruta subiu 1,8 p.p.",
+      "columns": [
+        "R$ mi",
+        "Real",
+        "Orçado",
+        "Var.",
+        "Var. %"
+      ],
+      "rows": [
+        [
+          "Receita líquida",
+          "41,3",
+          "42,1",
+          "(0,8)",
+          "-1,9%"
+        ],
+        [
+          "Custo",
+          "(27,0)",
+          "(28,3)",
+          "1,3",
+          "-4,6%"
+        ],
+        [
+          "Margem bruta",
+          "14,3",
+          "13,8",
+          "0,5",
+          "+3,6%"
+        ],
+        [
+          "Despesas",
+          "(6,1)",
+          "(6,1)",
+          "0,0",
+          "0,0%"
+        ],
+        [
+          "EBITDA",
+          "8,2",
+          "7,7",
+          "0,5",
+          "+6,5%"
+        ]
+      ]
+    },
+    {
+      "type": "action_plan",
+      "title": "Pedimos aprovar antecipação de capex de R$ 2 mi",
+      "actions": [
+        {
+          "action": "Aprovar capex linha 4",
+          "owner": "Diretoria",
+          "due": "31/07",
+          "status": "warning"
+        },
+        {
+          "action": "Revisar forecast de volume Divisão A",
+          "owner": "Comercial + FP&A",
+          "due": "15/08",
+          "status": "neutral"
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Obrigado",
+      "subtitle": "Anexos: DRE completa, DFC, reconciliações"
+    }
+  ]
+}

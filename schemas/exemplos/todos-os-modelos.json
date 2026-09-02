@@ -1,0 +1,35 @@
+{
+  "meta": {"title": "Catálogo de modelos de slide", "audience": "tatico", "type": "catalogo", "palette": "corporativa-azul", "author": "PPT Compendium", "date": "01/09/2026", "confidentiality": "Uso interno"},
+  "slides": [
+    {"type": "cover", "title": "Catálogo de modelos de slide", "subtitle": "Um slide de cada tipo suportado pela spec", "notes": "Deck de teste: exercita todos os modelos."},
+    {"type": "agenda", "items": ["Abertura", "Dados", "Estrutura", "Fechamento"], "durations": ["5 min", "15 min", "10 min", "5 min"]},
+    {"type": "section", "number": "1", "title": "Abertura", "subtitle": "Sumário, KPIs e número grande"},
+    {"type": "executive_summary", "headline": "Todos os 17 modelos geram slides dentro do grid", "points": ["Título no placeholder nativo", "Rodapé com fonte e página", "Cores só por papel da paleta"], "ask": "Revisar visualmente e ajustar coordenadas se necessário", "source": "build_examples.py"},
+    {"type": "kpi_row", "title": "Seis KPIs cabem em uma linha com fonte reduzida", "kpis": [
+      {"label": "Segurança", "value": "0", "delta": "142 dias", "status": "success"},
+      {"label": "Produção", "value": "4.120", "delta": "meta 4.500", "status": "danger"},
+      {"label": "Qualidade", "value": "1,8%", "delta": "meta 2%", "status": "success"},
+      {"label": "OEE", "value": "68%", "delta": "meta 75%", "status": "danger"},
+      {"label": "OTIF", "value": "96%", "delta": "meta 95%", "status": "success"},
+      {"label": "Custo", "value": "R$ 1,2 mi", "delta": "no orçamento", "status": "neutral"}
+    ], "bullets": ["Contexto opcional abaixo dos cartões", "Segunda linha de contexto"], "source": "MES"},
+    {"type": "big_number", "title": "Um número que é a mensagem", "value": "R$ 2,1 mi", "label": "custo anual", "context": "Equivale a 8% do faturamento. Comparação obrigatória.", "source": "Faturas 2025"},
+    {"type": "section", "number": "2", "title": "Dados"},
+    {"type": "chart", "title": "Barras horizontais ordenadas com destaque em accent", "subtitle": "R$ mi, agosto/26", "chart_type": "bar", "categories": ["Sudeste", "Sul", "Nordeste", "Centro-Oeste"], "series": [{"name": "Receita", "values": [2.0, 1.35, 0.8, 0.58]}], "highlight_index": 0, "number_format": "0.00", "source": "CRM"},
+    {"type": "chart", "title": "Linha com meta tracejada e comentários à direita", "chart_type": "line", "categories": ["S28", "S29", "S30", "S31", "S32", "S33", "S34"], "series": [{"name": "Planejado", "values": [40, 45, 50, 55, 60, 64, 68]}, {"name": "Real", "values": [40, 44, 48, 52, 56, 59, 62]}], "commentary": ["Gap abre a partir da S31", "Causa: homologação do fornecedor", "Recuperação prevista na S38"], "source": "Cronograma"},
+    {"type": "chart", "title": "Composição com colunas empilhadas", "chart_type": "stacked_column", "categories": ["1T", "2T", "3T"], "series": [{"name": "Produto A", "values": [10, 12, 14]}, {"name": "Produto B", "values": [6, 7, 9]}, {"name": "Serviços", "values": [3, 4, 5]}], "source": "ERP"},
+    {"type": "chart", "title": "Rosca com até 4 fatias", "chart_type": "doughnut", "categories": ["Troca de ferramenta", "Falta de material", "Falha hidráulica", "Outros"], "series": [{"name": "min", "values": [120, 95, 50, 45]}], "source": "Apontamento de paradas"},
+    {"type": "table", "title": "Tabela com colunas de status, linha de total e destaque", "columns": ["Item", "Real", "Orçado", "Var. %", "Status"], "rows": [["Receita", "41,3", "42,1", "-1,9%", "Amarelo"], ["Custo", "27,0", "28,3", "-4,6%", "Verde"], ["Despesas", "6,1", "6,1", "0,0%", "Verde"], ["EBITDA", "8,2", "7,7", "+6,5%", "Verde"]], "align": ["left", "right", "right", "right", "center"], "col_widths": [4.33, 2.0, 2.0, 2.0, 2.0], "status_columns": [4], "total_row": true, "highlight_rows": [0], "source": "DRE gerencial"},
+    {"type": "section", "number": "3", "title": "Estrutura"},
+    {"type": "bullets", "title": "Bullets com negrito inicial e sub-itens", "subtitle": "Máximo 6 itens, 2 linhas cada", "bullets": ["**Prazo:** go-live em 15/03", "**Custo:** 3% abaixo do orçamento", "**Escopo:** sem mudanças aprovadas", "**Riscos:** um crítico, fornecedor X"], "sub_bullets": {"3": ["Plano B com fornecedor Y", "Decisão até sexta"]}},
+    {"type": "two_column", "title": "Duas colunas: certo vs. errado", "left": {"heading": "Certo", "bullets": ["Causa específica", "Registrar na hora", "Duração real"], "status": "success"}, "right": {"heading": "Errado", "bullets": ["'Outros'", "Registrar no fim do turno", "Arredondar para 30 min"], "status": "danger"}},
+    {"type": "comparison", "title": "Comparação de três opções com uma recomendada", "options": [{"name": "Não fazer", "points": ["Custo: R$ 0", "Perda: R$ 1,8 mi/ano", "Risco: parada total"]}, {"name": "A: Reforma", "points": ["Custo: R$ 0,9 mi", "Economia: R$ 0,7 mi/ano", "Risco: sem peças"]}, {"name": "B: Prensa nova", "points": ["Custo: R$ 2,4 mi", "Economia: R$ 1,45 mi/ano", "Risco: 5 dias parada"], "recommended": true}]},
+    {"type": "timeline", "title": "Timeline com marcador de hoje e legenda", "milestones": [{"date": "Jun/26", "label": "Kickoff", "status": "success"}, {"date": "Jul/26", "label": "Design aprovado", "status": "success"}, {"date": "Set/26", "label": "Homologação", "status": "warning"}, {"date": "Out/26", "label": "Testes", "status": "danger"}, {"date": "Nov/26", "label": "Go-live", "status": "neutral"}], "today_index": 2},
+    {"type": "process", "title": "Processo em chevrons com etapa atual destacada", "steps": ["Instalar sensores", "Integrar ao MES", "Painéis por máquina", "Alertas"], "descriptions": ["Semana 1", "Semana 2, via API", "Semana 3", "Semana 3"], "current_index": 1},
+    {"type": "matrix_2x2", "title": "Matriz 2×2 com quadrante destacado", "x_label": "Facilidade", "y_label": "Impacto", "quadrants": {"tl": {"label": "Planejar", "items": ["Automação L4"]}, "tr": {"label": "Fazer agora", "items": ["SMED turno C", "Kit de material", "Alerta de energia"]}, "bl": {"label": "Descartar", "items": ["Layout do refeitório"]}, "br": {"label": "Delegar", "items": ["Revisão de checklist"]}}, "highlight": "tr"},
+    {"type": "quote", "text": "Em 6 meses reduzimos 18% do custo de energia e descobrimos duas máquinas que consumiam paradas.", "author": "Gerente industrial, cliente do setor metalúrgico", "dark": true},
+    {"type": "section", "number": "4", "title": "Fechamento"},
+    {"type": "action_plan", "title": "Plano de ação com decisão pedida", "actions": [{"action": "Aprovar fornecedor Y", "owner": "Sponsor", "due": "05/09", "status": "warning"}, {"action": "Replanejar testes", "owner": "GP", "due": "10/09", "status": "neutral"}, {"action": "Treinar turno C", "owner": "Supervisor", "due": "28/08", "status": "danger"}, {"action": "Mapear processo atual", "owner": "Carlos", "due": "20/08", "status": "success"}], "decision": "Aprovar o fornecedor Y como plano B (R$ 40 mil adicionais)"},
+    {"type": "closing", "title": "Próxima revisão: 15/09", "subtitle": "pmo@empresa.com | Anexos: cronograma completo"}
+  ]
+}

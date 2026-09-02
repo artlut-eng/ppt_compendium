@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/artlut-eng/ppt_compendium/schemas/deck-spec.schema.json",
+  "title": "Deck spec",
+  "description": "Especificacao estruturada de uma apresentacao, consumida por 06-codigo/python-pptx/build_from_spec.py e pelo equivalente em PptxGenJS.",
+  "type": "object",
+  "required": ["meta", "slides"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["title"],
+      "properties": {
+        "title": {"type": "string"},
+        "audience": {"type": "string", "enum": ["estrategico", "tatico", "operacional", "externo"]},
+        "type": {"type": "string", "description": "Tipo de apresentacao (ver 03-tipos-de-apresentacao). Ex.: relatorio-de-projeto"},
+        "palette": {"type": "string", "description": "Nome de um arquivo em 05-artefatos-visuais/paletas/ (sem .json) ou caminho para um JSON de paleta", "default": "corporativa-azul"},
+        "author": {"type": "string"},
+        "date": {"type": "string"},
+        "confidentiality": {"type": "string", "description": "Texto de rodape, ex.: Confidencial"},
+        "font_scale": {"type": "number", "minimum": 0.8, "maximum": 1.6, "description": "Multiplicador de tamanho de fonte. Operacional/TV: 1.25. Se omitido, usa o font_scale da paleta (ou 1.0)."},
+        "logo": {"type": "string", "description": "Caminho para imagem do logotipo"},
+        "language": {"type": "string", "default": "pt-BR"}
+      }
+    },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/slide"}
+    }
+  },
+  "$defs": {
+    "status": {"type": "string", "enum": ["success", "warning", "danger", "neutral"]},
+    "common": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string", "description": "Titulo-conclusao, max. 2 linhas"},
+        "subtitle": {"type": "string"},
+        "source": {"type": "string", "description": "Fonte dos dados (rodape)"},
+        "notes": {"type": "string", "description": "Notas do apresentador"}
+      }
+    },
+    "slide": {
+      "type": "object",
+      "required": ["type"],
+      "oneOf": [
+        {"$ref": "#/$defs/cover"},
+        {"$ref": "#/$defs/agenda"},
+        {"$ref": "#/$defs/section"},
+        {"$ref": "#/$defs/executive_summary"},
+        {"$ref": "#/$defs/kpi_row"},
+        {"$ref": "#/$defs/big_number"},
+        {"$ref": "#/$defs/chart"},
+        {"$ref": "#/$defs/table"},
+        {"$ref": "#/$defs/bullets"},
+        {"$ref": "#/$defs/two_column"},
+        {"$ref": "#/$defs/comparison"},
+        {"$ref": "#/$defs/timeline"},
+        {"$ref": "#/$defs/process"},
+        {"$ref": "#/$defs/matrix_2x2"},
+        {"$ref": "#/$defs/action_plan"},
+        {"$ref": "#/$defs/quote"},
+        {"$ref": "#/$defs/closing"}
+      ]
+    },
+    "cover": {
+      "type": "object", "required": ["type", "title"],
+      "properties": {"type": {"const": "cover"}, "title": {"type": "string"}, "subtitle": {"type": "string"}, "author": {"type": "string"}, "date": {"type": "string"}, "notes": {"type": "string"}}
+    },
+    "agenda": {
+      "type": "object", "required": ["type", "items"],
+      "properties": {"type": {"const": "agenda"}, "title": {"type": "string"}, "items": {"type": "array", "items": {"type": "string"}, "minItems": 2, "maxItems": 8}, "durations": {"type": "array", "items": {"type": "string"}}, "notes": {"type": "string"}}
+    },
+    "section": {
+      "type": "object", "required": ["type", "title"],
+      "properties": {"type": {"const": "section"}, "number": {"type": "string"}, "title": {"type": "string"}, "subtitle": {"type": "string"}, "notes": {"type": "string"}}
+    },
+    "executive_summary": {
+      "type": "object", "required": ["type", "headline", "points"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {"type": {"const": "executive_summary"}, "headline": {"type": "string"}, "points": {"type": "array", "items": {"type": "string"}, "minItems": 1, "maxItems": 5}, "ask": {"type": "string"}}
+    },
+    "kpi_row": {
+      "type": "object", "required": ["type", "title", "kpis"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {
+        "type": {"const": "kpi_row"},
+        "kpis": {"type": "array", "minItems": 2, "maxItems": 6, "items": {
+          "type": "object", "required": ["label", "value"],
+          "properties": {"label": {"type": "string"}, "value": {"type": "string"}, "delta": {"type": "string"}, "status": {"$ref": "#/$defs/status"}}
+        }},
+        "bullets": {"type": "array", "items": {"type": "string"}, "description": "Contexto opcional abaixo dos cartoes"}
+      }
+    },
+    "big_number": {
+      "type": "object", "required": ["type", "title", "value"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {"type": {"const": "big_number"}, "value": {"type": "string"}, "label": {"type": "string"}, "context": {"type": "string"}}
+    },
+    "chart": {
+      "type": "object", "required": ["type", "title", "chart_type", "categories", "series"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {
+        "type": {"const": "chart"},
+        "chart_type": {"type": "string", "enum": ["bar", "column", "line", "pie", "doughnut", "stacked_column", "stacked_bar", "area"]},
+        "categories": {"type": "array", "items": {"type": "string"}},
+        "series": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["name", "values"], "properties": {"name": {"type": "string"}, "values": {"type": "array", "items": {"type": "number"}}}}},
+        "highlight_index": {"type": "integer", "description": "Indice da categoria a destacar em accent"},
+        "number_format": {"type": "string", "description": "Formato Excel dos rotulos, ex.: 0.0 ou 0%"},
+        "show_labels": {"type": "boolean"},
+        "commentary": {"type": "array", "items": {"type": "string"}, "description": "Bullets a direita do grafico (layout 2/3 + 1/3)"}
+      }
+    },
+    "table": {
+      "type": "object", "required": ["type", "title", "columns", "rows"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {
+        "type": {"const": "table"},
+        "columns": {"type": "array", "items": {"type": "string"}},
+        "rows": {"type": "array", "items": {"type": "array", "items": {"type": ["string", "number"]}}},
+        "align": {"type": "array", "items": {"type": "string", "enum": ["left", "center", "right"]}},
+        "col_widths": {"type": "array", "items": {"type": "number"}, "description": "Larguras em polegadas; soma deve ser 12.33"},
+        "total_row": {"type": "boolean"},
+        "highlight_rows": {"type": "array", "items": {"type": "integer"}},
+        "status_columns": {"type": "array", "items": {"type": "integer"}, "description": "Colunas cujo texto (Verde/Amarelo/Vermelho, Alta/Media/Baixa, success/warning/danger) recebe fundo colorido"}
+      }
+    },
+    "bullets": {
+      "type": "object", "required": ["type", "title", "bullets"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {"type": {"const": "bullets"}, "bullets": {"type": "array", "items": {"type": "string"}, "minItems": 1, "maxItems": 8}, "sub_bullets": {"type": "object", "additionalProperties": {"type": "array", "items": {"type": "string"}}}}
+    },
+    "two_column": {
+      "type": "object", "required": ["type", "title", "left", "right"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {
+        "type": {"const": "two_column"},
+        "left": {"$ref": "#/$defs/column"},
+        "right": {"$ref": "#/$defs/column"}
+      }
+    },
+    "column": {
+      "type": "object", "required": ["heading", "bullets"],
+      "properties": {"heading": {"type": "string"}, "bullets": {"type": "array", "items": {"type": "string"}}, "status": {"$ref": "#/$defs/status"}}
+    },
+    "comparison": {
+      "type": "object", "required": ["type", "title", "options"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {
+        "type": {"const": "comparison"},
+        "options": {"type": "array", "minItems": 2, "maxItems": 4, "items": {
+          "type": "object", "required": ["name", "points"],
+          "properties": {"name": {"type": "string"}, "points": {"type": "array", "items": {"type": "string"}}, "recommended": {"type": "boolean"}}
+        }}
+      }
+    },
+    "timeline": {
+      "type": "object", "required": ["type", "title", "milestones"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {
+        "type": {"const": "timeline"},
+        "milestones": {"type": "array", "minItems": 2, "maxItems": 8, "items": {
+          "type": "object", "required": ["date", "label"],
+          "properties": {"date": {"type": "string"}, "label": {"type": "string"}, "status": {"$ref": "#/$defs/status"}}
+        }},
+        "today_index": {"type": "integer"}
+      }
+    },
+    "process": {
+      "type": "object", "required": ["type", "title", "steps"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {"type": {"const": "process"}, "steps": {"type": "array", "items": {"type": "string"}, "minItems": 2, "maxItems": 6}, "descriptions": {"type": "array", "items": {"type": "string"}}, "current_index": {"type": "integer"}}
+    },
+    "matrix_2x2": {
+      "type": "object", "required": ["type", "title", "quadrants"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {
+        "type": {"const": "matrix_2x2"},
+        "x_label": {"type": "string"}, "y_label": {"type": "string"},
+        "quadrants": {"type": "object", "required": ["tl", "tr", "bl", "br"], "properties": {
+          "tl": {"$ref": "#/$defs/quadrant"}, "tr": {"$ref": "#/$defs/quadrant"}, "bl": {"$ref": "#/$defs/quadrant"}, "br": {"$ref": "#/$defs/quadrant"}
+        }},
+        "highlight": {"type": "string", "enum": ["tl", "tr", "bl", "br"]}
+      }
+    },
+    "quadrant": {"type": "object", "properties": {"label": {"type": "string"}, "items": {"type": "array", "items": {"type": "string"}}}},
+    "action_plan": {
+      "type": "object", "required": ["type", "title", "actions"],
+      "allOf": [{"$ref": "#/$defs/common"}],
+      "properties": {
+        "type": {"const": "action_plan"},
+        "actions": {"type": "array", "minItems": 1, "maxItems": 8, "items": {
+          "type": "object", "required": ["action", "owner", "due"],
+          "properties": {"action": {"type": "string"}, "owner": {"type": "string"}, "due": {"type": "string"}, "status": {"$ref": "#/$defs/status"}}
+        }},
+        "decision": {"type": "string", "description": "Decisao pedida ao publico, destacada em caixa"}
+      }
+    },
+    "quote": {
+      "type": "object", "required": ["type", "text"],
+      "properties": {"type": {"const": "quote"}, "text": {"type": "string"}, "author": {"type": "string"}, "dark": {"type": "boolean"}, "notes": {"type": "string"}}
+    },
+    "closing": {
+      "type": "object", "required": ["type", "title"],
+      "properties": {"type": {"const": "closing"}, "title": {"type": "string"}, "subtitle": {"type": "string"}, "notes": {"type": "string"}}
+    }
+  }
+}

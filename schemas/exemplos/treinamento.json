@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "title": "Treinamento - Apontamento de paradas no MES",
+    "audience": "operacional",
+    "type": "treinamento",
+    "palette": "corporativa-azul",
+    "font_scale": 1.1
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Apontamento de paradas no MES",
+      "subtitle": "Treinamento para operadores - 45 min"
+    },
+    {
+      "type": "bullets",
+      "title": "Ao final, você será capaz de",
+      "bullets": [
+        "Registrar uma parada em até 2 minutos",
+        "Escolher a causa correta entre as 12 categorias",
+        "Corrigir um apontamento errado",
+        "Saber quando chamar a manutenção"
+      ]
+    },
+    {
+      "type": "agenda",
+      "items": [
+        "Por que apontar (5 min)",
+        "Passo a passo (15 min)",
+        "Prática (15 min)",
+        "Dúvidas e verificação (10 min)"
+      ]
+    },
+    {
+      "type": "section",
+      "number": "1",
+      "title": "Por que apontar"
+    },
+    {
+      "type": "bullets",
+      "title": "Sem apontamento, 40% das paradas viram 'outros' e nada é corrigido",
+      "bullets": [
+        "Pareto de causas depende do seu registro",
+        "Manutenção prioriza pelo que está apontado",
+        "Meta: menos de 5% em 'outros'"
+      ]
+    },
+    {
+      "type": "section",
+      "number": "2",
+      "title": "Passo a passo"
+    },
+    {
+      "type": "process",
+      "title": "Quatro passos para registrar uma parada",
+      "steps": [
+        "Tela Paradas > Nova",
+        "Selecionar máquina",
+        "Escolher causa (lista)",
+        "Confirmar e informar duração"
+      ]
+    },
+    {
+      "type": "two_column",
+      "title": "Certo vs. errado",
+      "left": {
+        "heading": "Certo",
+        "bullets": [
+          "Causa específica: 'falta de material - almoxarifado'",
+          "Registrar na hora",
+          "Duração real"
+        ]
+      },
+      "right": {
+        "heading": "Errado",
+        "bullets": [
+          "'Outros'",
+          "Registrar no fim do turno",
+          "Arredondar para 30 min"
+        ]
+      }
+    },
+    {
+      "type": "bullets",
+      "title": "Prática: registre as 3 paradas do cenário",
+      "bullets": [
+        "Cenário no ambiente de teste (usuário treino01)",
+        "15 minutos",
+        "Instrutor valida ao final"
+      ]
+    },
+    {
+      "type": "bullets",
+      "title": "Resumo: o que precisa ficar",
+      "bullets": [
+        "Apontar na hora, com causa específica",
+        "'Outros' só se nenhuma das 12 servir",
+        "Erro de apontamento: corrigir em Paradas > Editar",
+        "Dúvida: supervisor do turno"
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Obrigado",
+      "subtitle": "Avaliação: link no crachá do supervisor"
+    }
+  ]
+}

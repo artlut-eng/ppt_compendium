@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "title": "Proposta - Monitoramento de energia",
+    "audience": "externo",
+    "type": "proposta-comercial",
+    "palette": "vendas-energetica",
+    "date": "2026-09-01"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Proposta para Metalúrgica XYZ",
+      "subtitle": "Monitoramento de energia por máquina - válida até 30/09/2026"
+    },
+    {
+      "type": "executive_summary",
+      "headline": "Reduzir 15% do custo de energia em 12 meses",
+      "points": [
+        "Hoje: R$ 2,1 mi/ano sem visibilidade por máquina",
+        "Solução: 40 sensores + plataforma + alertas, implantação em 3 semanas",
+        "Resultado esperado: R$ 300 mil/ano de economia"
+      ],
+      "ask": "Investimento de R$ 180 mil ou R$ 6,5 mil/mês"
+    },
+    {
+      "type": "big_number",
+      "title": "Você gasta R$ 2,1 mi por ano em energia sem saber onde",
+      "value": "R$ 2,1 mi",
+      "label": "custo anual de energia",
+      "context": "Fatura única, sem rateio por máquina ou turno"
+    },
+    {
+      "type": "process",
+      "title": "Sensores, plataforma e alertas em 3 semanas",
+      "steps": [
+        "Instalação de 40 sensores",
+        "Integração com o MES",
+        "Painéis por máquina e turno",
+        "Alertas de consumo anômalo"
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Escopo: 40 sensores, plataforma, treinamento",
+      "columns": [
+        "Item",
+        "Quantidade",
+        "Incluído"
+      ],
+      "rows": [
+        [
+          "Sensores de energia",
+          "40",
+          "Sim"
+        ],
+        [
+          "Plataforma (licença anual)",
+          "1",
+          "Sim"
+        ],
+        [
+          "Treinamento",
+          "8 h",
+          "Sim"
+        ],
+        [
+          "Infraestrutura de rede",
+          "-",
+          "Não (cliente)"
+        ]
+      ]
+    },
+    {
+      "type": "timeline",
+      "title": "Operando em 3 semanas",
+      "milestones": [
+        {
+          "date": "Sem 1",
+          "label": "Instalação",
+          "status": "neutral"
+        },
+        {
+          "date": "Sem 2",
+          "label": "Integração",
+          "status": "neutral"
+        },
+        {
+          "date": "Sem 3",
+          "label": "Treinamento e go-live",
+          "status": "neutral"
+        }
+      ]
+    },
+    {
+      "type": "comparison",
+      "title": "Duas opções de investimento",
+      "options": [
+        {
+          "name": "Compra",
+          "points": [
+            "R$ 180 mil",
+            "Licença anual R$ 24 mil a partir do ano 2",
+            "Suporte incluído 12 meses"
+          ]
+        },
+        {
+          "name": "Assinatura (recomendada)",
+          "points": [
+            "R$ 6,5 mil/mês",
+            "Contrato de 24 meses",
+            "Suporte e atualizações incluídos"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "action_plan",
+      "title": "Assinatura até 30/09 garante início em outubro",
+      "actions": [
+        {
+          "action": "Visita técnica de validação",
+          "owner": "Nós",
+          "due": "10/09",
+          "status": "neutral"
+        },
+        {
+          "action": "Assinatura do contrato",
+          "owner": "Cliente",
+          "due": "30/09",
+          "status": "neutral"
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Obrigado",
+      "subtitle": "contato@empresa.com | (11) 99999-9999"
+    }
+  ]
+}

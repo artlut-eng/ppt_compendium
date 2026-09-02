@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "title": "Projeto Atlas - Status semana 34",
+    "audience": "tatico",
+    "type": "relatorio-de-projeto",
+    "palette": "corporativa-azul",
+    "author": "PMO",
+    "date": "2026-09-01"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Projeto Atlas",
+      "subtitle": "Relatório de status - semana 34"
+    },
+    {
+      "type": "executive_summary",
+      "headline": "Projeto no amarelo: prazo em risco por atraso do fornecedor",
+      "points": [
+        "Avanço físico 62% vs. 68% planejado",
+        "Custo projetado 3% abaixo do orçamento",
+        "Homologação do fornecedor X atrasou 2 semanas"
+      ],
+      "ask": "Aprovar plano B (fornecedor alternativo) até 05/09"
+    },
+    {
+      "type": "kpi_row",
+      "title": "4 de 5 dimensões no verde; prazo em amarelo",
+      "kpis": [
+        {
+          "label": "Escopo",
+          "value": "OK",
+          "status": "success"
+        },
+        {
+          "label": "Prazo",
+          "value": "-2 sem",
+          "status": "warning"
+        },
+        {
+          "label": "Custo",
+          "value": "-3%",
+          "status": "success"
+        },
+        {
+          "label": "Qualidade",
+          "value": "OK",
+          "status": "success"
+        },
+        {
+          "label": "Riscos",
+          "value": "1 crítico",
+          "status": "danger"
+        }
+      ]
+    },
+    {
+      "type": "timeline",
+      "title": "Marco 3 desliza 2 semanas; marco final mantido",
+      "milestones": [
+        {
+          "date": "Jun",
+          "label": "Kickoff",
+          "status": "success"
+        },
+        {
+          "date": "Jul",
+          "label": "Design aprovado",
+          "status": "success"
+        },
+        {
+          "date": "Set",
+          "label": "Homologação",
+          "status": "warning"
+        },
+        {
+          "date": "Nov",
+          "label": "Go-live",
+          "status": "neutral"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "title": "Avanço físico de 62% vs. 68% planejado",
+      "chart_type": "line",
+      "categories": [
+        "S28",
+        "S29",
+        "S30",
+        "S31",
+        "S32",
+        "S33",
+        "S34"
+      ],
+      "series": [
+        {
+          "name": "Planejado",
+          "values": [
+            40,
+            45,
+            50,
+            55,
+            60,
+            64,
+            68
+          ]
+        },
+        {
+          "name": "Real",
+          "values": [
+            40,
+            44,
+            48,
+            52,
+            56,
+            59,
+            62
+          ]
+        }
+      ],
+      "source": "Cronograma MS Project, base 01/09/2026"
+    },
+    {
+      "type": "table",
+      "title": "Risco crítico: homologação do fornecedor X",
+      "columns": [
+        "Risco",
+        "Prob.",
+        "Impacto",
+        "Resposta",
+        "Dono"
+      ],
+      "rows": [
+        [
+          "Fornecedor X não homologa até 15/09",
+          "Alta",
+          "Alto",
+          "Acionar fornecedor Y (plano B)",
+          "Compras"
+        ],
+        [
+          "Rotatividade no time de testes",
+          "Média",
+          "Médio",
+          "Contratar 1 temporário",
+          "RH"
+        ]
+      ]
+    },
+    {
+      "type": "action_plan",
+      "title": "Precisamos aprovar o plano B até sexta",
+      "actions": [
+        {
+          "action": "Aprovar fornecedor Y",
+          "owner": "Sponsor",
+          "due": "05/09",
+          "status": "warning"
+        },
+        {
+          "action": "Replanejar testes integrados",
+          "owner": "GP",
+          "due": "10/09",
+          "status": "neutral"
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Próxima revisão: 15/09",
+      "subtitle": "pmo@empresa.com"
+    }
+  ]
+}
