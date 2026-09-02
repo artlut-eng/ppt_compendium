@@ -28,3 +28,10 @@ spec.json  ->  build_from_spec.py  ->  deck.pptx
 python 06-codigo/python-pptx/build_examples.py
 ```
 Extrai o bloco JSON de cada arquivo em `03-tipos-de-apresentacao/`, valida contra o schema, salva em `schemas/exemplos/` e gera um `.pptx` por tipo em `examples/`. Se um exemplo da documentação quebrar, a documentação está errada.
+
+## Miniaturas (Windows + PowerPoint)
+```bash
+pip install pywin32
+python 06-codigo/python-pptx/render_thumbnails.py
+```
+Abre cada `.pptx` de `examples/` no PowerPoint (automação COM) e exporta um PNG por slide em `examples/thumbnails/`. Serve para revisão visual e para alimentar a IA com imagens dos modelos.

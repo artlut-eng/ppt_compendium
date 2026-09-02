@@ -30,8 +30,10 @@ Percorra antes de entregar qualquer deck. Itens marcados com (auto) podem ser ve
 - [ ] Sem elementos decorativos (clip-art, gradientes, sombras, transições).
 - [ ] Imagens nítidas e sem distorção.
 
-## Público
+## Público e exposição
 - [ ] Nível de detalhe e tamanho do deck coerentes com o público (ver `revisao-por-publico.md`).
+- [ ] Estrutura e redação coerentes com o estilo do decisor, se conhecido (`02-publicos/estilos-de-comunicacao.md`).
+- [ ] Filtro de exposição aplicado conforme `meta.exposure` (ver `nivel-de-exposicao.md`).
 - [ ] Siglas expandidas no primeiro uso ou em glossário (obrigatório para externo e all-hands).
 - [ ] Deck faz sentido sem apresentador (se for distribuído).
 

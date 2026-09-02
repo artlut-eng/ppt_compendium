@@ -8,8 +8,11 @@ Decks `.pptx` produzidos automaticamente pelo código base a partir das specs em
 | `todos-os-modelos.pptx` | `schemas/exemplos/todos-os-modelos.json`: um slide de cada modelo (23 slides) |
 | `relatorio-financeiro-js.pptx` | Gerado pela versão JavaScript (`06-codigo/pptxgenjs/deckbuilder.js`) |
 
+Miniaturas PNG (1280 px) de cada slide em `thumbnails/<deck>/slide-NN.png`, geradas pelo PowerPoint via `06-codigo/python-pptx/render_thumbnails.py`. Use-as para revisar visualmente um modelo sem abrir o arquivo.
+
 Regere tudo com:
 ```bash
 python 06-codigo/python-pptx/build_examples.py
 python 06-codigo/python-pptx/build_from_spec.py schemas/exemplos/todos-os-modelos.json examples/todos-os-modelos.pptx
+python 06-codigo/python-pptx/render_thumbnails.py
 ```

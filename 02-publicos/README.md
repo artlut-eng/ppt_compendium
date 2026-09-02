@@ -32,7 +32,11 @@ Quando o deck será visto por mais de um nível (ex.: reunião mensal com direto
 - Detalhe do nível mais baixo vai para **anexos** ou notas.
 - Um slide de sumário executivo obrigatório.
 
+## Estilo de comunicação do decisor
+O nível define **o que** entra no deck; o estilo de quem decide define **como** apresentar. Ver [`estilos-de-comunicacao.md`](estilos-de-comunicacao.md) (Vermelho, Amarelo, Verde, Azul) e a tabela de cruzamento nível × estilo.
+
 ## Arquivos
+- [`estilos-de-comunicacao.md`](estilos-de-comunicacao.md)
 - [`estrategico.md`](estrategico.md)
 - [`tatico.md`](tatico.md)
 - [`operacional.md`](operacional.md)

@@ -365,7 +365,9 @@ class DeckBuilder:
             self._rect(s, x, y, w, card_h, fill="neutral_light")
             self._rect(s, x, y, w, 0.08, fill=bar)
             self._text(s, x + 0.15, y + 0.25, w - 0.3, 0.4, str(k.get("label", "")).upper(), size="kpi_label", color="neutral_mid")
-            self._text(s, x + 0.15, y + 0.65, w - 0.3, 1.1, str(k.get("value", "")), size=value_size, bold=True, color="neutral_dark", anchor=MSO_ANCHOR.MIDDLE)
+            val = str(k.get("value", ""))
+            vsize = value_size if len(val) <= 6 else max(20, int(value_size * 6 / len(val) * 1.15))
+            self._text(s, x + 0.15, y + 0.65, w - 0.3, 1.1, val, size=vsize, bold=True, color="neutral_dark", anchor=MSO_ANCHOR.MIDDLE)
             if k.get("delta"):
                 self._text(s, x + 0.15, y + card_h - 0.65, w - 0.3, 0.5, str(k["delta"]), size="kpi_delta", bold=True, color=bar)
         if bullets:
@@ -509,6 +511,12 @@ class DeckBuilder:
             ca.tick_labels.font.color.rgb = self.c("neutral_mid")
             ca.format.line.color.rgb = self.c("neutral_mid")
             ca.has_major_gridlines = False
+            if chart_type in ("bar", "stacked_bar"):
+                ca.reverse_order = True  # primeira categoria no topo (leitura natural do ranking)
+                # eixo de valores cruza o de categorias no maximo (embaixo, ja que esta invertido)
+                crosses = va._element.find(qn("c:crosses"))
+                if crosses is not None:
+                    crosses.set("val", "max")
         plot = chart.plots[0]
         labels_on = show_labels if show_labels is not None else ((not multi and len(categories) <= 12) or is_pie)
         if labels_on:

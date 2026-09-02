@@ -20,6 +20,7 @@ Tendência (linha), comparação entre categorias (barras/colunas), composição
 - Série principal em `primary`, secundária em `secondary`, meta/referência em `neutral_mid` tracejado, destaque em `accent`.
 - Sem 3D, sem sombra, sem gradiente.
 - Ordenar categorias por valor (decrescente) quando não houver ordem natural (tempo).
+- Em barras horizontais (`bar`), a primeira categoria da lista aparece no **topo** (o código inverte o eixo e mantém a escala de valores embaixo).
 
 ## Escolha do tipo
 Ver `05-artefatos-visuais/graficos/escolha-do-grafico.md`. Resumo:
