@@ -3,6 +3,7 @@
 A knowledge base that lets AI agents (and people) build PowerPoint decks consistently: **audience → deck type → narrative → slide models → visual rules → generated .pptx → audit**. Content is written in Brazilian Portuguese; this page and [`00-guia/como-usar.en.md`](00-guia/como-usar.en.md) summarize the method in English so non-Portuguese agents can navigate the repository. Slide type keys, JSON spec fields and code are language-neutral.
 
 ## How an AI should use this repository
+0. **Read `agent-index.json`** (machine-readable index of every file with a summary and when to read it) and cite its version; if the repository is unreachable, say so in the first line. Pick the conduction mode: direct, guided (2 to 4 questions per turn, max 8 rounds), short path (single slide), review, realignment. Ready-made agent instructions: `00-guia/prompt-base-para-agentes.md` and the short version `prompt-curto-para-agentes.md`.
 1. **Brief first** (`00-guia/briefing.md`): one-sentence key message, what should happen afterwards, audience level and decision-maker style, **exposure level** (internal / cross-department / external) and visual identity (**always ask for the logo**).
 2. If the request comes with a spreadsheet, profile it (`06-codigo/python-pptx/profile_data.py`) and follow `00-guia/da-base-ao-deck.md`: cutoff date, coverage, immature cohorts, candidate KPIs and charts.
 3. Pick the **audience** (`02-publicos/`): strategic, tactical, operational, external; plus the decision-maker's communication style (red / yellow / green / blue).

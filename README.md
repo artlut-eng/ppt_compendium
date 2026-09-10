@@ -6,7 +6,7 @@ Idioma: português (pt-BR). Formato padrão dos decks: **16:9 (13,333 × 7,5 pol
 
 ## Como uma IA deve usar este repositório
 
-1. Leia [`00-guia/como-usar.md`](00-guia/como-usar.md) — é o fluxo de decisão completo.
+1. Leia [`agent-index.json`](agent-index.json) (índice de todos os arquivos com resumo e "quando ler") e [`00-guia/como-usar.md`](00-guia/como-usar.md) — o fluxo de decisão completo. Instruções prontas para agentes: [`prompt-base-para-agentes.md`](00-guia/prompt-base-para-agentes.md) e a [versão curta](00-guia/prompt-curto-para-agentes.md).
 2. Se o pedido vem com uma planilha, comece por [`00-guia/da-base-ao-deck.md`](00-guia/da-base-ao-deck.md) e o perfil automático `profile_data.py`.
 3. Faça o **briefing** com [`00-guia/briefing.md`](00-guia/briefing.md): mensagem central, objetivo, nível de exposição (interno, interáreas, externo) e identidade visual (logotipo, cores). Modo direto ou guiado: [`00-guia/prompt-base-para-agentes.md`](00-guia/prompt-base-para-agentes.md).
 4. Identifique o **público** em [`02-publicos/`](02-publicos/README.md): nível (estratégico, tático, operacional, externo) e estilo de comunicação do decisor ([4 cores](02-publicos/estilos-de-comunicacao.md)).
@@ -29,6 +29,7 @@ Idioma: português (pt-BR). Formato padrão dos decks: **16:9 (13,333 × 7,5 pol
 | `05-artefatos-visuais/` | Paletas em JSON, escolha de gráficos, ícones e formas, logotipo e marca, template corporativo (com exemplo) |
 | `06-codigo/` | Bibliotecas base em python-pptx e PptxGenJS, gerador a partir da spec, perfil de base de dados, formatação numérica, extração/reconstrução de decks existentes, pontuação pela rubrica, miniaturas (PowerPoint) e validador automático |
 | `07-checklists/` | Pré-entrega, por público, por nível de exposição, auditoria de arquivo e rubrica de qualidade (0 a 100) |
+| `agent-index.json` | Índice legível por máquina: todos os arquivos com título, resumo e quando ler; pontos de entrada e modos (gerado por `build_index.py`) |
 | `schemas/` | JSON Schema da spec de deck + `exemplos/` (uma spec por tipo, extraídas da documentação) |
 | `examples/` | Decks `.pptx` gerados a partir de `schemas/exemplos/` pelo código base, com miniaturas PNG em `examples/thumbnails/` |
 

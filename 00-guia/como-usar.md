@@ -17,6 +17,11 @@ Pedido do usuário
    └─ 7. VALIDAÇÃO ────── checklist por público → 07-checklists/
 ```
 
+## Antes de tudo: acesso à fonte e modo de condução
+
+1. Leia [`agent-index.json`](../agent-index.json) (índice de todos os arquivos com resumo e "quando ler") e este guia; cite a versão lida. Se o repositório não estiver acessível, diga isso na primeira linha da resposta.
+2. Escolha o modo pelo pedido: **direto** (premissas padrão, entrega única), **guiado** (2 a 4 perguntas por turno com padrão proposto, máximo 8 rodadas, roteiro aprovado antes de produzir), **caminho curto** (um slide ou ajuste: sem briefing completo, roteiro nem auditoria), **revisão** (deck existente) ou **realinhamento** (mudança de escopo). Gatilhos e regras em [`prompt-base-para-agentes.md`](prompt-base-para-agentes.md).
+
 ## Passo 0 — Briefing
 
 Se o pedido vier com planilha ou base de dados, rode primeiro o perfil (`06-codigo/python-pptx/profile_data.py base.xlsx --cutoff AAAA-MM-DD --spec esqueleto.json`) e siga [`da-base-ao-deck.md`](da-base-ao-deck.md): corte temporal, cobertura, coortes imaturas, KPIs e gráficos candidatos.
@@ -110,8 +115,9 @@ Mapeie cada ponto da narrativa para um modelo em `04-modelos-de-slides/`. Combin
 
 ## Passo 6 — Gerar
 
-1. Produza uma **spec JSON** válida contra `schemas/deck-spec.schema.json`.
-2. Rode `06-codigo/python-pptx/build_from_spec.py spec.json saida.pptx` (ou o equivalente em JS).
+1. Produza uma **spec JSON** válida contra `schemas/deck-spec.schema.json`. Ela é a entrega intermediária obrigatória: qualquer gerador do repositório a reproduz, e evita arquivos montados à mão que abrem com "reparo".
+2. Com execução de código: rode `06-codigo/python-pptx/build_from_spec.py spec.json saida.pptx` (ou o equivalente em JS). **Sem execução de código**: a spec é a entrega principal; se construir os slides por conta própria, siga as coordenadas de `04-modelos-de-slides/` e declare que o arquivo não passou pelo gerador.
+2b. Nome do arquivo: `<tipo>_<assunto>_<AAAA-MM-DD>_v<n>.pptx`; nova versão é novo número, nunca "(corrigido)" ou "(reparado)".
 3. Se precisar de algo que a biblioteca base não cobre, estenda `deckbuilder.py` em vez de escrever código solto.
 
 ## Passo 7 — Validar

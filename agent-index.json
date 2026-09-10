@@ -1,0 +1,1329 @@
+{
+  "name": "ppt_compendium",
+  "version": "39d3373",
+  "generated": "2026-09-10",
+  "language": "pt-BR (guias resumidos em ingles: README.en.md, 00-guia/como-usar.en.md)",
+  "entry_points": {
+    "start_here": "00-guia/como-usar.md",
+    "agent_prompt": "00-guia/prompt-base-para-agentes.md",
+    "agent_prompt_short": "00-guia/prompt-curto-para-agentes.md",
+    "briefing": "00-guia/briefing.md",
+    "deck_types": "03-tipos-de-apresentacao/README.md",
+    "slide_models": "04-modelos-de-slides/README.md",
+    "spec_schema": "schemas/deck-spec.schema.json",
+    "generator": "06-codigo/python-pptx/build_from_spec.py",
+    "audit": "06-codigo/python-pptx/audit_deck.py"
+  },
+  "reading_order": [
+    "00-guia/como-usar.md",
+    "00-guia/briefing.md",
+    "02-publicos/README.md",
+    "03-tipos-de-apresentacao/README.md",
+    "04-modelos-de-slides/README.md",
+    "07-checklists/pre-entrega.md"
+  ],
+  "modes": {
+    "direto": "premissas padrao declaradas, entrega unica",
+    "guiado": "2 a 4 perguntas por turno com padrao proposto, maximo 8 rodadas, roteiro aprovado antes de produzir",
+    "caminho_curto": "um slide ou ajuste, sem roteiro nem auditoria completa",
+    "revisao": "extrair, teste dos titulos, plano por slide",
+    "realinhamento": "listar o que muda, perguntar em blocos, sintese"
+  },
+  "files": [
+    {
+      "path": "00-guia/briefing.md",
+      "kind": "doc",
+      "title": "Briefing: descobrir o que a pessoa quer mostrar",
+      "summary": "Antes de escolher público, tipo ou modelo de slide, a IA precisa descobrir a mensagem central e o nível de exposição. Este roteiro é o \"passo 0\" do fluxo em como-usar.md. Faça as perguntas em ordem, mas pule as que o pedido já responde. Nun...",
+      "when_to_read": "Sempre: fluxo, briefing, modos de conducao, regras de dados; ler antes de qualquer deck"
+    },
+    {
+      "path": "00-guia/como-usar.en.md",
+      "kind": "doc",
+      "title": "How to use this compendium (English guide for AI agents)",
+      "summary": "Condensed translation of como-usar.md. File names and spec keys are the same; read the Portuguese pages for detail.",
+      "when_to_read": "Sempre: fluxo, briefing, modos de conducao, regras de dados; ler antes de qualquer deck"
+    },
+    {
+      "path": "00-guia/como-usar.md",
+      "kind": "doc",
+      "title": "Como usar este compêndio (guia para IAs)",
+      "summary": "Este documento descreve o fluxo de decisão que uma IA deve seguir ao receber um pedido do tipo \"faça uma apresentação sobre X\".",
+      "when_to_read": "Sempre: fluxo, briefing, modos de conducao, regras de dados; ler antes de qualquer deck"
+    },
+    {
+      "path": "00-guia/da-base-ao-deck.md",
+      "kind": "doc",
+      "title": "Da base de dados ao deck",
+      "summary": "A maioria dos pedidos começa com uma planilha (\"aqui estão os dados, faça a apresentação\"). Este guia descreve o caminho da base até a spec, com os controles que evitam os erros mais comuns (ler coorte imatura como melhora, somar programaçã...",
+      "when_to_read": "Sempre: fluxo, briefing, modos de conducao, regras de dados; ler antes de qualquer deck"
+    },
+    {
+      "path": "00-guia/fatos-inferencias-recomendacoes.md",
+      "kind": "doc",
+      "title": "Fatos, inferências e recomendações",
+      "summary": "Todo deck analítico mistura três naturezas de informação. Misturá-las sem sinalizar destrói a credibilidade quando alguém pergunta \"de onde veio isso?\". Regra: o público deve conseguir distinguir, em cada slide, o que é dado, o que é interp...",
+      "when_to_read": "Sempre: fluxo, briefing, modos de conducao, regras de dados; ler antes de qualquer deck"
+    },
+    {
+      "path": "00-guia/glossario.md",
+      "kind": "doc",
+      "title": "Glossário",
+      "summary": "",
+      "when_to_read": "Sempre: fluxo, briefing, modos de conducao, regras de dados; ler antes de qualquer deck"
+    },
+    {
+      "path": "00-guia/prompt-base-para-agentes.md",
+      "kind": "doc",
+      "title": "Prompt base para agentes de apresentação",
+      "summary": "Modelo de instrução de sistema para um agente (Copilot, GPT, Claude, Gemini) que usa este compêndio como fonte de conhecimento. Substitua os campos entre <...>. Tudo que for identidade da empresa fica no bloco de identidade visual; o restan...",
+      "when_to_read": "Sempre: fluxo, briefing, modos de conducao, regras de dados; ler antes de qualquer deck"
+    },
+    {
+      "path": "00-guia/prompt-curto-para-agentes.md",
+      "kind": "doc",
+      "title": "Prompt curto para agentes (cerca de 2 mil caracteres)",
+      "summary": "Para ferramentas com limite de tamanho na instrução de sistema. Substitua <...>. A versão completa está em prompt-base-para-agentes.md.",
+      "when_to_read": "Sempre: fluxo, briefing, modos de conducao, regras de dados; ler antes de qualquer deck"
+    },
+    {
+      "path": "00-guia/revisao-de-deck-existente.md",
+      "kind": "doc",
+      "title": "Revisão de um deck existente",
+      "summary": "Fluxo para quando o pedido é \"melhore esta apresentação\" em vez de \"crie uma\". Ferramentas: 06-codigo/python-pptx/extract_deck.py (estrutura e diagnóstico), audit_deck.py (validação visual), score_deck.py (rubrica).",
+      "when_to_read": "Sempre: fluxo, briefing, modos de conducao, regras de dados; ler antes de qualquer deck"
+    },
+    {
+      "path": "01-fundamentos/acessibilidade.md",
+      "kind": "doc",
+      "title": "Acessibilidade e legibilidade",
+      "summary": "",
+      "when_to_read": "Ao escrever titulos, escolher fontes/cores, montar o grid ou formatar numeros"
+    },
+    {
+      "path": "01-fundamentos/banco-de-titulos.md",
+      "kind": "doc",
+      "title": "Banco de títulos-conclusão",
+      "summary": "O título é a parte do slide que mais define a qualidade percebida. Este banco traz fórmulas, pares \"ruim → bom\" por tipo de deck, variações por estilo do decisor e vocabulário a evitar. Teste sempre: lendo só os títulos em sequência, a hist...",
+      "when_to_read": "Ao escrever titulos, escolher fontes/cores, montar o grid ou formatar numeros"
+    },
+    {
+      "path": "01-fundamentos/cores-e-paletas.md",
+      "kind": "doc",
+      "title": "Cores e paletas",
+      "summary": "Toda paleta deste compêndio (ver 05-artefatos-visuais/paletas/) tem os papéis abaixo. O código gerador só usa papéis, nunca cores soltas.",
+      "when_to_read": "Ao escrever titulos, escolher fontes/cores, montar o grid ou formatar numeros"
+    },
+    {
+      "path": "01-fundamentos/formatacao-numerica.md",
+      "kind": "doc",
+      "title": "Formatação numérica (pt-BR)",
+      "summary": "Números inconsistentes entre slides (\"R$ 1.234.567\", \"1,2 mi\", \"1.23M\") destroem a credibilidade. Regras únicas para todo o deck, implementadas em 06-codigo/python-pptx/fmt.py.",
+      "when_to_read": "Ao escrever titulos, escolher fontes/cores, montar o grid ou formatar numeros"
+    },
+    {
+      "path": "01-fundamentos/grid-e-layout.md",
+      "kind": "doc",
+      "title": "Grid e layout (16:9)",
+      "summary": "Dimensões do slide: 13,333 × 7,5 pol. (33,867 × 19,05 cm; 1920 × 1080 px a 144 dpi).",
+      "when_to_read": "Ao escrever titulos, escolher fontes/cores, montar o grid ou formatar numeros"
+    },
+    {
+      "path": "01-fundamentos/principios-de-design.md",
+      "kind": "doc",
+      "title": "Princípios de design para slides",
+      "summary": "Cada slide responde a uma única pergunta. Se o título precisa de \"e\", divida.",
+      "when_to_read": "Ao escrever titulos, escolher fontes/cores, montar o grid ou formatar numeros"
+    },
+    {
+      "path": "01-fundamentos/storytelling-e-estrutura.md",
+      "kind": "doc",
+      "title": "Storytelling e estrutura narrativa",
+      "summary": "Antes de qualquer slide, escreva uma frase que o público deve levar embora. Todo slide existe para sustentar essa frase. Se um slide não a sustenta, remova.",
+      "when_to_read": "Ao escrever titulos, escolher fontes/cores, montar o grid ou formatar numeros"
+    },
+    {
+      "path": "01-fundamentos/tipografia.md",
+      "kind": "doc",
+      "title": "Tipografia",
+      "summary": "Regra: uma família por deck (no máximo duas: uma para títulos, outra para corpo). Não usar fontes que não estejam instaladas no destino, a menos que sejam embutidas.",
+      "when_to_read": "Ao escrever titulos, escolher fontes/cores, montar o grid ou formatar numeros"
+    },
+    {
+      "path": "02-publicos/estilos-de-comunicacao.md",
+      "kind": "doc",
+      "title": "Estilos de comunicação (metodologia das 4 cores)",
+      "summary": "Além do nível (estratégico, tático, operacional, externo), o estilo de comunicação de quem decide muda como o deck deve ser construído. O modelo das 4 cores (derivado de DISC e da tipologia de Jung) classifica as pessoas pelo que priorizam ...",
+      "when_to_read": "Ao definir nivel do publico e estilo do decisor (passo 1)"
+    },
+    {
+      "path": "02-publicos/estrategico.md",
+      "kind": "doc",
+      "title": "Público estratégico",
+      "summary": "Quem: CEO, diretores, conselho de administração, sócios, investidores-controladores, comitês executivos.",
+      "when_to_read": "Ao definir nivel do publico e estilo do decisor (passo 1)"
+    },
+    {
+      "path": "02-publicos/externo.md",
+      "kind": "doc",
+      "title": "Público externo",
+      "summary": "Quem: clientes e prospects, investidores externos, parceiros, fornecedores, órgãos reguladores, imprensa, comunidade, candidatos.",
+      "when_to_read": "Ao definir nivel do publico e estilo do decisor (passo 1)"
+    },
+    {
+      "path": "02-publicos/operacional.md",
+      "kind": "doc",
+      "title": "Público operacional",
+      "summary": "Quem: supervisores de turno, líderes de célula, analistas, técnicos, operadores, equipes de campo, atendimento, times de desenvolvimento em reunião diária.",
+      "when_to_read": "Ao definir nivel do publico e estilo do decisor (passo 1)"
+    },
+    {
+      "path": "02-publicos/README.md",
+      "kind": "doc",
+      "title": "Públicos-alvo",
+      "summary": "A primeira decisão ao montar um deck é para quem ele é. O público determina densidade, tom, nível de agregação dos dados, número de slides e estrutura narrativa.",
+      "when_to_read": "Ao definir nivel do publico e estilo do decisor (passo 1)"
+    },
+    {
+      "path": "02-publicos/tatico.md",
+      "kind": "doc",
+      "title": "Público tático",
+      "summary": "Quem: gerentes de área, coordenadores, líderes de projeto, PMO, gestores de produto, gerentes de planta, chefes de departamento.",
+      "when_to_read": "Ao definir nivel do publico e estilo do decisor (passo 1)"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/all-hands.md",
+      "kind": "doc",
+      "title": "All-hands / Town hall",
+      "summary": "Comunicar a toda a empresa (ou a uma área inteira) resultados, direção, mudanças e reconhecimentos, reforçando alinhamento e engajamento.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/analise-de-processo.md",
+      "kind": "doc",
+      "title": "Análise de eficiência de processo",
+      "summary": "Diagnosticar onde um processo transacional (compras, aquisições, chamados, aprovações, expedição, onboarding) perde eficiência, quantificar as causas e propor controles simples com dono e cadência. Diferente da revisão operacional (que acom...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/business-case.md",
+      "kind": "doc",
+      "title": "Business case",
+      "summary": "Obter aprovação para um investimento, projeto ou mudança, demonstrando problema, alternativas, retorno esperado, riscos e o pedido concreto.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/comite-de-riscos-e-compliance.md",
+      "kind": "doc",
+      "title": "Comitê de riscos, compliance e auditoria interna",
+      "summary": "Dar ao comitê (ou à diretoria/conselho) a visão dos riscos corporativos, do programa de compliance e dos achados de auditoria interna: mapa de riscos com evolução, planos de tratamento, incidentes e denúncias (agregado), achados abertos e a...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/comunicacao-de-mudanca.md",
+      "kind": "doc",
+      "title": "Comunicação de mudança organizacional",
+      "summary": "Comunicar uma mudança (reorganização, nova estrutura, novo sistema ou processo, mudança de política, fusão, encerramento de unidade) de forma que cada público entenda o que muda, por quê, quando, o que se espera dele e onde tirar dúvidas. É...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/indicadores-de-pessoas.md",
+      "kind": "doc",
+      "title": "Indicadores de pessoas (RH)",
+      "summary": "Mostrar à liderança a situação da força de trabalho: tamanho e composição, movimentações (contratações, desligamentos, turnover), absenteísmo, clima e engajamento, capacitação e sucessão, com os riscos de pessoas que exigem decisão.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/indicadores-de-seguranca.md",
+      "kind": "doc",
+      "title": "Indicadores de segurança e saúde (SSMA / EHS)",
+      "summary": "Acompanhar o desempenho de segurança do trabalho, saúde ocupacional e meio ambiente: acidentes e quase-acidentes, taxas normalizadas, desvios e inspeções, ações abertas e cultura, com foco nas ações preventivas que exigem decisão.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/kickoff-de-projeto.md",
+      "kind": "doc",
+      "title": "Kickoff de projeto",
+      "summary": "Alinhar todos os envolvidos no início de um projeto: por que existe, o que entrega, quem faz o quê, como será conduzido e quais são os próximos passos.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/licoes-aprendidas.md",
+      "kind": "doc",
+      "title": "Lições aprendidas (retrospectiva / post-mortem)",
+      "summary": "Registrar e compartilhar o que funcionou e o que não funcionou em um projeto, fase ou incidente, com recomendações acionáveis para os próximos.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/orcamento-anual.md",
+      "kind": "doc",
+      "title": "Orçamento anual (proposta e revisão)",
+      "summary": "Apresentar a proposta de orçamento do próximo ano (ou a revisão de forecast) para aprovação: premissas, receita, custos e despesas, investimentos, pessoas, cenários e o que muda em relação ao ano atual.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/pitch-investidores.md",
+      "kind": "doc",
+      "title": "Pitch para investidores",
+      "summary": "Convencer investidores a entrar em uma rodada: problema relevante, solução com tração, mercado grande, modelo de negócio, time capaz e pedido claro.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/plano-estrategico.md",
+      "kind": "doc",
+      "title": "Plano estratégico",
+      "summary": "Comunicar a direção da empresa ou área para um horizonte de 1 a 5 anos: onde estamos, para onde vamos, como chegaremos e o que isso exige (investimentos, prioridades, metas). Inclui apresentações de OKRs anuais, planejamento estratégico e r...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/proposta-comercial.md",
+      "kind": "doc",
+      "title": "Proposta comercial",
+      "summary": "Convencer um cliente a contratar: mostrar entendimento da dor, a solução, o escopo, evidências de resultado, cronograma, investimento e o próximo passo.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/README.md",
+      "kind": "doc",
+      "title": "Catálogo de tipos de apresentação",
+      "summary": "Cada arquivo descreve um tipo: objetivo, público típico, estrutura slide a slide, dados e gráficos recomendados, variações por público, erros comuns e uma spec mínima em JSON (formato de schemas/deck-spec.schema.json).",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/relatorio-de-incidente.md",
+      "kind": "doc",
+      "title": "Relatório de incidente (operacional, TI, qualidade, segurança)",
+      "summary": "Registrar e comunicar um incidente relevante (parada de sistema, acidente, desvio de qualidade, falha de segurança da informação, incidente ambiental): o que aconteceu, impacto, linha do tempo de detecção e resposta, causa raiz, ações corre...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/relatorio-de-progresso.md",
+      "kind": "doc",
+      "title": "Relatório de progresso de atividades recorrentes (ensaios, testes, lotes, campanhas)",
+      "summary": "Mostrar à gerência o avanço de um conjunto planejado de atividades repetitivas (ensaios de laboratório, testes de software, lotes-piloto, auditorias, campanhas) contra o plano, a taxa de aprovação/sucesso, as causas de falha e as decisões n...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/relatorio-de-projeto.md",
+      "kind": "doc",
+      "title": "Relatório de projeto (status report)",
+      "summary": "Informar o andamento de um projeto em relação ao plano (escopo, prazo, custo, qualidade, riscos) e obter decisões ou apoio para desvios.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/relatorio-de-vendas.md",
+      "kind": "doc",
+      "title": "Relatório de vendas",
+      "summary": "Mostrar o desempenho comercial contra meta (cota), a saúde do pipeline e as ações para atingir o resultado do período seguinte.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/relatorio-esg.md",
+      "kind": "doc",
+      "title": "Relatório ESG / sustentabilidade",
+      "summary": "Comunicar o desempenho ambiental, social e de governança contra metas e compromissos: emissões, energia, água, resíduos; pessoas, segurança, comunidade, diversidade (agregada); governança, ética, cadeia de fornecedores. Serve a conselho, cl...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/relatorio-financeiro.md",
+      "kind": "doc",
+      "title": "Relatório financeiro",
+      "summary": "Apresentar o resultado financeiro de um período (mês, trimestre, ano) contra orçamento e período anterior, explicar as variações e projetar o restante do ano.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/resultados-de-marketing.md",
+      "kind": "doc",
+      "title": "Resultados de marketing e campanhas",
+      "summary": "Mostrar o retorno do investimento em marketing: funil (alcance, leads, oportunidades, vendas), custo por resultado, desempenho por canal e por campanha, marca, e as decisões de realocação de verba.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/resultados-de-pesquisa.md",
+      "kind": "doc",
+      "title": "Resultados de pesquisa (clima, NPS, satisfação, mercado)",
+      "summary": "Apresentar os resultados de uma pesquisa (clima organizacional, NPS de clientes, satisfação de usuários, pesquisa de mercado) de forma que o público entenda o que foi medido, com que confiança, o que os números dizem e o que se propõe fazer...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/reuniao-de-conselho.md",
+      "kind": "doc",
+      "title": "Reunião de conselho (board pack)",
+      "summary": "Dar ao conselho de administração (ou comitê executivo) uma visão completa e padronizada do período: resultado, execução da estratégia, riscos e as decisões que só o conselho pode tomar. O deck circula antes da reunião e serve de base para a...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/revisao-com-cliente-qbr.md",
+      "kind": "doc",
+      "title": "Revisão periódica com cliente (QBR) e saúde da carteira",
+      "summary": "Duas faces do mesmo tema. QBR (quarterly business review): prestar contas ao cliente do valor entregue no período, alinhar prioridades e expandir a relação. Saúde da carteira (visão interna de customer success): mostrar à liderança a situaç...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/revisao-de-fornecedores.md",
+      "kind": "doc",
+      "title": "Revisão de desempenho de fornecedores",
+      "summary": "Avaliar a base de fornecedores (ou um fornecedor crítico) em qualidade, prazo, custo, serviço e risco, decidir desenvolvimento, substituição ou renegociação, e preparar a reunião de avaliação com o fornecedor.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/revisao-de-kpis-de-area.md",
+      "kind": "doc",
+      "title": "Revisão de KPIs de área (base para o próximo ciclo)",
+      "summary": "Criar uma leitura compartilhada do desempenho de uma área (P&D, operações, TI, marketing) ao fim de um ciclo, para alinhar expectativas, prioridades e metas do ciclo seguinte. Não é prestação de contas nem auditoria: é insumo de planejament...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/revisao-de-portfolio.md",
+      "kind": "doc",
+      "title": "Revisão de portfólio (comitê e deep dive decisório)",
+      "summary": "Dar à liderança uma visão comparável de uma carteira de projetos (P&D, TI, capex, produtos) e, na versão decisória, repriorizar a carteira, aprovar planos de recuperação e realocar orçamento e capacidade. Duas variantes:",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/revisao-operacional.md",
+      "kind": "doc",
+      "title": "Revisão operacional (diária / semanal)",
+      "summary": "Alinhar a equipe de execução sobre o desempenho do período (turno, dia, semana), expor desvios e definir ações imediatas com dono e prazo. Inclui reuniões de produção, gestão à vista, daily de times, revisão de atendimento/suporte, logístic...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/revisao-pela-direcao-qualidade.md",
+      "kind": "doc",
+      "title": "Revisão pela direção do sistema de qualidade",
+      "summary": "Reunião formal (exigida por normas como ISO 9001, IATF, ISO 13485, BPF) em que a direção avalia o desempenho do sistema de gestão da qualidade: indicadores, não conformidades, auditorias, reclamações, fornecedores, riscos e oportunidades, e...",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/roadmap-de-produto.md",
+      "kind": "doc",
+      "title": "Roadmap de produto ou tecnologia",
+      "summary": "Alinhar liderança, áreas internas e, em versão filtrada, clientes sobre o que será construído, por quê, em que ordem e com que confiança: temas e objetivos, entregas por horizonte, dependências, capacidade e o que ficou de fora.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "03-tipos-de-apresentacao/treinamento.md",
+      "kind": "doc",
+      "title": "Treinamento / capacitação",
+      "summary": "Ensinar um procedimento, sistema, conceito ou norma para que o público consiga executar algo depois. Inclui onboarding, treinamento de processo, uso de ferramenta, segurança, compliance.",
+      "when_to_read": "Ao escolher o tipo de deck (passo 2); ler apenas o arquivo do tipo escolhido"
+    },
+    {
+      "path": "04-modelos-de-slides/agenda.md",
+      "kind": "doc",
+      "title": "Agenda (`agenda`)",
+      "summary": "Decks com 8 ou mais slides de conteúdo ou mais de 3 blocos. Reuniões com discussão (kickoff, treinamento, all-hands). Não usar em decks executivos curtos (o sumário executivo já orienta).",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/bullets-e-duas-colunas.md",
+      "kind": "doc",
+      "title": "Bullets (`bullets`) e duas colunas (`two_column`)",
+      "summary": "3 a 6 pontos de texto que sustentam o título. Contexto, objetivos, escopo, \"o que muda para você\". Se os pontos são dados, prefira kpi_row, chart ou table.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/cabecalho-kicker-e-logo.md",
+      "kind": "doc",
+      "title": "Cabeçalho, kicker e logotipo (campos comuns)",
+      "summary": "Três elementos que dão identidade e navegação a todos os slides de conteúdo sem competir com o título.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/callout.md",
+      "kind": "doc",
+      "title": "Callout rotulado (campo `callout`, comum a todos os slides de conteúdo)",
+      "summary": "Para fechar um slide com a leitura, a ressalva, a recomendação ou a decisão pedida, separada visualmente do dado. É o mecanismo padrão para sinalizar fato × inferência × recomendação (00-guia/fatos-inferencias-recomendacoes.md). No máximo u...",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/capa.md",
+      "kind": "doc",
+      "title": "Capa (`cover`)",
+      "summary": "Primeiro slide de qualquer deck apresentado ou distribuído. Exceção: painéis operacionais diários (começam direto no painel).",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/citacao-destaque.md",
+      "kind": "doc",
+      "title": "Citação / destaque (`quote`)",
+      "summary": "Depoimento de cliente (proposta, pitch), visão/ambição (plano estratégico), frase de impacto (all-hands), reconhecimento. Com moderação: no máximo 1 a 2 por deck.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/comparacao.md",
+      "kind": "doc",
+      "title": "Comparação (`comparison`)",
+      "summary": "2 a 4 opções, cenários, pilares ou produtos lado a lado com os mesmos critérios. Alternativas em business case, planos de preço em proposta, pilares em plano estratégico.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/encerramento.md",
+      "kind": "doc",
+      "title": "Encerramento (`closing`)",
+      "summary": "Último slide (antes dos anexos). Reforça o pedido ou próximo passo e dá o contato. Não usar \"Obrigado\" sozinho em decks que pedem decisão.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/gantt.md",
+      "kind": "doc",
+      "title": "Gantt simplificado (`gantt`)",
+      "summary": "Cronograma macro de projeto, roadmap por iniciativa, plano de implantação, cadência de governança. Até 10 linhas e 16 períodos. Para marcos apenas, prefira timeline.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/grafico.md",
+      "kind": "doc",
+      "title": "Gráfico (`chart`)",
+      "summary": "Tendência (linha), comparação entre categorias (barras/colunas), composição (empilhado, pizza até 4 fatias), variação (waterfall). Um gráfico por slide.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/imagem.md",
+      "kind": "doc",
+      "title": "Imagem / print de tela (`image`)",
+      "summary": "Prints de sistema em treinamentos, fotos de produto ou instalação em decks externos, fotos de equipe em all-hands, diagramas exportados de outras ferramentas. A imagem é o conteúdo; o título continua sendo a conclusão (\"Quatro passos para r...",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/kpi-dashboard.md",
+      "kind": "doc",
+      "title": "Painel de KPIs (`kpi_row`)",
+      "summary": "Visão geral de 3 a 6 indicadores com valor, comparação e status. Slide 3 típico de relatórios; slide 1 de revisões operacionais.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/matriz-2x2.md",
+      "kind": "doc",
+      "title": "Matriz 2×2 (`matrix_2x2`)",
+      "summary": "Priorização (impacto × esforço), posicionamento competitivo (preço × qualidade), riscos (probabilidade × impacto), SWOT (4 quadrantes sem eixos).",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/numero-grande.md",
+      "kind": "doc",
+      "title": "Número grande (`big_number`)",
+      "summary": "Quando um único número é a mensagem: tamanho de mercado, custo do problema, resultado alcançado, meta. Decks estratégicos, pitch, proposta, all-hands.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/pareto.md",
+      "kind": "doc",
+      "title": "Pareto (`pareto`)",
+      "summary": "Causas de parada, defeito, reprovação, perda de venda, chamados: mostrar quais poucas causas concentram a maior parte do efeito. Construído com formas: barras decrescentes + linha de % acumulado + limiar (80% por padrão).",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/processo-fluxo.md",
+      "kind": "doc",
+      "title": "Processo / fluxo (`process`)",
+      "summary": "Etapas sequenciais (3 a 6): como a solução funciona, passo a passo de procedimento, fases de metodologia, funil simplificado.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/progress-bars.md",
+      "kind": "doc",
+      "title": "Barras de progresso / distribuição (`progress_bars`)",
+      "summary": "Lista de 3 a 10 itens com um valor proporcional cada: distribuição por categoria, carga por equipe, % de preenchimento de campos (qualidade de dado), aprovação por parâmetro, atingimento por região. É um gráfico de barras construído com for...",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/proximos-passos.md",
+      "kind": "doc",
+      "title": "Plano de ação / próximos passos (`action_plan`)",
+      "summary": "Penúltimo ou último slide de conteúdo de quase todo deck: o que será feito, por quem, até quando, e o que se pede do público. Também no meio de relatórios táticos (plano de recuperação de desvios).",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/README.md",
+      "kind": "doc",
+      "title": "Modelos de slide",
+      "summary": "Padrões reutilizáveis de um slide. Cada arquivo traz: quando usar, anatomia com coordenadas (polegadas, 16:9), regras, variantes e o trecho de spec correspondente. A chave type é a usada em schemas/deck-spec.schema.json e implementada em 06...",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/riscos-e-issues.md",
+      "kind": "doc",
+      "title": "Riscos e issues (`table`, variante)",
+      "summary": "Lista priorizada de riscos (futuros, incertos) ou issues (problemas atuais) com resposta e dono. Relatórios de projeto, business case, plano estratégico, financeiro (riscos ao forecast).",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/secao-divisoria.md",
+      "kind": "doc",
+      "title": "Divisória de seção (`section`)",
+      "summary": "Decks com 12 ou mais slides, para marcar a transição entre blocos (diagnóstico / direção / plano). Não usar em decks curtos nem em painéis operacionais.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/sumario-executivo.md",
+      "kind": "doc",
+      "title": "Sumário executivo (`executive_summary`)",
+      "summary": "Slide 2 de todo deck tático ou estratégico. É o slide mais importante: quem só ler este deve sair com a resposta completa.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/tabela.md",
+      "kind": "doc",
+      "title": "Tabela (`table`)",
+      "summary": "Quando o público precisa ler valores exatos ou comparar várias dimensões ao mesmo tempo (DRE resumida, lista de entregas, plano de ação, riscos). Não usar tabela para mostrar tendência (use gráfico).",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/takeaways.md",
+      "kind": "doc",
+      "title": "Leitura executiva / takeaways (`takeaways`)",
+      "summary": "Três (2 a 4) pontos numerados lado a lado, cada um com título curto e uma frase: leitura executiva de um conjunto de dados, direcionadores, decisões pedidas, plano em fases (agora / próximas semanas / após 30 dias). Substitui listas de bull...",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/timeline-roadmap.md",
+      "kind": "doc",
+      "title": "Timeline / roadmap (`timeline`)",
+      "summary": "Marcos de projeto, fases de implantação, roadmap de plano estratégico, histórico de eventos (lições aprendidas). 3 a 8 marcos.",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "04-modelos-de-slides/waterfall.md",
+      "kind": "doc",
+      "title": "Waterfall / ponte (`waterfall`)",
+      "summary": "Explicar como se sai de um total para outro (EBITDA orçado → real; receita ano anterior → atual; orçamento → realocação). É o gráfico mais importante do relatório financeiro e do deep dive de portfólio. Construído com formas (python-pptx nã...",
+      "when_to_read": "Ao montar cada slide (passo 4); ler apenas os modelos usados"
+    },
+    {
+      "path": "05-artefatos-visuais/graficos/escolha-do-grafico.md",
+      "kind": "doc",
+      "title": "Escolha do gráfico",
+      "summary": "1. Um gráfico por slide e o título do slide é a conclusão dele. 2. Comece o eixo em zero para barras e colunas. Linhas podem ter eixo truncado se sinalizado. 3. Até 3 séries coloridas; as demais em cinza. Legenda só com 2 ou mais séries.",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/icones-e-formas.md",
+      "kind": "doc",
+      "title": "Ícones, formas e imagens",
+      "summary": "Sempre cor + texto (ou cor + ícone). Círculo de 0,25 pol. ao lado do texto, ou célula de tabela preenchida.",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/logo-placeholder-light.png",
+      "kind": "asset",
+      "title": "logo-placeholder-light",
+      "summary": "Imagem placeholder para testes",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/logo-placeholder.png",
+      "kind": "asset",
+      "title": "logo-placeholder",
+      "summary": "Imagem placeholder para testes",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/logotipo-e-marca.md",
+      "kind": "doc",
+      "title": "Logotipo e marca",
+      "summary": "Um deck sem logotipo parece rascunho; um deck com logotipo gigante em todo slide parece propaganda. O compêndio adota a regra: presente e discreto. A IA deve sempre perguntar pelo logotipo e pela identidade visual no briefing, e aplicar a r...",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/paletas/corporativa-azul.json",
+      "kind": "data",
+      "title": "corporativa-azul",
+      "summary": "Paleta de cores por papel",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/paletas/educacao-publico.json",
+      "kind": "data",
+      "title": "educacao-publico",
+      "summary": "Paleta de cores por papel",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/paletas/financeira-sobria.json",
+      "kind": "data",
+      "title": "financeira-sobria",
+      "summary": "Paleta de cores por papel",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/paletas/industria.json",
+      "kind": "data",
+      "title": "industria",
+      "summary": "Paleta de cores por papel",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/paletas/operacional-alto-contraste.json",
+      "kind": "data",
+      "title": "operacional-alto-contraste",
+      "summary": "Paleta de cores por papel",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/paletas/saude.json",
+      "kind": "data",
+      "title": "saude",
+      "summary": "Paleta de cores por papel",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/paletas/tecnologia.json",
+      "kind": "data",
+      "title": "tecnologia",
+      "summary": "Paleta de cores por papel",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/paletas/varejo-servicos.json",
+      "kind": "data",
+      "title": "varejo-servicos",
+      "summary": "Paleta de cores por papel",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/paletas/vendas-energetica.json",
+      "kind": "data",
+      "title": "vendas-energetica",
+      "summary": "Paleta de cores por papel",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/print-placeholder.png",
+      "kind": "asset",
+      "title": "print-placeholder",
+      "summary": "Imagem placeholder para testes",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/README.md",
+      "kind": "doc",
+      "title": "Artefatos visuais",
+      "summary": "{ \"name\": \"nome-da-paleta\", \"description\": \"quando usar\", \"use_for\": [\"tipos ou públicos\"], \"font\": {\"title\": \"Calibri\", \"body\": \"Calibri\"}, \"font_scale\": 1.0, \"colors\": { \"primary\": \"RRGGBB\", \"primary_dark\": \"RRGGBB\", \"secondary\": \"RRGGBB\"...",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "05-artefatos-visuais/template-corporativo.md",
+      "kind": "doc",
+      "title": "Template corporativo (.pptx / .potx)",
+      "summary": "Quando a empresa tem um template obrigatório, o deck deve nascer dele: mestre, layouts, tema de cores e fontes, logotipo e rodapé já vêm do arquivo. O gerador passa a preencher layouts em vez de desenhar identidade.",
+      "when_to_read": "Ao escolher paleta, grafico, logotipo ou template"
+    },
+    {
+      "path": "06-codigo/pptxgenjs/deckbuilder.js",
+      "kind": "code",
+      "title": "deckbuilder.js",
+      "summary": "DeckBuilder (PptxGenJS): versao JavaScript do gerador, com a mesma spec JSON e o mesmo grid",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/pptxgenjs/README.md",
+      "kind": "doc",
+      "title": "PptxGenJS: DeckBuilder (JavaScript)",
+      "summary": "Versão em Node.js do gerador, com a mesma spec JSON, o mesmo grid e os mesmos modelos de slide da versão Python.",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/audit_deck.py",
+      "kind": "code",
+      "title": "audit_deck.py",
+      "summary": "Validador automatico de um .pptx conforme as regras do compendio (07-checklists/auditoria-de-arquivo.md).",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/build_examples.py",
+      "kind": "code",
+      "title": "build_examples.py",
+      "summary": "Extrai os blocos ```json das paginas de 03-tipos-de-apresentacao/*.md, salva em schemas/exemplos/<tipo>.json e gera um .pptx de cada um em examples/.",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/build_from_spec.py",
+      "kind": "code",
+      "title": "build_from_spec.py",
+      "summary": "Gera um .pptx a partir de uma spec JSON (schemas/deck-spec.schema.json).",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/build_index.py",
+      "kind": "code",
+      "title": "build_index.py",
+      "summary": "Gera agent-index.json na raiz do repositorio: indice legivel por maquina de todos os documentos, esquemas, paletas e scripts, com titulo, resumo (primeiro paragrafo) e \"quando ler\".",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/deckbuilder.py",
+      "kind": "code",
+      "title": "deckbuilder.py",
+      "summary": "DeckBuilder: biblioteca base em python-pptx para gerar apresentacoes a partir de uma spec (ver ../../schemas/deck-spec.schema.json) seguindo as regras do compendio: grid 16:9 (01-fundamentos/grid-e-layout.md), paletas por papel de cor (05-a",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/extract_deck.py",
+      "kind": "code",
+      "title": "extract_deck.py",
+      "summary": "Extrai a estrutura de um .pptx existente para revisao (00-guia/revisao-de-deck-existente.md).",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/fmt.py",
+      "kind": "code",
+      "title": "fmt.py",
+      "summary": "Formatacao numerica pt-BR para slides (01-fundamentos/formatacao-numerica.md).",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/profile_data.py",
+      "kind": "code",
+      "title": "profile_data.py",
+      "summary": "Perfil de uma base de dados (xlsx, csv) para orientar a construcao de um deck.",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/README.md",
+      "kind": "doc",
+      "title": "python-pptx: DeckBuilder",
+      "summary": "pip install python-pptx jsonschema pandas openpyxl pillow pywin32",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/render_thumbnails.py",
+      "kind": "code",
+      "title": "render_thumbnails.py",
+      "summary": "Renderiza cada .pptx de uma pasta em PNGs (um por slide) usando o PowerPoint instalado (automacao COM, Windows). Saida: <out>/<nome-do-deck>/slide-01.png ...",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/python-pptx/score_deck.py",
+      "kind": "code",
+      "title": "score_deck.py",
+      "summary": "Pontua um deck pela rubrica (07-checklists/rubrica-de-qualidade.md): calcula os criterios automatizaveis e deixa os manuais em branco na folha de pontuacao.",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "06-codigo/README.md",
+      "kind": "doc",
+      "title": "Código gerador",
+      "summary": "Bibliotecas base para transformar uma spec JSON (schemas/deck-spec.schema.json) em .pptx, aplicando automaticamente grid, paleta, tipografia e modelos de slide do compêndio.",
+      "when_to_read": "Ao gerar, renderizar, auditar, pontuar ou extrair decks; ao perfilar uma base de dados"
+    },
+    {
+      "path": "07-checklists/auditoria-de-arquivo.md",
+      "kind": "doc",
+      "title": "Auditoria de arquivo (antes da entrega)",
+      "summary": "Motivação: arquivos gerados por código podem abrir com \"reparo\", ter texto cortado, fontes ausentes ou elementos fora da área útil sem que o gerador acuse erro. A auditoria é obrigatória e deve ser registrada na entrega.",
+      "when_to_read": "Antes da entrega (passo 7) e ao revisar um deck"
+    },
+    {
+      "path": "07-checklists/nivel-de-exposicao.md",
+      "kind": "doc",
+      "title": "Checklist por nível de exposição",
+      "summary": "Aplicar depois de definir meta.exposure no briefing (00-guia/briefing.md, bloco 3). Se o deck for encaminhado a alguém fora do público original, suba um nível.",
+      "when_to_read": "Antes da entrega (passo 7) e ao revisar um deck"
+    },
+    {
+      "path": "07-checklists/pre-entrega.md",
+      "kind": "doc",
+      "title": "Checklist pré-entrega",
+      "summary": "Percorra antes de entregar qualquer deck. Itens marcados com (auto) podem ser verificados por script.",
+      "when_to_read": "Antes da entrega (passo 7) e ao revisar um deck"
+    },
+    {
+      "path": "07-checklists/revisao-por-publico.md",
+      "kind": "doc",
+      "title": "Revisão por público",
+      "summary": "Verificações específicas além do checklist geral (pre-entrega.md).",
+      "when_to_read": "Antes da entrega (passo 7) e ao revisar um deck"
+    },
+    {
+      "path": "07-checklists/rubrica-de-qualidade.md",
+      "kind": "doc",
+      "title": "Rubrica de qualidade de um deck",
+      "summary": "Pontuação para comparar saídas de agentes diferentes, versões do mesmo deck ou o efeito de mudanças no compêndio. Cada critério vale 0 (ausente), 1 (parcial) ou 2 (pleno). A parte automatizável é calculada por 06-codigo/python-pptx/score_de...",
+      "when_to_read": "Antes da entrega (passo 7) e ao revisar um deck"
+    },
+    {
+      "path": "examples/all-hands.pptx",
+      "kind": "example",
+      "title": "all-hands",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/analise-de-processo.pptx",
+      "kind": "example",
+      "title": "analise-de-processo",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/business-case.pptx",
+      "kind": "example",
+      "title": "business-case",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/comite-de-riscos-e-compliance.pptx",
+      "kind": "example",
+      "title": "comite-de-riscos-e-compliance",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/comunicacao-de-mudanca.pptx",
+      "kind": "example",
+      "title": "comunicacao-de-mudanca",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/indicadores-de-pessoas.pptx",
+      "kind": "example",
+      "title": "indicadores-de-pessoas",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/indicadores-de-seguranca.pptx",
+      "kind": "example",
+      "title": "indicadores-de-seguranca",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/kickoff-de-projeto.pptx",
+      "kind": "example",
+      "title": "kickoff-de-projeto",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/licoes-aprendidas.pptx",
+      "kind": "example",
+      "title": "licoes-aprendidas",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/orcamento-anual.pptx",
+      "kind": "example",
+      "title": "orcamento-anual",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/pitch-investidores.pptx",
+      "kind": "example",
+      "title": "pitch-investidores",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/plano-estrategico.pptx",
+      "kind": "example",
+      "title": "plano-estrategico",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/proposta-comercial.pptx",
+      "kind": "example",
+      "title": "proposta-comercial",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/README.md",
+      "kind": "doc",
+      "title": "Exemplos gerados",
+      "summary": "Decks .pptx produzidos automaticamente pelo código base a partir das specs em schemas/exemplos/ (que por sua vez são os blocos JSON de 03-tipos-de-apresentacao/.md).",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/relatorio-de-incidente.pptx",
+      "kind": "example",
+      "title": "relatorio-de-incidente",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/relatorio-de-progresso.pptx",
+      "kind": "example",
+      "title": "relatorio-de-progresso",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/relatorio-de-projeto.pptx",
+      "kind": "example",
+      "title": "relatorio-de-projeto",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/relatorio-de-vendas.pptx",
+      "kind": "example",
+      "title": "relatorio-de-vendas",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/relatorio-esg.pptx",
+      "kind": "example",
+      "title": "relatorio-esg",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/relatorio-financeiro.pptx",
+      "kind": "example",
+      "title": "relatorio-financeiro",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/resultados-de-marketing.pptx",
+      "kind": "example",
+      "title": "resultados-de-marketing",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/resultados-de-pesquisa.pptx",
+      "kind": "example",
+      "title": "resultados-de-pesquisa",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/reuniao-de-conselho.pptx",
+      "kind": "example",
+      "title": "reuniao-de-conselho",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/revisao-com-cliente-qbr.pptx",
+      "kind": "example",
+      "title": "revisao-com-cliente-qbr",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/revisao-de-fornecedores.pptx",
+      "kind": "example",
+      "title": "revisao-de-fornecedores",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/revisao-de-kpis-de-area.pptx",
+      "kind": "example",
+      "title": "revisao-de-kpis-de-area",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/revisao-de-portfolio.pptx",
+      "kind": "example",
+      "title": "revisao-de-portfolio",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/revisao-operacional.pptx",
+      "kind": "example",
+      "title": "revisao-operacional",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/revisao-pela-direcao-qualidade.pptx",
+      "kind": "example",
+      "title": "revisao-pela-direcao-qualidade",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/roadmap-de-produto.pptx",
+      "kind": "example",
+      "title": "roadmap-de-produto",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/template-exemplo.pptx",
+      "kind": "example",
+      "title": "template-exemplo",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/todos-os-modelos-js.pptx",
+      "kind": "example",
+      "title": "todos-os-modelos-js",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/todos-os-modelos.pptx",
+      "kind": "example",
+      "title": "todos-os-modelos",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "examples/treinamento.pptx",
+      "kind": "example",
+      "title": "treinamento",
+      "summary": "Deck de exemplo gerado a partir de schemas/exemplos",
+      "when_to_read": "Para ver o resultado renderizado de cada tipo e modelo"
+    },
+    {
+      "path": "README.en.md",
+      "kind": "doc",
+      "title": "PPT Compendium (English overview)",
+      "summary": "A knowledge base that lets AI agents (and people) build PowerPoint decks consistently: audience → deck type → narrative → slide models → visual rules → generated .pptx → audit. Content is written in Brazilian Portuguese; this page and 00-gu...",
+      "when_to_read": ""
+    },
+    {
+      "path": "README.md",
+      "kind": "doc",
+      "title": "PPT Compendium",
+      "summary": "Base de conhecimento para que IAs (e pessoas) criem apresentações em PowerPoint de forma consistente: público-alvo → tipo de apresentação → estrutura narrativa → modelos de slide → regras visuais → código gerador.",
+      "when_to_read": ""
+    },
+    {
+      "path": "schemas/deck-spec.schema.json",
+      "kind": "data",
+      "title": "deck-spec.schema",
+      "summary": "JSON Schema da spec de deck",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/all-hands.json",
+      "kind": "data",
+      "title": "all-hands",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/analise-de-processo.json",
+      "kind": "data",
+      "title": "analise-de-processo",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/business-case.json",
+      "kind": "data",
+      "title": "business-case",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/comite-de-riscos-e-compliance.json",
+      "kind": "data",
+      "title": "comite-de-riscos-e-compliance",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/comunicacao-de-mudanca.json",
+      "kind": "data",
+      "title": "comunicacao-de-mudanca",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/indicadores-de-pessoas.json",
+      "kind": "data",
+      "title": "indicadores-de-pessoas",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/indicadores-de-seguranca.json",
+      "kind": "data",
+      "title": "indicadores-de-seguranca",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/kickoff-de-projeto.json",
+      "kind": "data",
+      "title": "kickoff-de-projeto",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/licoes-aprendidas.json",
+      "kind": "data",
+      "title": "licoes-aprendidas",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/orcamento-anual.json",
+      "kind": "data",
+      "title": "orcamento-anual",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/pitch-investidores.json",
+      "kind": "data",
+      "title": "pitch-investidores",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/plano-estrategico.json",
+      "kind": "data",
+      "title": "plano-estrategico",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/proposta-comercial.json",
+      "kind": "data",
+      "title": "proposta-comercial",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/relatorio-de-incidente.json",
+      "kind": "data",
+      "title": "relatorio-de-incidente",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/relatorio-de-progresso.json",
+      "kind": "data",
+      "title": "relatorio-de-progresso",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/relatorio-de-projeto.json",
+      "kind": "data",
+      "title": "relatorio-de-projeto",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/relatorio-de-vendas.json",
+      "kind": "data",
+      "title": "relatorio-de-vendas",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/relatorio-esg.json",
+      "kind": "data",
+      "title": "relatorio-esg",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/relatorio-financeiro.json",
+      "kind": "data",
+      "title": "relatorio-financeiro",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/resultados-de-marketing.json",
+      "kind": "data",
+      "title": "resultados-de-marketing",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/resultados-de-pesquisa.json",
+      "kind": "data",
+      "title": "resultados-de-pesquisa",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/reuniao-de-conselho.json",
+      "kind": "data",
+      "title": "reuniao-de-conselho",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/revisao-com-cliente-qbr.json",
+      "kind": "data",
+      "title": "revisao-com-cliente-qbr",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/revisao-de-fornecedores.json",
+      "kind": "data",
+      "title": "revisao-de-fornecedores",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/revisao-de-kpis-de-area.json",
+      "kind": "data",
+      "title": "revisao-de-kpis-de-area",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/revisao-de-portfolio.json",
+      "kind": "data",
+      "title": "revisao-de-portfolio",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/revisao-operacional.json",
+      "kind": "data",
+      "title": "revisao-operacional",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/revisao-pela-direcao-qualidade.json",
+      "kind": "data",
+      "title": "revisao-pela-direcao-qualidade",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/roadmap-de-produto.json",
+      "kind": "data",
+      "title": "roadmap-de-produto",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/template-exemplo.json",
+      "kind": "data",
+      "title": "template-exemplo",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/todos-os-modelos.json",
+      "kind": "data",
+      "title": "todos-os-modelos",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    },
+    {
+      "path": "schemas/exemplos/treinamento.json",
+      "kind": "data",
+      "title": "treinamento",
+      "summary": "Spec de exemplo",
+      "when_to_read": "Ao escrever a spec JSON de um deck"
+    }
+  ]
+}

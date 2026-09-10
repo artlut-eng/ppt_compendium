@@ -45,6 +45,12 @@ python 06-codigo/python-pptx/score_deck.py deck.pptx --audience tatico --manual 
 ## Template corporativo
 `meta.template` + `meta.template_branding: true` (ou `--template`) fazem o gerador preencher os layouts do arquivo da empresa em vez de desenhar identidade. Ver `05-artefatos-visuais/template-corporativo.md`. Tabelas com mais de `max_rows` (10) linhas são paginadas automaticamente em slides `(i/n)`.
 
+## Índice para agentes
+```bash
+python 06-codigo/python-pptx/build_index.py
+```
+Gera `agent-index.json` na raiz (título, resumo e "quando ler" de cada arquivo, pontos de entrada, modos de condução, versão do commit). Rodar após adicionar ou renomear documentos.
+
 ## Miniaturas (Windows + PowerPoint)
 ```bash
 pip install pywin32
