@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "title": "Desempenho da área e próximo ciclo",
+    "audience": "estrategico",
+    "type": "revisao-de-kpis-de-area",
+    "palette": "corporativa-azul",
+    "brand": "Empresa Exemplo",
+    "deck_name": "Planejamento do próximo ciclo"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Diretoria e gestores",
+      "title": "Desempenho da área",
+      "subtitle": "Base para alinhar prioridades, metas e investimentos do próximo ciclo",
+      "thesis": "O avanço de capacidade, maturidade e entregas cria uma base sólida. O próximo passo é converter esse desempenho em escolhas compartilhadas."
+    },
+    {
+      "type": "process",
+      "kicker": "Propósito",
+      "title": "A reunião deve converter desempenho em direcionamento",
+      "steps": [
+        "Ler o ciclo",
+        "Alinhar expectativas",
+        "Decidir",
+        "Encaminhar"
+      ],
+      "descriptions": [
+        "Resultados e tendências",
+        "Ambição e limites",
+        "Prioridades e metas",
+        "Responsáveis e pendências"
+      ],
+      "current_index": 2,
+      "callout": {
+        "kind": "decision",
+        "label": "Resultado esperado",
+        "text": "Prioridades, metas e direcionadores de investimento validados, com decisões e responsáveis registrados."
+      }
+    },
+    {
+      "type": "kpi_row",
+      "kicker": "Entrega",
+      "title": "A execução ganhou previsibilidade ao longo do ciclo",
+      "kpis": [
+        {
+          "label": "Concluídos",
+          "value": "29",
+          "delta": "projetos"
+        },
+        {
+          "label": "No prazo",
+          "value": "84,5%",
+          "delta": "média anual",
+          "status": "success"
+        },
+        {
+          "label": "Evolução",
+          "value": "78% a 91%",
+          "delta": "jan a dez",
+          "status": "success"
+        }
+      ],
+      "callout": {
+        "kind": "warning",
+        "label": "Atenção",
+        "text": "Sustentar, não extrapolar: o fechamento de 91% orienta a ambição, mas não substitui uma meta pactuada."
+      },
+      "source": "Painel de KPIs da área"
+    },
+    {
+      "type": "chart",
+      "kicker": "Valor",
+      "title": "O benefício potencial supera o investimento, mas ainda precisa ser realizado",
+      "chart_type": "column",
+      "categories": [
+        "Investimento",
+        "Benefício estimado"
+      ],
+      "series": [
+        {
+          "name": "R$ mi",
+          "values": [
+            3.27,
+            4.59
+          ]
+        }
+      ],
+      "highlight_index": 1,
+      "number_format": "0.00",
+      "commentary": [
+        "**1,40x** de benefício potencial sobre o investimento",
+        "Benefício estimado não é retorno realizado",
+        "O próximo ciclo deve incorporar marcos de captura e validação de valor"
+      ],
+      "callout": {
+        "kind": "warning",
+        "label": "Transparência",
+        "text": "Benefício estimado não é retorno realizado."
+      },
+      "source": "Painel de KPIs da área"
+    },
+    {
+      "type": "takeaways",
+      "kicker": "Recomendação",
+      "title": "Três direcionadores devem filtrar o próximo ciclo",
+      "items": [
+        {
+          "heading": "Foco",
+          "text": "Priorizar iniciativas alinhadas à estratégia e limitar dispersão."
+        },
+        {
+          "heading": "Previsibilidade",
+          "text": "Pactuar capacidade, prazo e avanço de maturidade com metas realistas."
+        },
+        {
+          "heading": "Valor",
+          "text": "Acompanhar a materialização dos benefícios, não apenas sua estimativa."
+        }
+      ],
+      "callout": {
+        "kind": "conclusion",
+        "label": "Princípio de decisão",
+        "text": "Nenhuma iniciativa avança sem responder claramente aos três filtros."
+      }
+    },
+    {
+      "type": "action_plan",
+      "kicker": "Fechamento",
+      "title": "A reunião termina com decisões, responsáveis e próximos passos",
+      "headers": [
+        "Decisão / direcionamento",
+        "Responsável",
+        "Prazo",
+        "Pendência"
+      ],
+      "actions": [
+        {
+          "action": "",
+          "owner": "",
+          "due": "",
+          "status": ""
+        },
+        {
+          "action": "",
+          "owner": "",
+          "due": "",
+          "status": ""
+        },
+        {
+          "action": "",
+          "owner": "",
+          "due": "",
+          "status": ""
+        },
+        {
+          "action": "",
+          "owner": "",
+          "due": "",
+          "status": ""
+        }
+      ],
+      "callout": {
+        "kind": "recommendation",
+        "label": "Critério de saída",
+        "text": "Cada tema relevante precisa de decisão ou de um responsável por fechar a pendência."
+      }
+    }
+  ]
+}

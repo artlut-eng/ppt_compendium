@@ -52,8 +52,10 @@ db.save("atlas.pptx")
 | `add_action_plan(title, actions, decision)` | `action_plan` | `proximos-passos.md` |
 | `add_quote(text, author, dark)` | `quote` | `citacao-destaque.md` |
 | `add_closing(title, subtitle)` | `closing` | `encerramento.md` |
+| `add_takeaways(title, items)` | `takeaways` | `takeaways.md` |
+| `add_progress_bars(title, items, max, columns, highlight_index)` | `progress_bars` | `progress-bars.md` |
 
-Todos os métodos de conteúdo aceitam também `subtitle`, `source` (rodapé) e `notes` (notas do apresentador).
+Todos os métodos de conteúdo aceitam também `subtitle`, `source` (rodapé), `notes` (notas do apresentador), `kicker` (rótulo acima do título) e `callout` (`{kind, label, text}`). O construtor aceita `brand`, `deck_name`, `date`, `logo`, `logo_light` e `logo_position` (cabeçalho e logotipo em todos os slides; ver `04-modelos-de-slides/cabecalho-kicker-e-logo.md`).
 
 ## Como o estilo é aplicado
 - **Título**: placeholder nativo do layout "Título apenas", reposicionado para o grid, fonte de título da paleta, cor `primary`, 28 pt × `font_scale`.

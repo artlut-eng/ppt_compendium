@@ -49,6 +49,18 @@ CONTENT_TOP_SUB = 1.9
 CONTENT_BOTTOM = 6.7
 FOOTER_BOX = (0.5, 6.8, 12.33, 0.4)
 GUTTER = 0.3
+KICKER_BOX = (0.5, 0.42, 12.33, 0.28)
+TITLE_BOX_K = (0.5, 0.68, 12.33, 0.9)
+SUBTITLE_BOX_K = (0.5, 1.55, 12.33, 0.45)
+CONTENT_TOP_K_NO_SUB = 1.8
+CONTENT_TOP_K_SUB = 2.1
+CALLOUT_H = 0.8
+CALLOUT_STYLE = {  # kind -> (fill, bar, label_color, text_color)
+    "conclusion": ("neutral_light", "primary", "primary", "neutral_dark"),
+    "warning": ("FFF3D6", "warning", "warning", "neutral_dark"),
+    "recommendation": ("EAF5EA", "success", "success", "neutral_dark"),
+    "decision": ("primary_dark", None, "accent", "FFFFFF"),
+}
 
 # Tamanhos base de fonte (pt) - ver 01-fundamentos/tipografia.md
 FS = {
@@ -113,7 +125,9 @@ class DeckBuilder:
     """Constroi um deck slide a slide, aplicando grid, paleta e tipografia do compendio."""
 
     def __init__(self, palette: str | dict | None = "corporativa-azul", font_scale: float | None = None,
-                 confidentiality: str | None = None, logo: str | None = None, template: str | None = None):
+                 confidentiality: str | None = None, logo: str | None = None, template: str | None = None,
+                 brand: str | None = None, deck_name: str | None = None, date: str | None = None,
+                 logo_light: str | None = None, logo_position: str = "footer"):
         self.prs = Presentation(template) if template else Presentation()
         self.prs.slide_width = Inches(SLIDE_W)
         self.prs.slide_height = Inches(SLIDE_H)
@@ -124,8 +138,14 @@ class DeckBuilder:
         self.font_body = fonts.get("body", "Calibri")
         self.scale = float(font_scale if font_scale is not None else self.pal.get("font_scale", 1.0))
         self.confidentiality = confidentiality
-        self.logo = logo
+        self.logo = logo if (logo and Path(logo).exists()) else (str(ROOT / logo) if logo and (ROOT / logo).exists() else None)
+        self.logo_light = logo_light if (logo_light and Path(logo_light).exists()) else (str(ROOT / logo_light) if logo_light and (ROOT / logo_light).exists() else None)
+        self.logo_position = logo_position or "footer"
+        self.brand = brand
+        self.deck_name = deck_name
+        self.date = date
         self.page = 0
+        self.bottom = CONTENT_BOTTOM
         self._blank = self.prs.slide_layouts[6]
         self._title_only = self.prs.slide_layouts[5]
 
@@ -238,11 +258,34 @@ class DeckBuilder:
             r.text = part
             self._style_run(r, size, bold=(i % 2 == 1), color=color)
 
-    def _title(self, slide, title: str | None, subtitle: str | None = None) -> float:
-        """Escreve titulo (placeholder nativo) e subtitulo; devolve o top da area de conteudo."""
+    def _header(self, slide):
+        """Linha discreta no topo: MARCA | DECK a esquerda; data ou logo a direita."""
+        left = "  |  ".join(v for v in (self.brand, self.deck_name) if v)
+        if left:
+            self._text(slide, 0.5, 0.1, 8.0, 0.25, left.upper(), size=9, bold=True, color="neutral_mid", anchor=MSO_ANCHOR.MIDDLE)
+        if self.logo_position == "header" and self.logo:
+            slide.shapes.add_picture(self.logo, Inches(11.6), Inches(0.1), height=Inches(0.32))
+        elif self.date:
+            self._text(slide, 8.5, 0.1, 4.33, 0.25, self.date, size=9, color="neutral_mid", align="right", anchor=MSO_ANCHOR.MIDDLE)
+
+    def _place_logo(self, slide, x, y, width=None, height=None, dark=False):
+        src = (self.logo_light or self.logo) if dark else self.logo
+        if src:
+            kw = {"width": Inches(width)} if width else {"height": Inches(height)}
+            slide.shapes.add_picture(src, Inches(x), Inches(y), **kw)
+        elif self.brand:
+            self._text(slide, x - 1.0, y, 2.5 if width is None else width, 0.4, self.brand.upper(), size=10, bold=True,
+                       color="FFFFFF" if dark else "primary", align="right", anchor=MSO_ANCHOR.MIDDLE)
+
+    def _title(self, slide, title: str | None, subtitle: str | None = None, kicker: str | None = None) -> float:
+        """Escreve cabecalho, kicker, titulo (placeholder nativo) e subtitulo; devolve o top da area de conteudo."""
+        self._header(slide)
+        tbox, sbox = (TITLE_BOX_K, SUBTITLE_BOX_K) if kicker else (TITLE_BOX, SUBTITLE_BOX)
+        if kicker:
+            self._text(slide, *KICKER_BOX, str(kicker).upper(), size=10, bold=True, color="secondary", anchor=MSO_ANCHOR.BOTTOM)
         if title is not None:
             ph = slide.shapes.title
-            ph.left, ph.top, ph.width, ph.height = (Inches(v) for v in TITLE_BOX)
+            ph.left, ph.top, ph.width, ph.height = (Inches(v) for v in tbox)
             tf = ph.text_frame
             tf.word_wrap = True
             tf.vertical_anchor = MSO_ANCHOR.TOP
@@ -253,9 +296,9 @@ class DeckBuilder:
             r.text = title
             self._style_run(r, "title", bold=True, color="primary", font=self.font_title)
         if subtitle:
-            self._text(slide, *SUBTITLE_BOX, subtitle, size="subtitle", color="neutral_mid")
-            return CONTENT_TOP_SUB
-        return CONTENT_TOP_NO_SUB
+            self._text(slide, *sbox, subtitle, size="subtitle", color="neutral_mid")
+            return CONTENT_TOP_K_SUB if kicker else CONTENT_TOP_SUB
+        return CONTENT_TOP_K_NO_SUB if kicker else CONTENT_TOP_NO_SUB
 
     def _footer(self, slide, source: str | None = None):
         x, y, w, h = FOOTER_BOX
@@ -263,20 +306,42 @@ class DeckBuilder:
         if self.confidentiality:
             left = f"{left}   |   {self.confidentiality}" if left else self.confidentiality
         if left:
-            self._text(slide, x, y, w - 1.0, h, left, size="footer", color="neutral_mid", anchor=MSO_ANCHOR.MIDDLE)
+            self._text(slide, x, y, w - 3.0, h, left, size="footer", color="neutral_mid", anchor=MSO_ANCHOR.MIDDLE)
         self._text(slide, x + w - 1.0, y, 1.0, h, str(self.page), size="footer", color="neutral_mid", align="right", anchor=MSO_ANCHOR.MIDDLE)
-        if self.logo and Path(self.logo).exists():
-            slide.shapes.add_picture(self.logo, Inches(11.9), Inches(6.85), height=Inches(0.3))
+        if self.logo_position == "footer":
+            if self.logo:
+                slide.shapes.add_picture(self.logo, Inches(10.6), Inches(6.83), height=Inches(0.3))
+            elif self.brand:
+                self._text(slide, 9.8, y, 2.0, h, self.brand.upper(), size=9, bold=True, color="primary", align="right", anchor=MSO_ANCHOR.MIDDLE)
+
+    def _callout(self, slide, callout: dict):
+        """Caixa rotulada no rodape da area de conteudo (ver 04-modelos-de-slides/callout.md)."""
+        kind = callout.get("kind", "conclusion")
+        fill, bar, label_color, text_color = CALLOUT_STYLE.get(kind, CALLOUT_STYLE["conclusion"])
+        y = CONTENT_BOTTOM - CALLOUT_H - 0.05
+        self._rect(slide, 0.5, y, CONTENT_W, CALLOUT_H, fill=fill)
+        if bar:
+            self._rect(slide, 0.5, y, 0.08, CALLOUT_H, fill=bar)
+        label = callout.get("label")
+        tx = 0.75
+        if label:
+            self._text(slide, 0.75, y, 2.3, CALLOUT_H, str(label).upper(), size=10, bold=True, color=label_color, anchor=MSO_ANCHOR.MIDDLE)
+            tx = 3.05
+        self._text(slide, tx, y, 12.83 - tx - 0.2, CALLOUT_H, callout.get("text", ""), size=14, bold=True, color=text_color, anchor=MSO_ANCHOR.MIDDLE)
 
     def _notes(self, slide, notes: str | None):
         if notes:
             slide.notes_slide.notes_text_frame.text = notes
 
-    def _content_slide(self, spec_title, subtitle=None, source=None, notes=None):
+    def _content_slide(self, spec_title, subtitle=None, source=None, notes=None, kicker=None, callout=None):
         slide = self._new_slide(with_title=True)
-        top = self._title(slide, spec_title, subtitle)
+        top = self._title(slide, spec_title, subtitle, kicker)
         self._footer(slide, source)
         self._notes(slide, notes)
+        self.bottom = CONTENT_BOTTOM
+        if callout:
+            self._callout(slide, callout)
+            self.bottom = CONTENT_BOTTOM - CALLOUT_H - 0.2
         return slide, top
 
     @staticmethod
@@ -285,18 +350,28 @@ class DeckBuilder:
         return [(x0 + i * (w + gutter), w) for i in range(n)]
 
     # --------------------------------------------------------------- slides
-    def add_cover(self, title: str, subtitle: str | None = None, author: str | None = None, date: str | None = None, notes: str | None = None):
+    def add_cover(self, title: str, subtitle: str | None = None, author: str | None = None, date: str | None = None,
+                  notes: str | None = None, kicker: str | None = None, thesis: str | None = None):
         s = self._new_slide()
         self._fill_bg(s, "primary_dark")
         self._rect(s, 0, 6.9, SLIDE_W, 0.6, fill="accent")
-        self._text(s, 0.8, 2.4, 11.7, 1.6, title, size="cover_title", bold=True, color="FFFFFF", anchor=MSO_ANCHOR.BOTTOM, font=self.font_title)
+        if self.brand:
+            self._text(s, 0.8, 0.5, 6.0, 0.4, self.brand.upper(), size=11, bold=True, color="D9E1EA", anchor=MSO_ANCHOR.MIDDLE)
+        if kicker:
+            self._text(s, 0.8, 1.7, 11.7, 0.4, str(kicker).upper(), size=11, bold=True, color="accent", anchor=MSO_ANCHOR.BOTTOM)
+        tw = 8.0 if thesis else 11.7
+        self._text(s, 0.8, 2.1, tw, 1.9, title, size="cover_title", bold=True, color="FFFFFF", anchor=MSO_ANCHOR.BOTTOM, font=self.font_title)
         if subtitle:
-            self._text(s, 0.8, 4.1, 11.7, 0.8, subtitle, size="cover_sub", color="D9E1EA")
-        meta = " | ".join(v for v in (author, date, self.confidentiality) if v)
+            self._text(s, 0.8, 4.1, tw, 0.8, subtitle, size="cover_sub", color="D9E1EA")
+        if thesis:
+            self._rect(s, 9.2, 2.1, 3.63, 2.7, fill="FFFFFF", line=None)
+            self._rect(s, 9.2, 2.1, 0.08, 2.7, fill="accent")
+            self._text(s, 9.45, 2.25, 3.25, 0.4, "TESE CENTRAL", size=9, bold=True, color="neutral_mid")
+            self._text(s, 9.45, 2.65, 3.25, 2.05, thesis, size=15, bold=True, color="primary")
+        meta = " | ".join(v for v in (author, date or self.date, self.confidentiality) if v)
         if meta:
             self._text(s, 0.8, 6.2, 11.7, 0.5, meta, size="cover_meta", color="BFC9D4")
-        if self.logo and Path(self.logo).exists():
-            s.shapes.add_picture(self.logo, Inches(11.3), Inches(0.5), width=Inches(1.5))
+        self._place_logo(s, 11.3, 0.5, width=1.5, dark=True)
         self._notes(s, notes)
         return s
 
@@ -306,14 +381,15 @@ class DeckBuilder:
         if number:
             self._text(s, 0.8, 2.2, 2.0, 1.0, str(number), size="section_number", bold=True, color="accent", font=self.font_title)
         self._text(s, 0.8, 3.3, 11.7, 1.2, title, size="section_title", bold=True, color="FFFFFF", font=self.font_title)
+        self._place_logo(s, 11.6, 0.5, width=1.2, dark=True)
         if subtitle:
             self._text(s, 0.8, 4.5, 11.7, 0.8, subtitle, size=18, color="D9E1EA")
         self._notes(s, notes)
         return s
 
-    def add_agenda(self, items: list[str], title: str = "Agenda", durations: list[str] | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, notes=notes)
-        step = min(0.75, (CONTENT_BOTTOM - top - 0.2) / max(len(items), 1))
+    def add_agenda(self, items: list[str], title: str = "Agenda", durations: list[str] | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, notes=notes, kicker=kicker, callout=callout)
+        step = min(0.75, (self.bottom - top - 0.2) / max(len(items), 1))
         for i, item in enumerate(items):
             y = top + 0.2 + i * step
             circ = self._rect(s, 0.5, y, 0.5, 0.5, fill="primary", shape=MSO_SHAPE.OVAL)
@@ -327,13 +403,13 @@ class DeckBuilder:
         return s
 
     def add_executive_summary(self, headline: str, points: list[str], ask: str | None = None, title: str = "Sumário executivo",
-                              source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, source=source, notes=notes)
+                              source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, source=source, notes=notes, kicker=kicker, callout=callout)
         self._rect(s, 0.5, top, 12.33, 1.1, fill="neutral_light")
         self._rect(s, 0.5, top, 0.08, 1.1, fill="accent")
         self._text(s, 0.75, top, 11.9, 1.1, headline, size=22, bold=True, color="primary", anchor=MSO_ANCHOR.MIDDLE)
         y = top + 1.4
-        row_h = min(0.9, (CONTENT_BOTTOM - y - (0.9 if ask else 0)) / max(len(points), 1))
+        row_h = min(0.9, (self.bottom - y - (0.9 if ask else 0)) / max(len(points), 1))
         for i, ptxt in enumerate(points):
             yy = y + i * row_h
             circ = self._rect(s, 0.6, yy + 0.05, 0.45, 0.45, fill="primary", shape=MSO_SHAPE.OVAL)
@@ -343,7 +419,7 @@ class DeckBuilder:
             self._style_run(circ.text_frame.paragraphs[0].runs[0], 13, bold=True, color="FFFFFF")
             self._text(s, 1.25, yy, 11.5, row_h, ptxt, size=17, anchor=MSO_ANCHOR.TOP)
         if ask:
-            ya = CONTENT_BOTTOM - 0.8
+            ya = self.bottom - 0.8
             self._rect(s, 0.5, ya, 12.33, 0.75, fill="FFFFFF", line="accent", line_width=1.5)
             tb = self._text(s, 0.7, ya, 12.0, 0.75, "", anchor=MSO_ANCHOR.MIDDLE)
             p = tb.text_frame.paragraphs[0]
@@ -352,11 +428,12 @@ class DeckBuilder:
         return s
 
     def add_kpi_row(self, title: str, kpis: list[dict], subtitle: str | None = None, bullets: list[str] | None = None,
-                    source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
+                    source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
         n = max(2, min(len(kpis), 6))
         cols = self._columns(n)
-        card_h = 2.6 if n <= 4 else 2.4
+        has_desc = any(k.get("description") for k in kpis)
+        card_h = (2.9 if has_desc else 2.6) if n <= 4 else (2.9 if has_desc else 2.4)
         value_size = {2: 48, 3: 44, 4: 40, 5: 34, 6: 30}[n]
         y = top + 0.2
         for (x, w), k in zip(cols, kpis):
@@ -369,14 +446,16 @@ class DeckBuilder:
             vsize = value_size if len(val) <= 6 else max(20, int(value_size * 6 / len(val) * 1.15))
             self._text(s, x + 0.15, y + 0.65, w - 0.3, 1.1, val, size=vsize, bold=True, color="neutral_dark", anchor=MSO_ANCHOR.MIDDLE)
             if k.get("delta"):
-                self._text(s, x + 0.15, y + card_h - 0.65, w - 0.3, 0.5, str(k["delta"]), size="kpi_delta", bold=True, color=bar)
+                self._text(s, x + 0.15, y + 1.75, w - 0.3, 0.45, str(k["delta"]), size="kpi_delta", bold=True, color=bar)
+            if k.get("description"):
+                self._text(s, x + 0.15, y + 2.15, w - 0.3, 0.7, str(k["description"]), size=10, color="neutral_mid")
         if bullets:
-            self._bullets(s, 0.5, y + card_h + 0.3, 12.33, CONTENT_BOTTOM - (y + card_h + 0.3), bullets, size=15)
+            self._bullets(s, 0.5, y + card_h + 0.3, 12.33, self.bottom - (y + card_h + 0.3), bullets, size=15)
         return s
 
     def add_big_number(self, title: str, value: str, label: str | None = None, context: str | None = None,
-                       subtitle: str | None = None, source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
+                       subtitle: str | None = None, source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
         self._text(s, 0.5, top + 0.4, 12.33, 2.0, value, size="big_number", bold=True, color="primary", align="center", anchor=MSO_ANCHOR.MIDDLE, font=self.font_title)
         if label:
             self._text(s, 0.5, top + 2.5, 12.33, 0.6, label, size=20, color="neutral_mid", align="center")
@@ -385,26 +464,26 @@ class DeckBuilder:
         return s
 
     def add_bullets(self, title: str, bullets: list[str], subtitle: str | None = None, sub_bullets: dict | None = None,
-                    source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
-        self._bullets(s, 0.5, top + 0.1, 12.33, CONTENT_BOTTOM - top - 0.1, bullets, size="body", sub_bullets=sub_bullets, space_after=10)
+                    source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
+        self._bullets(s, 0.5, top + 0.1, 12.33, self.bottom - top - 0.1, bullets, size="body", sub_bullets=sub_bullets, space_after=10)
         return s
 
-    def add_two_column(self, title: str, left: dict, right: dict, subtitle: str | None = None, source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
+    def add_two_column(self, title: str, left: dict, right: dict, subtitle: str | None = None, source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
         for (x, w), col in zip(self._columns(2), (left, right)):
             st = col.get("status")
             head_color = st if st in ("success", "warning", "danger") else "primary"
             self._text(s, x, top + 0.1, w, 0.6, col.get("heading", ""), size=18, bold=True, color=head_color, anchor=MSO_ANCHOR.BOTTOM)
             self._rect(s, x, top + 0.75, w, 0.03, fill=head_color)
-            self._bullets(s, x, top + 0.95, w, CONTENT_BOTTOM - top - 0.95, col.get("bullets", []), size=15, bullet_color=head_color)
+            self._bullets(s, x, top + 0.95, w, self.bottom - top - 0.95, col.get("bullets", []), size=15, bullet_color=head_color)
         return s
 
-    def add_comparison(self, title: str, options: list[dict], subtitle: str | None = None, source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
+    def add_comparison(self, title: str, options: list[dict], subtitle: str | None = None, source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
         n = max(2, min(len(options), 4))
         cols = self._columns(n)
-        card_h = CONTENT_BOTTOM - top - 0.2
+        card_h = self.bottom - top - 0.2
         text_size = 15 if n <= 3 else 13
         for (x, w), opt in zip(cols, options):
             rec = bool(opt.get("recommended"))
@@ -419,10 +498,10 @@ class DeckBuilder:
 
     def add_table(self, title: str, columns: list[str], rows: list[list], subtitle: str | None = None, align: list[str] | None = None,
                   col_widths: list[float] | None = None, total_row: bool = False, highlight_rows: list[int] | None = None,
-                  status_columns: list[int] | None = None, source: str | None = None, notes: str | None = None, font_size: float | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
+                  status_columns: list[int] | None = None, source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None, font_size: float | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
         n_rows, n_cols = len(rows) + 1, len(columns)
-        row_h = min(0.5, (CONTENT_BOTTOM - top - 0.1) / n_rows)
+        row_h = min(0.5, (self.bottom - top - 0.1) / n_rows)
         shape = s.shapes.add_table(n_rows, n_cols, Inches(0.5), Inches(top + 0.1), Inches(CONTENT_W), Inches(row_h * n_rows))
         tbl = shape.table
         tbl.first_row = True
@@ -473,8 +552,8 @@ class DeckBuilder:
 
     def add_chart(self, title: str, chart_type: str, categories: list[str], series: list[dict], subtitle: str | None = None,
                   highlight_index: int | None = None, number_format: str | None = None, show_labels: bool | None = None,
-                  commentary: list[str] | None = None, source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
+                  commentary: list[str] | None = None, source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
         xl_type = CHART_TYPES[chart_type]
         data = CategoryChartData()
         data.categories = categories
@@ -485,7 +564,7 @@ class DeckBuilder:
             cw = 8.0; tx = 8.8; tw = 4.03
         else:
             cx, cw, tx, tw = 0.5, CONTENT_W, None, None
-        h = CONTENT_BOTTOM - top - 0.1
+        h = self.bottom - top - 0.1
         gframe = s.shapes.add_chart(xl_type, Inches(cx), Inches(top + 0.1), Inches(cw), Inches(h), data)
         chart = gframe.chart
         chart.has_title = False
@@ -565,10 +644,10 @@ class DeckBuilder:
         return s
 
     def add_timeline(self, title: str, milestones: list[dict], subtitle: str | None = None, today_index: int | None = None,
-                     source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
+                     source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
         n = len(milestones)
-        y_line = top + (CONTENT_BOTTOM - top) / 2
+        y_line = top + (self.bottom - top) / 2
         self._rect(s, 0.8, y_line - 0.03, 11.7, 0.06, fill="neutral_mid")
         xs = [1.3 + i * (10.7 / max(n - 1, 1)) for i in range(n)]
         for i, (x, m) in enumerate(zip(xs, milestones)):
@@ -593,14 +672,14 @@ class DeckBuilder:
             key = "neutral" if role == "primary" else role
             if key not in used:
                 continue
-            self._rect(s, lx, CONTENT_BOTTOM - 0.3, 0.2, 0.2, fill=role, shape=MSO_SHAPE.OVAL)
-            self._text(s, lx + 0.25, CONTENT_BOTTOM - 0.35, 1.5, 0.3, lab, size=11, color="neutral_mid", anchor=MSO_ANCHOR.MIDDLE)
+            self._rect(s, lx, self.bottom - 0.3, 0.2, 0.2, fill=role, shape=MSO_SHAPE.OVAL)
+            self._text(s, lx + 0.25, self.bottom - 0.35, 1.5, 0.3, lab, size=11, color="neutral_mid", anchor=MSO_ANCHOR.MIDDLE)
             lx += 1.7
         return s
 
-    def add_process(self, title: str, steps: list[str], descriptions: list[str] | None = None, current_index: int | None = None,
-                    subtitle: str | None = None, source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
+    def add_process(self, title: str, steps: list[str], descriptions: list[str] | None = None, current_index: int | None = None, metrics: list[str] | None = None,
+                    subtitle: str | None = None, source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
         n = len(steps)
         w = CONTENT_W / n
         y = top + 0.6
@@ -618,14 +697,18 @@ class DeckBuilder:
             p.alignment = PP_ALIGN.CENTER
             r = p.add_run(); r.text = f"{i + 1}. {step}"
             self._style_run(r, 14 if n <= 4 else 12, bold=True, color="FFFFFF")
-            if descriptions and i < len(descriptions):
-                self._text(s, x + 0.1, y + 1.6, w - 0.3, 1.8, descriptions[i], size=13, color="neutral_dark")
+            dy = y + 1.6
+            if metrics and i < len(metrics) and metrics[i]:
+                self._text(s, x + 0.1, dy, w - 0.3, 0.6, str(metrics[i]), size=26, bold=True, color="accent" if current_index == i else "primary")
+                dy += 0.65
+            if descriptions and i < len(descriptions) and descriptions[i]:
+                self._text(s, x + 0.1, dy, w - 0.3, 1.4, descriptions[i], size=13, color="neutral_dark")
         return s
 
     def add_matrix_2x2(self, title: str, quadrants: dict, x_label: str | None = None, y_label: str | None = None, highlight: str | None = None,
-                       subtitle: str | None = None, source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
-        mx, my, mw, mh = 1.6, top + 0.1, 9.0, CONTENT_BOTTOM - top - 0.6
+                       subtitle: str | None = None, source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
+        mx, my, mw, mh = 1.6, top + 0.1, 9.0, self.bottom - top - 0.6
         qw, qh = mw / 2 - 0.05, mh / 2 - 0.05
         pos = {"tl": (mx, my), "tr": (mx + qw + 0.1, my), "bl": (mx, my + qh + 0.1), "br": (mx + qw + 0.1, my + qh + 0.1)}
         for key, (qx, qy) in pos.items():
@@ -641,11 +724,11 @@ class DeckBuilder:
             tb.rotation = 270
         return s
 
-    def add_action_plan(self, title: str, actions: list[dict], decision: str | None = None, subtitle: str | None = None,
-                        source: str | None = None, notes: str | None = None):
-        s, top = self._content_slide(title, subtitle, source, notes)
+    def add_action_plan(self, title: str, actions: list[dict], decision: str | None = None, headers: list[str] | None = None, subtitle: str | None = None,
+                        source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
         n_rows = len(actions) + 1
-        avail = CONTENT_BOTTOM - top - 0.1 - (0.95 if decision else 0)
+        avail = self.bottom - top - 0.1 - (0.95 if decision else 0)
         row_h = min(0.5, avail / n_rows)
         widths = [6.5, 2.0, 1.5, 2.33]
         shape = s.shapes.add_table(n_rows, 4, Inches(0.5), Inches(top + 0.1), Inches(CONTENT_W), Inches(row_h * n_rows))
@@ -661,27 +744,82 @@ class DeckBuilder:
             p = cell_.text_frame.paragraphs[0]; p.alignment = ALIGN[al]
             r = p.add_run(); r.text = str(text); self._style_run(r, "table", bold=bold, color=color)
 
-        for j, h in enumerate(["Ação", "Dono", "Prazo", "Status"]):
+        for j, h in enumerate(headers or ["Ação", "Dono", "Prazo", "Status"]):
             cell(tbl.cell(0, j), h, "primary", "FFFFFF", bold=True, al="center" if j == 3 else "left")
         for i, a in enumerate(actions, start=1):
             base = "neutral_light" if i % 2 == 0 else "FFFFFF"
-            cell(tbl.cell(i, 0), a.get("action", ""), base, "neutral_dark")
+            cell(tbl.cell(i, 0), a.get("action", "") or (f"{i:02d}" if headers else ""), base, "neutral_dark")
             cell(tbl.cell(i, 1), a.get("owner", ""), base, "neutral_dark")
             cell(tbl.cell(i, 2), a.get("due", ""), base, "neutral_dark", al="center")
             st = a.get("status", "neutral")
             labels = {"success": "Concluída", "warning": "Em andamento", "danger": "Atrasada", "neutral": "Não iniciada"}
-            if st == "neutral":
+            if headers:
+                cell(tbl.cell(i, 3), a.get("note", "") if st in labels or not st else st, base, "neutral_dark")
+            elif st == "neutral":
                 cell(tbl.cell(i, 3), labels[st], base, "neutral_mid", al="center")
+            elif st in labels:
+                cell(tbl.cell(i, 3), labels[st], st, "FFFFFF", bold=True, al="center")
             else:
-                cell(tbl.cell(i, 3), labels.get(st, st), st, "FFFFFF", bold=True, al="center")
+                cell(tbl.cell(i, 3), st, base, "neutral_dark", al="center")
         if decision:
-            yd = CONTENT_BOTTOM - 0.8
+            yd = self.bottom - 0.8
             self._rect(s, 0.5, yd, 12.33, 0.75, fill="FFF3D6")
             self._rect(s, 0.5, yd, 0.08, 0.75, fill="accent")
             tb = self._text(s, 0.75, yd, 11.9, 0.75, "", anchor=MSO_ANCHOR.MIDDLE)
             p = tb.text_frame.paragraphs[0]
             r1 = p.add_run(); r1.text = "Decisão pedida:  "; self._style_run(r1, 16, bold=True, color="accent")
             r2 = p.add_run(); r2.text = decision; self._style_run(r2, 16, bold=True, color="neutral_dark")
+        return s
+
+    def add_takeaways(self, title: str, items: list[dict], subtitle: str | None = None, source: str | None = None,
+                      notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
+        n = max(2, min(len(items), 4))
+        cols = self._columns(n)
+        card_h = self.bottom - top - 0.3
+        head_size, text_size = (18, 14) if n <= 3 else (15, 12)
+        for i, ((x, w), it) in enumerate(zip(cols, items)):
+            color = self.chart_color(i)
+            self._rect(s, x, top + 0.2, w, card_h, fill="neutral_light")
+            bar = self._rect(s, x, top + 0.2, w, 0.06, fill="FFFFFF")
+            bar.fill.fore_color.rgb = color
+            if it.get("tag"):
+                pill = self._rect(s, x + 0.25, top + 0.45, min(2.4, w - 0.5), 0.32, fill="FFFFFF")
+                pill.fill.fore_color.rgb = color
+                self._text(s, x + 0.25, top + 0.45, min(2.4, w - 0.5), 0.32, str(it["tag"]).upper(), size=9, bold=True, color="FFFFFF", align="center", anchor=MSO_ANCHOR.MIDDLE)
+            else:
+                tb = self._text(s, x + 0.25, top + 0.4, 1.5, 0.5, f"{i + 1:02d}", size=22, bold=True)
+                tb.text_frame.paragraphs[0].runs[0].font.color.rgb = color
+            self._text(s, x + 0.25, top + 1.0, w - 0.5, 0.75, it.get("heading", ""), size=head_size, bold=True, anchor=MSO_ANCHOR.TOP)
+            self._text(s, x + 0.25, top + 1.75, w - 0.5, card_h - 1.7, it.get("text", ""), size=text_size)
+        return s
+
+    def add_progress_bars(self, title: str, items: list[dict], subtitle: str | None = None, max_value: float | None = None,
+                          columns: int = 1, highlight_index: int | None = None, source: str | None = None,
+                          notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
+        vmax = float(max_value or 100)
+        ncol = 2 if columns == 2 else 1
+        per_col = (len(items) + ncol - 1) // ncol
+        row_h = min(0.55, (self.bottom - top - 0.2) / max(per_col, 1))
+        for i, it in enumerate(items):
+            c, r = divmod(i, per_col)
+            x0 = 0.5 + c * 6.32
+            y = top + 0.15 + r * row_h
+            if ncol == 1:
+                lw, bx, bw, vx, vw = 3.0, 3.6, 7.0, 10.7, 2.13
+            else:
+                lw, bx, bw, vx, vw = 1.9, x0 + 2.0, 3.0, x0 + 5.1, 0.9
+                bx, vx = x0 + 2.0, x0 + 5.1
+            st = it.get("status")
+            color = st if st in ("success", "warning", "danger") else ("accent" if highlight_index == i else "primary")
+            self._text(s, x0, y, lw, 0.45, str(it.get("label", "")), size=14 if ncol == 1 else 12, anchor=MSO_ANCHOR.MIDDLE)
+            self._rect(s, bx, y + 0.1, bw, 0.25, fill="neutral_light")
+            frac = min(1.0, max(0.0, float(it.get("value", 0)) / vmax))
+            if frac > 0:
+                self._rect(s, bx, y + 0.1, bw * frac, 0.25, fill=color)
+            self._text(s, vx, y, vw, 0.45, str(it.get("display", it.get("value", ""))), size=13 if ncol == 1 else 11, bold=True,
+                       color=color if st else "neutral_dark", anchor=MSO_ANCHOR.MIDDLE)
         return s
 
     def add_quote(self, text: str, author: str | None = None, dark: bool = False, notes: str | None = None):
@@ -703,8 +841,7 @@ class DeckBuilder:
         if subtitle:
             self._text(s, 0.8, 4.1, 11.7, 0.9, subtitle, size=19, color="D9E1EA")
         self._rect(s, 0, 6.9, SLIDE_W, 0.6, fill="accent")
-        if self.logo and Path(self.logo).exists():
-            s.shapes.add_picture(self.logo, Inches(11.3), Inches(0.5), width=Inches(1.5))
+        self._place_logo(s, 11.3, 0.5, width=1.5, dark=True)
         self._notes(s, notes)
         return s
 
@@ -713,12 +850,15 @@ class DeckBuilder:
         """Adiciona um slide a partir do dicionario de spec (campo 'type' define o modelo)."""
         t = sl.get("type")
         args = {k: v for k, v in sl.items() if k != "type"}
+        if t == "progress_bars" and "max" in args:
+            args["max_value"] = args.pop("max")
         dispatch = {
             "cover": self.add_cover, "agenda": self.add_agenda, "section": self.add_section,
             "executive_summary": self.add_executive_summary, "kpi_row": self.add_kpi_row, "big_number": self.add_big_number,
             "chart": self.add_chart, "table": self.add_table, "bullets": self.add_bullets, "two_column": self.add_two_column,
             "comparison": self.add_comparison, "timeline": self.add_timeline, "process": self.add_process,
             "matrix_2x2": self.add_matrix_2x2, "action_plan": self.add_action_plan, "quote": self.add_quote, "closing": self.add_closing,
+            "takeaways": self.add_takeaways, "progress_bars": self.add_progress_bars,
         }
         if t not in dispatch:
             raise ValueError(f"Tipo de slide desconhecido: {t!r}. Tipos validos: {sorted(dispatch)}")
@@ -728,7 +868,9 @@ class DeckBuilder:
     def from_spec(cls, spec: dict, template: str | None = None) -> "DeckBuilder":
         meta = spec.get("meta", {})
         db = cls(palette=meta.get("palette", "corporativa-azul"), font_scale=meta.get("font_scale"),
-                 confidentiality=meta.get("confidentiality"), logo=meta.get("logo"), template=template)
+                 confidentiality=meta.get("confidentiality"), logo=meta.get("logo"), template=template,
+                 brand=meta.get("brand"), deck_name=meta.get("deck_name"), date=meta.get("date"),
+                 logo_light=meta.get("logo_light"), logo_position=meta.get("logo_position", "footer"))
         for sl in spec.get("slides", []):
             db.add_from_spec(sl)
         return db

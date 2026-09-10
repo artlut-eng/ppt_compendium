@@ -24,6 +24,10 @@ Padrões reutilizáveis de **um slide**. Cada arquivo traz: quando usar, anatomi
 | Plano de ação / próximos passos | `action_plan` | Ações com dono, prazo e status | [`proximos-passos.md`](proximos-passos.md) |
 | Citação / destaque | `quote` | Frase de impacto, depoimento, visão | [`citacao-destaque.md`](citacao-destaque.md) |
 | Encerramento | `closing` | Último slide: pedido, contato, próxima revisão | [`encerramento.md`](encerramento.md) |
+| Leitura executiva / takeaways | `takeaways` | 2 a 4 pontos numerados lado a lado (leitura, direcionadores, fases) | [`takeaways.md`](takeaways.md) |
+| Barras de progresso / distribuição | `progress_bars` | 3 a 12 itens com valor proporcional e cor por status (qualidade de dado, carga, distribuição) | [`progress-bars.md`](progress-bars.md) |
+| Callout rotulado | campo `callout` | Caixa de conclusão / ressalva / recomendação / decisão no rodapé de qualquer slide | [`callout.md`](callout.md) |
+| Cabeçalho, kicker e logotipo | `meta.brand`, `kicker`, `meta.logo` | Identidade e navegação em todos os slides | [`cabecalho-kicker-e-logo.md`](cabecalho-kicker-e-logo.md) |
 
 ## Campos comuns a todos os slides de conteúdo
 | Campo | Obrigatório | Descrição |
@@ -33,6 +37,8 @@ Padrões reutilizáveis de **um slide**. Cada arquivo traz: quando usar, anatomi
 | `subtitle` | não | Mensagem de apoio, 1 linha |
 | `source` | não | Fonte dos dados; vai para o rodapé |
 | `notes` | não | Notas do apresentador |
+| `kicker` | não | Rótulo de seção em caixa alta acima do título |
+| `callout` | não | `{kind, label, text}`; reduz a área de conteúdo em 1 pol. |
 
 ## Coordenadas de referência (pol.)
 Ver `01-fundamentos/grid-e-layout.md`. Resumo: título em (0,5 / 0,4 / 12,33 / 0,9); conteúdo em (0,5 / 1,5 / 12,33 / 5,2) sem subtítulo ou (0,5 / 1,9 / 12,33 / 4,8) com subtítulo; rodapé em (0,5 / 6,8 / 12,33 / 0,4).

@@ -95,6 +95,27 @@
         "language": {
           "type": "string",
           "default": "pt-BR"
+        },
+        "brand": {
+          "type": "string",
+          "description": "Nome da empresa/area; aparece no cabecalho e, sem logo, como marca-texto"
+        },
+        "deck_name": {
+          "type": "string",
+          "description": "Nome curto do deck no cabecalho (ex.: Aquisicoes)"
+        },
+        "logo_light": {
+          "type": "string",
+          "description": "Versao clara do logotipo para fundos escuros (capa, secoes, encerramento)"
+        },
+        "logo_position": {
+          "type": "string",
+          "enum": [
+            "footer",
+            "header",
+            "cover_only"
+          ],
+          "default": "footer"
         }
       }
     },
@@ -133,6 +154,13 @@
         "notes": {
           "type": "string",
           "description": "Notas do apresentador"
+        },
+        "kicker": {
+          "type": "string",
+          "description": "Rotulo curto em caixa alta acima do titulo (secao/tipo de leitura)"
+        },
+        "callout": {
+          "$ref": "#/$defs/callout"
         }
       }
     },
@@ -192,6 +220,12 @@
         },
         {
           "$ref": "#/$defs/closing"
+        },
+        {
+          "$ref": "#/$defs/takeaways"
+        },
+        {
+          "$ref": "#/$defs/progress_bars"
         }
       ]
     },
@@ -219,6 +253,13 @@
         },
         "notes": {
           "type": "string"
+        },
+        "kicker": {
+          "type": "string"
+        },
+        "thesis": {
+          "type": "string",
+          "description": "Tese central em uma frase, em caixa a direita"
         }
       }
     },
@@ -348,6 +389,10 @@
               },
               "status": {
                 "$ref": "#/$defs/status"
+              },
+              "description": {
+                "type": "string",
+                "description": "Linha curta de contexto/cobertura sob o delta"
               }
             }
           }
@@ -739,6 +784,13 @@
         },
         "current_index": {
           "type": "integer"
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Metrica por etapa (ex.: tempo medio); string vazia para omitir"
         }
       }
     },
@@ -850,7 +902,10 @@
                 "type": "string"
               },
               "status": {
-                "$ref": "#/$defs/status"
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
               }
             }
           }
@@ -858,6 +913,15 @@
         "decision": {
           "type": "string",
           "description": "Decisao pedida ao publico, destacada em caixa"
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Cabecalhos alternativos (ex.: Decisao, Responsavel, Prazo, Pendencia); a 4a coluna vira texto livre"
         }
       }
     },
@@ -903,6 +967,129 @@
         },
         "notes": {
           "type": "string"
+        }
+      }
+    },
+    "callout": {
+      "type": "object",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "conclusion",
+            "warning",
+            "recommendation",
+            "decision"
+          ],
+          "default": "conclusion"
+        },
+        "label": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "takeaways": {
+      "type": "object",
+      "required": [
+        "type",
+        "title",
+        "items"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "takeaways"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": [
+              "heading"
+            ],
+            "properties": {
+              "tag": {
+                "type": "string"
+              },
+              "heading": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "progress_bars": {
+      "type": "object",
+      "required": [
+        "type",
+        "title",
+        "items"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "progress_bars"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value"
+            ],
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "display": {
+                "type": "string"
+              },
+              "status": {
+                "$ref": "#/$defs/status"
+              }
+            }
+          }
+        },
+        "max": {
+          "type": "number",
+          "default": 100
+        },
+        "columns": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ],
+          "default": 1
+        },
+        "highlight_index": {
+          "type": "integer"
         }
       }
     }

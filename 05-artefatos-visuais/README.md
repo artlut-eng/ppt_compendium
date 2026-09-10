@@ -5,6 +5,8 @@
 | [`paletas/`](paletas/) | Paletas em JSON com papéis de cor (`primary`, `accent`, semânticas, `chart`). Lidas pelo código gerador via `meta.palette`. |
 | [`graficos/escolha-do-grafico.md`](graficos/escolha-do-grafico.md) | Qual gráfico usar para qual pergunta, com regras de estilo. |
 | [`icones-e-formas.md`](icones-e-formas.md) | Uso de ícones, formas, semáforos e imagens. |
+| [`logotipo-e-marca.md`](logotipo-e-marca.md) | O que pedir ao usuário, regra de posição e tamanho do logo, mapeamento de cores de marca para a paleta. |
+| `logo-placeholder.png`, `logo-placeholder-light.png` | Logos de teste (fundo claro / fundo escuro) usados nos exemplos. |
 
 ## Estrutura de uma paleta
 ```json

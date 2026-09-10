@@ -64,7 +64,8 @@ A mesma informação pode ser adequada para o próprio time e inadequada para um
 ## Bloco 4 - Restrições práticas
 | # | Pergunta | Uso |
 |---|---|---|
-| 9 | Existe template/identidade visual obrigatória? | Paleta e fonte; `meta.palette` ou `--template` |
+| 9 | **Existe logotipo?** Envie o PNG com fundo transparente (e a versão branca para fundo escuro). Sem arquivo, qual o nome a usar como marca-texto? | `meta.logo`, `meta.logo_light`, `meta.brand`; regra em `05-artefatos-visuais/logotipo-e-marca.md` |
+| 9b | Cores e fontes da marca, ou template `.pptx` obrigatório? | Paleta JSON em `05-artefatos-visuais/paletas/`; `meta.palette` ou `--template` |
 | 10 | Idioma e unidade monetária? | Formatação de números, siglas |
 | 11 | Há slides ou decks anteriores para manter consistência? | Reaproveitar layout fixo (recorrentes) |
 | 12 | Data-base dos dados e prazo de entrega? | Rodapé, capa, priorização |
@@ -81,7 +82,12 @@ Formato: <duração, apresentado ou lido, recorrente ou único>
 Tipo de apresentação: <arquivo em 03-tipos-de-apresentacao/>
 ```
 
-Esses campos correspondem a `meta.audience`, `meta.communication_style`, `meta.exposure`, `meta.type` e `meta.key_message` na spec (`schemas/deck-spec.schema.json`).
+Identidade: <paleta | logotipo (arquivo ou marca-texto) | fontes>
+```
+
+Esses campos correspondem a `meta.audience`, `meta.communication_style`, `meta.exposure`, `meta.type`, `meta.key_message`, `meta.palette`, `meta.logo`, `meta.brand` na spec (`schemas/deck-spec.schema.json`).
+
+```
 
 ## Premissas padrão (quando o usuário não responde)
 - Público: tático. Estilo: misto. Exposição: **interáreas** (nível intermediário de proteção; é o erro menos custoso).

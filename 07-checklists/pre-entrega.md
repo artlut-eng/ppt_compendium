@@ -16,6 +16,7 @@ Percorra antes de entregar qualquer deck. Itens marcados com (auto) podem ser ve
 - [ ] Fonte dos dados no rodapé de todo slide com números. (auto)
 - [ ] Data-base explícita na capa ou no sumário.
 - [ ] Percentuais com base pequena acompanhados do valor absoluto.
+- [ ] Fatos, inferências e recomendações distinguíveis; cobertura (n) e ressalvas de maturidade/lacunas incluídas (`00-guia/fatos-inferencias-recomendacoes.md`).
 - [ ] Casas decimais consistentes por coluna/série.
 
 ## Visual
@@ -29,6 +30,8 @@ Percorra antes de entregar qualquer deck. Itens marcados com (auto) podem ser ve
 - [ ] Nada fora da zona segura (margens de 0,5 pol.). (auto)
 - [ ] Sem elementos decorativos (clip-art, gradientes, sombras, transições).
 - [ ] Imagens nítidas e sem distorção.
+- [ ] Logotipo presente na capa, encerramento e rodapé dos slides de conteúdo (ou marca-texto), discreto e proporcional.
+- [ ] Kicker consistente entre slides quando usado; callouts com rótulo e no máximo um por slide.
 
 ## Público e exposição
 - [ ] Nível de detalhe e tamanho do deck coerentes com o público (ver `revisao-por-publico.md`).

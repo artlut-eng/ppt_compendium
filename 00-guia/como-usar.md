@@ -22,7 +22,9 @@ Pedido do usuário
 Antes de qualquer escolha, descubra com o usuário (ver [`briefing.md`](briefing.md)):
 1. **Mensagem central** em uma frase e **o que deve acontecer depois** (decidir, aprovar, alinhar, informar, vender).
 2. **Nível de exposição**: `interno` (tudo pode entrar, inclusive riscos crus), `interareas` (fraquezas só com plano, sem culpar áreas, sem dados de pessoas) ou `externo` (só o que a empresa autoriza publicar). Na dúvida, `interareas`.
-3. Confirme um resumo de briefing de 6 linhas antes de montar o deck.
+3. **Identidade visual e logotipo**: pergunte sempre se há logotipo (PNG transparente), cores e fontes da marca ou template obrigatório. Sem arquivo, use o nome da empresa como marca-texto (`meta.brand`) e avise que o logo pode ser inserido depois. Ver `05-artefatos-visuais/logotipo-e-marca.md`.
+4. Escolha o **modo de condução**: direto (premissas padrão, entrega única) ou guiado (uma pergunta por vez, roteiro aprovado antes de produzir). Ver `prompt-base-para-agentes.md`.
+5. Confirme um resumo de briefing de 6 linhas antes de montar o deck.
 
 ## Passo 1 — Identificar o público
 
@@ -57,6 +59,10 @@ Detalhes e matriz comparativa: [`02-publicos/README.md`](../02-publicos/README.m
 | lições aprendidas, retrospectiva, post-mortem, encerramento | Lições aprendidas | `licoes-aprendidas.md` |
 | treinamento, capacitação, tutorial, onboarding | Treinamento | `treinamento.md` |
 | all-hands, town hall, comunicado geral, resultados para toda a empresa | All-hands | `all-hands.md` |
+| eficiência, gargalo, SLA, atraso, tempo de ciclo, base de solicitações/chamados | Análise de processo | `analise-de-processo.md` |
+| portfólio, carteira de projetos, comitê, repriorizar, planos de recuperação | Revisão de portfólio | `revisao-de-portfolio.md` |
+| KPIs da área, ciclo, planejamento do próximo ciclo, alinhar expectativas | Revisão de KPIs de área | `revisao-de-kpis-de-area.md` |
+| progresso, ensaios, testes, lotes, aprovação, reprovação, plano vs. realizado | Relatório de progresso | `relatorio-de-progresso.md` |
 
 Catálogo completo: [`03-tipos-de-apresentacao/README.md`](../03-tipos-de-apresentacao/README.md).
 
@@ -74,8 +80,9 @@ Catálogo completo: [`03-tipos-de-apresentacao/README.md`](../03-tipos-de-aprese
 
 Mapeie cada ponto da narrativa para um modelo em `04-modelos-de-slides/`. Combinações mais comuns:
 
-- Abertura: `capa` → `agenda` (opcional se < 8 slides) → `sumario-executivo`
-- Corpo: `kpi-dashboard`, `grafico`, `tabela`, `comparacao`, `timeline-roadmap`, `processo-fluxo`, `matriz-2x2`, `riscos-e-issues`
+- Campos comuns em todo slide de conteúdo: `kicker` (rótulo de seção acima do título) e `callout` (caixa rotulada de conclusão / ressalva / recomendação / decisão). Ver `04-modelos-de-slides/callout.md` e `cabecalho-kicker-e-logo.md`.
+- Abertura: `capa` (com `thesis` quando houver tese central) → `agenda` (opcional se < 8 slides) → `sumario-executivo`
+- Corpo: `kpi-dashboard`, `grafico`, `tabela`, `progress-bars`, `comparacao`, `timeline-roadmap`, `processo-fluxo` (com métricas por etapa), `matriz-2x2`, `riscos-e-issues`, `takeaways`
 - Fechamento: `proximos-passos` → `encerramento`
 
 ## Passo 5 — Aplicar regras visuais
@@ -92,7 +99,9 @@ Mapeie cada ponto da narrativa para um modelo em `04-modelos-de-slides/`. Combin
 
 ## Passo 7 — Validar
 
-Percorra `07-checklists/pre-entrega.md`, o checklist do público em `07-checklists/revisao-por-publico.md` e o filtro de exposição em `07-checklists/nivel-de-exposicao.md`.
+1. Rode `06-codigo/python-pptx/audit_deck.py <deck> --audience <nível> --expect-logo` e renderize as miniaturas (`render_thumbnails.py`).
+2. Percorra `07-checklists/pre-entrega.md`, `revisao-por-publico.md`, `nivel-de-exposicao.md` e `auditoria-de-arquivo.md`.
+3. Entregue: resumo da narrativa, roteiro, decisões de design (paleta, fontes, logotipo), dados a confirmar e tabela de auditoria (formato em `prompt-base-para-agentes.md`).
 
 ## Regras invioláveis
 
@@ -104,3 +113,5 @@ Percorra `07-checklists/pre-entrega.md`, o checklist do público em `07-checklis
 6. **Não decore**: ícone, imagem ou forma só entram se carregam informação.
 7. **Consistência**: mesma posição de título, mesma paleta, mesma fonte em todos os slides.
 8. **Exposição**: nada entra no deck que não possa ser visto por todos os que o receberão depois (ver `briefing.md`, bloco 3).
+9. **Logotipo presente e discreto**: capa e encerramento no canto superior direito, conteúdo no rodapé; sem arquivo, marca-texto. Nunca esquecer de perguntar.
+10. **Fato, inferência e recomendação rotulados**; números com cobertura e ressalvas de maturidade (`fatos-inferencias-recomendacoes.md`).

@@ -4,7 +4,7 @@ Bibliotecas base para transformar uma **spec JSON** (`schemas/deck-spec.schema.j
 
 | Pasta | Linguagem | Estado |
 |---|---|---|
-| [`python-pptx/`](python-pptx/README.md) | Python 3.10+, `python-pptx` | Completo: todos os 17 modelos de slide, validação de spec, geração dos exemplos |
+| [`python-pptx/`](python-pptx/README.md) | Python 3.10+, `python-pptx` | Completo: 19 modelos de slide, kicker/callout/cabeçalho/logotipo, validação de spec, geração dos exemplos, miniaturas e auditoria |
 | [`pptxgenjs/`](pptxgenjs/README.md) | Node 18+, `pptxgenjs` | Base: capa, seção, bullets, KPIs, gráfico, tabela, plano de ação, encerramento |
 
 ## Fluxo
@@ -35,3 +35,9 @@ pip install pywin32
 python 06-codigo/python-pptx/render_thumbnails.py
 ```
 Abre cada `.pptx` de `examples/` no PowerPoint (automação COM) e exporta um PNG por slide em `examples/thumbnails/`. Serve para revisão visual e para alimentar a IA com imagens dos modelos.
+
+## Auditoria automática
+```bash
+python 06-codigo/python-pptx/audit_deck.py deck.pptx --audience tatico --expect-logo --fonts Calibri,Arial
+```
+Lista ocorrências por slide (fora da zona segura, fonte abaixo do mínimo, possível estouro de texto, gráfico sem fonte, título ausente, tabela longa, logo ausente, fontes não permitidas). Retorna código 1 se houver `erro`. Ver `07-checklists/auditoria-de-arquivo.md`.

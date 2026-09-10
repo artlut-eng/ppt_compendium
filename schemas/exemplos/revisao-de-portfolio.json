@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "title": "Situação geral do portfólio",
+    "audience": "estrategico",
+    "type": "revisao-de-portfolio",
+    "palette": "financeira-sobria",
+    "exposure": "interareas",
+    "brand": "Empresa Exemplo",
+    "deck_name": "Comitê de portfólio"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Comitê de portfólio",
+      "title": "Situação geral do portfólio",
+      "subtitle": "Visão executiva para tomada de ciência | setembro/2026",
+      "thesis": "55 projetos, R$ 58 mi de orçamento, 52% de conclusão média e 19 projetos em risco alto."
+    },
+    {
+      "type": "kpi_row",
+      "kicker": "Composição",
+      "title": "A carteira é ampla e equilibrada entre níveis de maturidade",
+      "kpis": [
+        {
+          "label": "Projetos",
+          "value": "55",
+          "delta": "10 categorias"
+        },
+        {
+          "label": "Prioridade alta",
+          "value": "27",
+          "delta": "49% da carteira",
+          "status": "warning"
+        },
+        {
+          "label": "Fase inicial",
+          "value": "18",
+          "delta": "33%"
+        },
+        {
+          "label": "Fase intermediária",
+          "value": "20",
+          "delta": "36%"
+        },
+        {
+          "label": "Fase avançada",
+          "value": "17",
+          "delta": "31%"
+        }
+      ],
+      "source": "Base de portfólio, set/2026"
+    },
+    {
+      "type": "progress_bars",
+      "kicker": "Composição",
+      "title": "Nenhuma categoria concentra mais de 15% da carteira",
+      "columns": 2,
+      "items": [
+        {
+          "label": "Categoria A",
+          "value": 7,
+          "max": 10,
+          "display": "7"
+        },
+        {
+          "label": "Categoria B",
+          "value": 6,
+          "max": 10,
+          "display": "6"
+        },
+        {
+          "label": "Categoria C",
+          "value": 6,
+          "max": 10,
+          "display": "6"
+        },
+        {
+          "label": "Categoria D",
+          "value": 5,
+          "max": 10,
+          "display": "5"
+        },
+        {
+          "label": "Categoria E",
+          "value": 5,
+          "max": 10,
+          "display": "5"
+        },
+        {
+          "label": "Categoria F",
+          "value": 4,
+          "max": 10,
+          "display": "4"
+        }
+      ]
+    },
+    {
+      "type": "kpi_row",
+      "kicker": "Recursos",
+      "title": "O portfólio consumiu 52% do orçamento para 52% de avanço médio",
+      "kpis": [
+        {
+          "label": "Orçamento total",
+          "value": "R$ 58,0 mi"
+        },
+        {
+          "label": "Gasto acumulado",
+          "value": "R$ 30,1 mi",
+          "delta": "51,8%"
+        },
+        {
+          "label": "Saldo",
+          "value": "R$ 28,0 mi"
+        },
+        {
+          "label": "Acima do orçamento",
+          "value": "7 projetos",
+          "delta": "R$ 460 mil de estouro",
+          "status": "danger"
+        }
+      ],
+      "callout": {
+        "kind": "warning",
+        "label": "Ponto de atenção",
+        "text": "O equilíbrio consolidado não elimina desvios individuais: sete projetos concentram o estouro."
+      }
+    },
+    {
+      "type": "table",
+      "kicker": "Atenção",
+      "title": "Risco alto e estouro de orçamento se concentram em poucas exceções",
+      "columns": [
+        "Projeto",
+        "Status",
+        "Risco",
+        "Conclusão",
+        "Consumo",
+        "Saldo"
+      ],
+      "rows": [
+        [
+          "P-014",
+          "Validação",
+          "Alto",
+          "78%",
+          "105%",
+          "(R$ 115 mil)"
+        ],
+        [
+          "P-035",
+          "Validação",
+          "Alto",
+          "74%",
+          "106%",
+          "(R$ 24 mil)"
+        ],
+        [
+          "P-052",
+          "Em andamento",
+          "Alto",
+          "46%",
+          "108%",
+          "(R$ 65 mil)"
+        ],
+        [
+          "P-040",
+          "Em espera",
+          "Alto",
+          "60%",
+          "72%",
+          "R$ 330 mil"
+        ],
+        [
+          "P-017",
+          "Em espera",
+          "Alto",
+          "50%",
+          "53%",
+          "R$ 402 mil"
+        ]
+      ],
+      "status_columns": [
+        2
+      ],
+      "align": [
+        "left",
+        "left",
+        "center",
+        "right",
+        "right",
+        "right"
+      ],
+      "source": "Base de portfólio; critério: risco alto + desvio financeiro ou em espera",
+      "callout": {
+        "kind": "conclusion",
+        "label": "Leitura",
+        "text": "Não representa recomendação de priorização; exceções para acompanhamento mais próximo."
+      }
+    },
+    {
+      "type": "chart",
+      "kicker": "Horizonte",
+      "title": "15 marcos estão concentrados no último trimestre do ano",
+      "chart_type": "column",
+      "categories": [
+        "out",
+        "nov",
+        "dez",
+        "jan",
+        "fev",
+        "mar",
+        "abr",
+        "mai",
+        "jun"
+      ],
+      "series": [
+        {
+          "name": "Marcos",
+          "values": [
+            5,
+            5,
+            5,
+            5,
+            4,
+            5,
+            4,
+            4,
+            3
+          ]
+        }
+      ],
+      "highlight_index": 0,
+      "source": "Próximo marco por projeto",
+      "callout": {
+        "kind": "conclusion",
+        "label": "Para ciência",
+        "text": "Carteira diversificada, execução física e financeira equilibradas no consolidado, com exceções de risco e orçamento sob acompanhamento."
+      }
+    },
+    {
+      "type": "closing",
+      "title": "Próximo comitê: outubro",
+      "subtitle": "Anexo: lista completa dos 55 projetos"
+    }
+  ]
+}

@@ -18,6 +18,10 @@ Cada arquivo descreve um tipo: objetivo, público típico, estrutura slide a sli
 | Lições aprendidas | [`licoes-aprendidas.md`](licoes-aprendidas.md) | Tático | Cronológica + análise | 8 a 12 | Fim de projeto / fase |
 | Treinamento | [`treinamento.md`](treinamento.md) | Operacional | Cronológica / modular | 15 a 40 | Pontual / recorrente |
 | All-hands / Town hall | [`all-hands.md`](all-hands.md) | Misto (toda a empresa) | Resposta primeiro + celebração | 10 a 20 | Mensal / trimestral |
+| Análise de eficiência de processo | [`analise-de-processo.md`](analise-de-processo.md) | Operacional / tático | Tese, evidências, causas, controles, rotina | 8 a 12 | Pontual / semestral |
+| Revisão de portfólio (comitê e deep dive) | [`revisao-de-portfolio.md`](revisao-de-portfolio.md) | Estratégico | Situação, método, blocos decisórios, planos, realocações | 6 a 8 / 20 a 30 | Mensal / semestral |
+| Revisão de KPIs de área (próximo ciclo) | [`revisao-de-kpis-de-area.md`](revisao-de-kpis-de-area.md) | Estratégico + tático | Situação, evidências, implicações, direcionamento, decisão | 10 a 12 | Anual |
+| Relatório de progresso (ensaios, testes, lotes) | [`relatorio-de-progresso.md`](relatorio-de-progresso.md) | Tático | Avanço, qualidade, causas, tendência, decisões | 5 a 7 | Semanal / por onda |
 
 ## Como escolher
 Ver tabela de palavras-chave em [`00-guia/como-usar.md`](../00-guia/como-usar.md#passo-2--identificar-o-tipo-de-apresentação).
