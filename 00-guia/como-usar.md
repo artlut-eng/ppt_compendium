@@ -65,6 +65,20 @@ Detalhes e matriz comparativa: [`02-publicos/README.md`](../02-publicos/README.m
 | portfólio, carteira de projetos, comitê, repriorizar, planos de recuperação | Revisão de portfólio | `revisao-de-portfolio.md` |
 | KPIs da área, ciclo, planejamento do próximo ciclo, alinhar expectativas | Revisão de KPIs de área | `revisao-de-kpis-de-area.md` |
 | progresso, ensaios, testes, lotes, aprovação, reprovação, plano vs. realizado | Relatório de progresso | `relatorio-de-progresso.md` |
+| conselho, board, deliberação, ata, reunião ordinária | Reunião de conselho | `reuniao-de-conselho.md` |
+| orçamento do ano, budget, premissas, forecast, revisão orçamentária | Orçamento anual | `orcamento-anual.md` |
+| headcount, turnover, absenteísmo, clima, sucessão, RH | Indicadores de pessoas | `indicadores-de-pessoas.md` |
+| pesquisa, clima, NPS, satisfação, respondentes, amostra | Resultados de pesquisa | `resultados-de-pesquisa.md` |
+| QBR, revisão trimestral com cliente, saúde da carteira, churn, health score | Revisão com cliente | `revisao-com-cliente-qbr.md` |
+| campanha, leads, CAC, funil de marketing, mídia, ROI de marketing | Resultados de marketing | `resultados-de-marketing.md` |
+| revisão pela direção, ISO, SGQ, não conformidade, auditoria da qualidade | Revisão pela direção | `revisao-pela-direcao-qualidade.md` |
+| acidente, taxa de frequência, SSMA, EHS, quase-acidente, DDS | Indicadores de segurança | `indicadores-de-seguranca.md` |
+| incidente, indisponibilidade, causa raiz, pós-incidente, linha do tempo do evento | Relatório de incidente | `relatorio-de-incidente.md` |
+| roadmap, horizontes, backlog, próximas entregas, o que não faremos | Roadmap de produto | `roadmap-de-produto.md` |
+| mapa de riscos, compliance, denúncias, auditoria interna, apetite a risco | Comitê de riscos | `comite-de-riscos-e-compliance.md` |
+| ESG, sustentabilidade, emissões, escopo, metas 2030 | Relatório ESG | `relatorio-esg.md` |
+| reorganização, nova estrutura, comunicar mudança, cascata, FAQ | Comunicação de mudança | `comunicacao-de-mudanca.md` |
+| fornecedores, scorecard, IQF, OTIF de fornecedor, homologação | Revisão de fornecedores | `revisao-de-fornecedores.md` |
 
 Catálogo completo: [`03-tipos-de-apresentacao/README.md`](../03-tipos-de-apresentacao/README.md).
 

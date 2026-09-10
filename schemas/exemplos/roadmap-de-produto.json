@@ -1,0 +1,224 @@
+{
+  "meta": {
+    "title": "Roadmap 2027 do produto X",
+    "audience": "estrategico",
+    "type": "roadmap-de-produto",
+    "palette": "tecnologia",
+    "exposure": "interareas",
+    "brand": "Empresa Exemplo",
+    "deck_name": "Roadmap de produto",
+    "date": "dez/2026"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Produto X",
+      "title": "Roadmap 2027",
+      "subtitle": "Temas, horizontes, capacidade e o que fica de fora",
+      "thesis": "Três apostas (retenção, expansão, eficiência) para dobrar a adoção, com 20% da capacidade reservada para dívida técnica."
+    },
+    {
+      "type": "kpi_row",
+      "kicker": "Onde estamos",
+      "title": "Adoção em 64%, NPS 41",
+      "kpis": [
+        {
+          "label": "Clientes ativos",
+          "value": "312",
+          "delta": "+18% no ano",
+          "status": "success"
+        },
+        {
+          "label": "Adoção (funcionalidades-chave)",
+          "value": "64%",
+          "delta": "meta 80%",
+          "status": "warning"
+        },
+        {
+          "label": "NPS",
+          "value": "41",
+          "delta": "+9",
+          "status": "success"
+        },
+        {
+          "label": "Entregas 2S26",
+          "value": "14 de 18",
+          "delta": "78% do planejado",
+          "status": "warning"
+        },
+        {
+          "label": "Dívida técnica",
+          "value": "Alta",
+          "delta": "3 sistemas legados",
+          "status": "danger"
+        }
+      ],
+      "source": "Analytics do produto e backlog, nov/26"
+    },
+    {
+      "type": "comparison",
+      "kicker": "Temas",
+      "title": "Três temas: retenção, expansão, eficiência",
+      "options": [
+        {
+          "name": "Retenção",
+          "points": [
+            "Objetivo: reduzir churn de 8% para 5%",
+            "Onboarding guiado e alertas proativos",
+            "Indicador: churn e adoção em 90 dias"
+          ]
+        },
+        {
+          "name": "Expansão",
+          "points": [
+            "Objetivo: 30% da receita em novos módulos",
+            "Módulo de energia e integrações ERP",
+            "Indicador: receita de expansão"
+          ],
+          "recommended": true
+        },
+        {
+          "name": "Eficiência",
+          "points": [
+            "Objetivo: -25% no custo por cliente",
+            "Migração dos 3 legados",
+            "Indicador: custo de infra por cliente"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "gantt",
+      "kicker": "Horizontes",
+      "title": "Agora comprometido, próximo planejado, depois em exploração",
+      "periods": [
+        "1T27",
+        "2T27",
+        "3T27",
+        "4T27"
+      ],
+      "tasks": [
+        {
+          "name": "Onboarding guiado",
+          "start": 0,
+          "end": 1,
+          "status": "success",
+          "label": "alta confiança"
+        },
+        {
+          "name": "Alertas proativos",
+          "start": 0.5,
+          "end": 1.5,
+          "status": "success"
+        },
+        {
+          "name": "Módulo de energia",
+          "start": 1,
+          "end": 2.5,
+          "status": "warning",
+          "label": "média"
+        },
+        {
+          "name": "Integração ERP (2 sistemas)",
+          "start": 1.5,
+          "end": 3
+        },
+        {
+          "name": "Migração legado 1",
+          "start": 0,
+          "end": 2
+        },
+        {
+          "name": "App mobile",
+          "start": 3,
+          "end": 4,
+          "label": "explorando"
+        }
+      ],
+      "today": 0,
+      "source": "Planejamento de produto, dez/26"
+    },
+    {
+      "type": "bullets",
+      "kicker": "Fora do ciclo",
+      "title": "Cinco pedidos que ficam fora deste ciclo",
+      "bullets": [
+        "**Relatórios personalizados por cliente:** baixo volume de pedidos (12) e alto custo de manutenção",
+        "**Integração com marketplace Y:** parceiro sem API estável",
+        "**Versão em espanhol:** depende da decisão de expansão internacional (2028)",
+        "**Modo offline:** exige rearquitetura; reavaliar após migração dos legados",
+        "**Chat interno:** existem ferramentas de mercado melhores"
+      ],
+      "callout": {
+        "kind": "conclusion",
+        "label": "Regra",
+        "text": "Pedidos fora do ciclo voltam à avaliação na revisão trimestral com volume e receita associada."
+      }
+    },
+    {
+      "type": "progress_bars",
+      "kicker": "Capacidade",
+      "title": "20% da capacidade reservada para dívida técnica",
+      "items": [
+        {
+          "label": "Retenção",
+          "value": 30,
+          "display": "30%"
+        },
+        {
+          "label": "Expansão",
+          "value": 30,
+          "display": "30%"
+        },
+        {
+          "label": "Eficiência / dívida técnica",
+          "value": 20,
+          "display": "20%",
+          "status": "warning"
+        },
+        {
+          "label": "Suporte e correções",
+          "value": 15,
+          "display": "15%"
+        },
+        {
+          "label": "Exploração",
+          "value": 5,
+          "display": "5%"
+        }
+      ],
+      "source": "Alocação planejada de 6 squads"
+    },
+    {
+      "type": "action_plan",
+      "kicker": "Decisões",
+      "title": "Aprovar a alocação e o congelamento de escopo do 1T",
+      "actions": [
+        {
+          "action": "Aprovar alocação por tema",
+          "owner": "Diretoria",
+          "due": "15/12",
+          "status": "warning"
+        },
+        {
+          "action": "Congelar escopo do 1T27",
+          "owner": "Produto",
+          "due": "20/12",
+          "status": "neutral"
+        },
+        {
+          "action": "Contratar 2 engenheiros para integrações",
+          "owner": "RH + Engenharia",
+          "due": "1T27",
+          "status": "neutral"
+        },
+        {
+          "action": "Versão externa do roadmap para clientes",
+          "owner": "Produto + Marketing",
+          "due": "jan/27",
+          "status": "neutral"
+        }
+      ]
+    }
+  ]
+}

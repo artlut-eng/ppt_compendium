@@ -24,7 +24,7 @@ Idioma: português (pt-BR). Formato padrão dos decks: **16:9 (13,333 × 7,5 pol
 | `00-guia/` | Fluxo de decisão, briefing, prompt base para agentes, da base ao deck, revisão de deck existente, fatos × inferências × recomendações, glossário |
 | `01-fundamentos/` | Princípios de design, tipografia, cores, grid, storytelling, acessibilidade, banco de títulos, formatação numérica |
 | `02-publicos/` | Perfis por nível (estratégico, tático, operacional, externo) e por estilo de comunicação (vermelho, amarelo, verde, azul) |
-| `03-tipos-de-apresentacao/` | 16 tipos (status de projeto, financeiro, vendas, pitch, plano estratégico, análise de processo, portfólio, KPIs de área, progresso...) com estrutura slide a slide e spec |
+| `03-tipos-de-apresentacao/` | 30 tipos cobrindo diretoria, finanças, comercial, marketing, operações, suprimentos, projetos, produto, pessoas, qualidade, segurança, riscos e ESG, com estrutura slide a slide e spec |
 | `04-modelos-de-slides/` | 23 modelos de slide (capa, KPI, tabela, timeline, takeaways, barras de progresso...) + campos comuns (kicker, callout, cabeçalho, logotipo) com anatomia e coordenadas |
 | `05-artefatos-visuais/` | Paletas em JSON, escolha de gráficos, ícones e formas, logotipo e marca, template corporativo (com exemplo) |
 | `06-codigo/` | Bibliotecas base em python-pptx e PptxGenJS, gerador a partir da spec, perfil de base de dados, formatação numérica, extração/reconstrução de decks existentes, pontuação pela rubrica, miniaturas (PowerPoint) e validador automático |
@@ -40,6 +40,8 @@ Idioma: português (pt-BR). Formato padrão dos decks: **16:9 (13,333 × 7,5 pol
 - Toda recomendação numérica (nº de slides, tamanho de fonte) é um **padrão inicial**, não uma regra rígida.
 
 ## Status
+
+v0.5 — v0.4 + 14 tipos por departamento (conselho, orçamento, pessoas, pesquisa, QBR, marketing, qualidade, segurança, incidente, roadmap, riscos, ESG, mudança, fornecedores), com regras de exposição reforçadas para pessoas, incidentes e mudança.
 
 v0.4 — v0.3 + da base ao deck, slide de imagem, banco de títulos, formatação numérica, revisão de deck existente, rubrica, paginação de tabelas, template corporativo, waterfall/Pareto/Gantt, paletas por setor, versão JS completa, guias em inglês.
 

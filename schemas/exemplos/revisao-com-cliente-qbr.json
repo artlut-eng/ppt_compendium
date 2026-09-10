@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "title": "Revisão trimestral 3T26",
+    "audience": "externo",
+    "type": "revisao-com-cliente-qbr",
+    "palette": "vendas-energetica",
+    "exposure": "externo",
+    "brand": "Empresa Exemplo",
+    "deck_name": "Revisão trimestral",
+    "date": "out/2026",
+    "confidentiality": "Confidencial - preparado para Cliente Exemplo"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Cliente Exemplo",
+      "title": "Revisão trimestral 3T26",
+      "subtitle": "Resultados, entregas e prioridades do próximo trimestre",
+      "thesis": "Redução de 18% no custo de energia no trimestre, acima da meta de 15% acordada."
+    },
+    {
+      "type": "kpi_row",
+      "kicker": "Indicadores do contrato",
+      "title": "Todos os SLAs cumpridos; adoção em 84%",
+      "kpis": [
+        {
+          "label": "Economia de energia",
+          "value": "18%",
+          "delta": "meta 15%",
+          "status": "success"
+        },
+        {
+          "label": "Disponibilidade",
+          "value": "99,7%",
+          "delta": "SLA 99,5%",
+          "status": "success"
+        },
+        {
+          "label": "Tempo de resposta",
+          "value": "2 h",
+          "delta": "SLA 4 h",
+          "status": "success"
+        },
+        {
+          "label": "Adoção (usuários ativos)",
+          "value": "84%",
+          "delta": "meta 80%",
+          "status": "success"
+        }
+      ],
+      "source": "Plataforma, jul a set/26"
+    },
+    {
+      "type": "chart",
+      "kicker": "Resultado",
+      "title": "Economia acumulada de R$ 420 mil desde o início",
+      "subtitle": "R$ mil por mês",
+      "chart_type": "column",
+      "categories": [
+        "abr",
+        "mai",
+        "jun",
+        "jul",
+        "ago",
+        "set"
+      ],
+      "series": [
+        {
+          "name": "Economia",
+          "values": [
+            38,
+            52,
+            61,
+            74,
+            92,
+            103
+          ]
+        }
+      ],
+      "source": "Faturas de energia e medição da plataforma"
+    },
+    {
+      "type": "two_column",
+      "kicker": "Balanço",
+      "title": "Integração com o MES foi o ponto de atrito do trimestre",
+      "left": {
+        "heading": "Funcionou",
+        "bullets": [
+          "Alertas de consumo anômalo evitaram 3 paradas",
+          "Treinamento dos turnos concluído",
+          "Relatório mensal automatizado"
+        ],
+        "status": "success"
+      },
+      "right": {
+        "heading": "Precisa melhorar",
+        "bullets": [
+          "Integração com o MES atrasou 3 semanas (nossa responsabilidade)",
+          "Dois chamados acima do SLA em agosto",
+          "Painel de turno ainda manual"
+        ],
+        "status": "danger"
+      }
+    },
+    {
+      "type": "takeaways",
+      "kicker": "Próximo trimestre",
+      "title": "Três prioridades para o 4T",
+      "items": [
+        {
+          "heading": "Fechar a integração",
+          "text": "MES integrado até 15/11, com validação conjunta."
+        },
+        {
+          "heading": "Painel de turno automático",
+          "text": "Substituir o painel manual pela tela de gestão à vista."
+        },
+        {
+          "heading": "Estender para a planta 2",
+          "text": "Avaliar piloto em janeiro, se o cliente tiver interesse."
+        }
+      ]
+    },
+    {
+      "type": "action_plan",
+      "kicker": "Próximos passos",
+      "title": "Próximos passos dos dois lados",
+      "actions": [
+        {
+          "action": "Concluir integração MES",
+          "owner": "Nós",
+          "due": "15/11",
+          "status": "warning"
+        },
+        {
+          "action": "Liberar acesso ao MES de homologação",
+          "owner": "Cliente (TI)",
+          "due": "20/10",
+          "status": "neutral"
+        },
+        {
+          "action": "Definir escopo do piloto na planta 2",
+          "owner": "Ambos",
+          "due": "dez/26",
+          "status": "neutral"
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Próxima revisão: janeiro/27",
+      "subtitle": "gerente.conta@empresa-exemplo.com"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "title": "Nova estrutura comercial",
+    "audience": "operacional",
+    "type": "comunicacao-de-mudanca",
+    "palette": "corporativa-azul",
+    "exposure": "interareas",
+    "brand": "Empresa Exemplo",
+    "deck_name": "Comunicação às equipes",
+    "date": "set/2026",
+    "font_scale": 1.1
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Comunicação às equipes",
+      "title": "Nova estrutura comercial a partir de outubro",
+      "subtitle": "O que muda, o que não muda e o que esperamos de você"
+    },
+    {
+      "type": "big_number",
+      "kicker": "Por quê",
+      "title": "Crescemos 40% em dois anos e a estrutura atual não acompanha",
+      "value": "+40%",
+      "label": "clientes ativos desde 2024",
+      "context": "Uma única gerência comercial atende hoje 1.240 clientes em 12 estados. Decisões demoram e o cliente sente."
+    },
+    {
+      "type": "two_column",
+      "kicker": "Mudança",
+      "title": "Muda a organização por região; não mudam metas, produtos nem equipes de campo",
+      "left": {
+        "heading": "O que muda",
+        "bullets": [
+          "Três regiões (Sul, Sudeste, Norte/Nordeste), cada uma com gerente próprio",
+          "Atendimento e pré-vendas alocados por região",
+          "Reuniões comerciais passam a ser regionais"
+        ],
+        "status": "warning"
+      },
+      "right": {
+        "heading": "O que não muda",
+        "bullets": [
+          "Metas e política de comissão de 2026",
+          "Produtos, preços e contratos vigentes",
+          "Equipes de campo e suas carteiras",
+          "Sistemas (CRM e ERP)"
+        ],
+        "status": "success"
+      }
+    },
+    {
+      "type": "timeline",
+      "kicker": "Quando",
+      "title": "Transição em três fases até dezembro",
+      "milestones": [
+        {
+          "date": "01/10",
+          "label": "Anúncio e gerentes regionais",
+          "status": "success"
+        },
+        {
+          "date": "15/10",
+          "label": "Alocação das equipes por região",
+          "status": "warning"
+        },
+        {
+          "date": "nov",
+          "label": "Rituais regionais e treinamento",
+          "status": "neutral"
+        },
+        {
+          "date": "dez",
+          "label": "Estrutura completa; avaliação",
+          "status": "neutral"
+        }
+      ],
+      "today_index": 0
+    },
+    {
+      "type": "takeaways",
+      "kicker": "O que esperamos",
+      "title": "Três pedidos para as equipes",
+      "items": [
+        {
+          "heading": "Continuidade",
+          "text": "Nenhum cliente fica sem atendimento na transição: a carteira atual continua com você até a alocação formal."
+        },
+        {
+          "heading": "Participação",
+          "text": "Traga dúvidas e sugestões nas reuniões regionais de outubro."
+        },
+        {
+          "heading": "Registro",
+          "text": "Mantenha o CRM atualizado; ele será a base da alocação por região."
+        }
+      ]
+    },
+    {
+      "type": "bullets",
+      "kicker": "Perguntas frequentes",
+      "title": "As cinco perguntas mais frequentes",
+      "bullets": [
+        "**Vai ter demissão?** Não. A mudança cria três posições de gerente e não reduz equipes.",
+        "**Meu salário ou comissão muda?** Não em 2026. A política de 2027 será discutida em novembro com as equipes.",
+        "**Vou trocar de chefe?** Quem atende clientes fora da sua região atual pode passar a reportar ao gerente regional; cada caso será conversado individualmente até 15/10.",
+        "**Preciso mudar de cidade?** Não. Regiões são definidas por carteira, não por local de trabalho.",
+        "**Quem são os gerentes regionais?** Serão anunciados em 01/10 após conversa individual com as equipes envolvidas."
+      ],
+      "callout": {
+        "kind": "decision",
+        "label": "Apoio",
+        "text": "Dúvidas: canal #estrutura-comercial ou seu gestor; FAQ atualizada toda sexta-feira."
+      }
+    },
+    {
+      "type": "closing",
+      "title": "Próxima comunicação: 15/10",
+      "subtitle": "rh@empresa-exemplo.com | canal #estrutura-comercial"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "title": "Comitê de riscos e compliance 3T26",
+    "audience": "estrategico",
+    "type": "comite-de-riscos-e-compliance",
+    "palette": "financeira-sobria",
+    "exposure": "interno",
+    "brand": "Empresa Exemplo",
+    "deck_name": "Riscos e compliance",
+    "date": "out/2026",
+    "confidentiality": "Confidencial - comitê de riscos"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Comitê de riscos e compliance",
+      "title": "Comitê de riscos e compliance 3T26",
+      "subtitle": "Mapa de riscos, tratamento, compliance e auditoria interna",
+      "thesis": "Exposição geral estável; o risco cibernético subiu para crítico e dois planos de tratamento estão atrasados."
+    },
+    {
+      "type": "kpi_row",
+      "kicker": "Painel",
+      "title": "3 riscos críticos; 85% dos planos de tratamento no prazo",
+      "kpis": [
+        {
+          "label": "Riscos críticos",
+          "value": "3",
+          "delta": "+1 no trimestre",
+          "status": "danger"
+        },
+        {
+          "label": "Riscos altos",
+          "value": "7",
+          "delta": "estável",
+          "status": "warning"
+        },
+        {
+          "label": "Planos no prazo",
+          "value": "85%",
+          "delta": "2 atrasados",
+          "status": "warning"
+        },
+        {
+          "label": "Denúncias tratadas",
+          "value": "9 de 9",
+          "delta": "prazo médio 21 dias",
+          "status": "success"
+        },
+        {
+          "label": "Achados de auditoria abertos",
+          "value": "12",
+          "delta": "3 altos atrasados",
+          "status": "danger"
+        },
+        {
+          "label": "Treinamento de compliance",
+          "value": "94%",
+          "delta": "meta 95%",
+          "status": "warning"
+        }
+      ],
+      "source": "Registro de riscos, canal de denúncias e auditoria interna, set/26"
+    },
+    {
+      "type": "matrix_2x2",
+      "kicker": "Mapa de riscos",
+      "title": "Três riscos no quadrante crítico",
+      "x_label": "Probabilidade",
+      "y_label": "Impacto",
+      "quadrants": {
+        "tl": {
+          "label": "Alto impacto, baixa prob.",
+          "items": [
+            "4. Concentração de clientes",
+            "6. Falha de fornecedor crítico"
+          ]
+        },
+        "tr": {
+          "label": "Crítico",
+          "items": [
+            "1. Ataque cibernético",
+            "2. Câmbio (novo hedge em curso)",
+            "3. Perda de licença regulatória"
+          ]
+        },
+        "bl": {
+          "label": "Monitorar",
+          "items": [
+            "8. Rotatividade de talentos",
+            "10. Inadimplência"
+          ]
+        },
+        "br": {
+          "label": "Alta prob., baixo impacto",
+          "items": [
+            "5. Atraso em projetos de TI",
+            "7. Multas trabalhistas",
+            "9. Interrupção logística"
+          ]
+        }
+      },
+      "highlight": "tr",
+      "source": "Registro de riscos (escala no anexo)"
+    },
+    {
+      "type": "table",
+      "kicker": "Mudanças",
+      "title": "Cibernético sobe; câmbio desce com o hedge",
+      "columns": [
+        "Risco",
+        "Trimestre anterior",
+        "Atual",
+        "Motivo da mudança"
+      ],
+      "rows": [
+        [
+          "Ataque cibernético",
+          "Alto",
+          "Crítico",
+          "Dois incidentes no setor e teste de intrusão com falhas"
+        ],
+        [
+          "Câmbio",
+          "Crítico",
+          "Alto",
+          "Hedge de 60% da exposição contratado"
+        ],
+        [
+          "Perda de licença regulatória",
+          "Alto",
+          "Crítico",
+          "Nova exigência com prazo em mar/27"
+        ],
+        [
+          "Interrupção logística",
+          "Médio",
+          "Médio",
+          "Sem mudança"
+        ]
+      ],
+      "status_columns": [
+        1,
+        2
+      ],
+      "source": "Registro de riscos"
+    },
+    {
+      "type": "table",
+      "kicker": "Tratamento",
+      "title": "Dois planos de tratamento atrasados",
+      "columns": [
+        "Risco",
+        "Ação",
+        "Dono",
+        "Prazo",
+        "Status",
+        "Residual esperado"
+      ],
+      "rows": [
+        [
+          "Ataque cibernético",
+          "Autenticação multifator e segmentação de rede",
+          "TI",
+          "dez/26",
+          "Em andamento",
+          "Alto"
+        ],
+        [
+          "Ataque cibernético",
+          "Resposta a incidentes testada",
+          "TI + Jurídico",
+          "set/26",
+          "Atrasado",
+          "Alto"
+        ],
+        [
+          "Licença regulatória",
+          "Adequação ao novo requisito",
+          "Regulatório",
+          "fev/27",
+          "Em andamento",
+          "Médio"
+        ],
+        [
+          "Concentração de clientes",
+          "Plano de diversificação comercial",
+          "Comercial",
+          "ago/26",
+          "Atrasado",
+          "Médio"
+        ]
+      ],
+      "status_columns": [
+        4,
+        5
+      ],
+      "source": "Planos de tratamento"
+    },
+    {
+      "type": "action_plan",
+      "kicker": "Decisões",
+      "title": "Três decisões para o comitê",
+      "actions": [
+        {
+          "action": "Aprovar investimento em segurança cibernética (R$ 600 mil)",
+          "owner": "Comitê",
+          "due": "hoje",
+          "status": "warning"
+        },
+        {
+          "action": "Escalar plano de diversificação comercial à diretoria",
+          "owner": "Comitê",
+          "due": "hoje",
+          "status": "warning"
+        },
+        {
+          "action": "Confirmar apetite a risco cambial (hedge de 60% para 80%)",
+          "owner": "CFO",
+          "due": "nov/26",
+          "status": "neutral"
+        }
+      ],
+      "decision": "Aprovar o investimento em segurança e o novo apetite cambial"
+    }
+  ]
+}
