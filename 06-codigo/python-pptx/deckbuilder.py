@@ -129,10 +129,16 @@ class DeckBuilder:
     def __init__(self, palette: str | dict | None = "corporativa-azul", font_scale: float | None = None,
                  confidentiality: str | None = None, logo: str | None = None, template: str | None = None,
                  brand: str | None = None, deck_name: str | None = None, date: str | None = None,
-                 logo_light: str | None = None, logo_position: str = "footer"):
+                 logo_light: str | None = None, logo_position: str = "footer",
+                 template_layouts: dict | None = None, template_branding: bool = False):
+        self.template = template
+        self.template_branding = bool(template and template_branding)
         self.prs = Presentation(template) if template else Presentation()
-        self.prs.slide_width = Inches(SLIDE_W)
-        self.prs.slide_height = Inches(SLIDE_H)
+        if template:
+            self._clear_slides()
+        else:
+            self.prs.slide_width = Inches(SLIDE_W)
+            self.prs.slide_height = Inches(SLIDE_H)
         self.pal = load_palette(palette)
         self.colors: dict = self.pal["colors"]
         fonts = self.pal.get("font", {})
@@ -148,8 +154,9 @@ class DeckBuilder:
         self.date = date
         self.page = 0
         self.bottom = CONTENT_BOTTOM
-        self._blank = self.prs.slide_layouts[6]
-        self._title_only = self.prs.slide_layouts[5]
+        self._layouts = self._pick_layouts(template_layouts or {})
+        self._blank = self._layouts["blank"]
+        self._title_only = self._layouts["content"]
 
     # ------------------------------------------------------------------ util
     def c(self, role: str) -> RGBColor:
@@ -164,12 +171,51 @@ class DeckBuilder:
         size = FS[key_or_size] if isinstance(key_or_size, str) else key_or_size
         return Pt(size * self.scale)
 
+    def _clear_slides(self):
+        """Remove slides que vierem no arquivo de template."""
+        lst = self.prs.slides._sldIdLst
+        for sld in list(lst):
+            self.prs.part.drop_rel(sld.rId)
+            lst.remove(sld)
+
+    def _pick_layouts(self, mapping: dict) -> dict:
+        """Escolhe layouts por nome (pt/en) ou por mapeamento explicito {cover, section, content, blank}."""
+        layouts = list(self.prs.slide_layouts)
+        names = [(l.name or "").lower() for l in layouts]
+        aliases = {
+            "cover": ["title slide", "slide de título", "slide de titulo", "capa", "title"],
+            "section": ["section header", "cabeçalho da seção", "cabecalho da secao", "seção", "secao", "divis"],
+            "content": ["title only", "somente título", "somente titulo", "apenas título", "apenas titulo", "título e conteúdo", "title and content"],
+            "blank": ["blank", "em branco", "vazio"],
+        }
+        defaults = {"cover": 0, "section": 2, "content": 5, "blank": 6}
+        out = {}
+        for key in ("cover", "section", "content", "blank"):
+            want = mapping.get(key)
+            found = None
+            if isinstance(want, int) and 0 <= want < len(layouts):
+                found = layouts[want]
+            elif isinstance(want, str):
+                found = next((l for l, n in zip(layouts, names) if want.lower() == n or want.lower() in n), None)
+            if found is None:
+                for alias in aliases[key]:
+                    found = next((l for l, n in zip(layouts, names) if alias in n), None)
+                    if found:
+                        break
+            if found is None:
+                idx = defaults[key] if defaults[key] < len(layouts) else len(layouts) - 1
+                found = layouts[idx]
+            out[key] = found
+        return out
+
     def _new_slide(self, with_title: bool = False):
         slide = self.prs.slides.add_slide(self._title_only if with_title else self._blank)
         self.page += 1
         return slide
 
     def _fill_bg(self, slide, role: str):
+        if self.template_branding:
+            return
         bg = slide.background.fill
         bg.solid()
         bg.fore_color.rgb = self.c(role)
@@ -262,6 +308,8 @@ class DeckBuilder:
 
     def _header(self, slide):
         """Linha discreta no topo: MARCA | DECK a esquerda; data ou logo a direita."""
+        if self.template_branding:
+            return
         left = "  |  ".join(v for v in (self.brand, self.deck_name) if v)
         if left:
             self._text(slide, 0.5, 0.1, 8.0, 0.25, left.upper(), size=9, bold=True, color="neutral_mid", anchor=MSO_ANCHOR.MIDDLE)
@@ -271,6 +319,8 @@ class DeckBuilder:
             self._text(slide, 8.5, 0.1, 4.33, 0.25, self.date, size=9, color="neutral_mid", align="right", anchor=MSO_ANCHOR.MIDDLE)
 
     def _place_logo(self, slide, x, y, width=None, height=None, dark=False):
+        if self.template_branding:
+            return
         src = (self.logo_light or self.logo) if dark else self.logo
         if src:
             kw = {"width": Inches(width)} if width else {"height": Inches(height)}
@@ -287,16 +337,31 @@ class DeckBuilder:
             self._text(slide, *KICKER_BOX, str(kicker).upper(), size=10, bold=True, color="secondary", anchor=MSO_ANCHOR.BOTTOM)
         if title is not None:
             ph = slide.shapes.title
-            ph.left, ph.top, ph.width, ph.height = (Inches(v) for v in tbox)
-            tf = ph.text_frame
-            tf.word_wrap = True
-            tf.vertical_anchor = MSO_ANCHOR.TOP
-            tf.margin_left = tf.margin_right = Inches(0.05)
-            p = tf.paragraphs[0]
-            p.alignment = PP_ALIGN.LEFT
-            r = p.add_run()
-            r.text = title
-            self._style_run(r, "title", bold=True, color="primary", font=self.font_title)
+            if ph is None:
+                self._text(slide, *tbox, title, size="title", bold=True, color="primary", font=self.font_title)
+            elif self.template_branding:
+                # posicao do grid, alinhamento a esquerda; fonte, cor e negrito ficam do template
+                ph.left, ph.top, ph.width, ph.height = (Inches(v) for v in tbox)
+                tf = ph.text_frame
+                tf.word_wrap = True
+                tf.vertical_anchor = MSO_ANCHOR.TOP
+                p = tf.paragraphs[0]
+                p.alignment = PP_ALIGN.LEFT
+                r = p.add_run()
+                r.text = title
+                if r.font.size is None or r.font.size.pt > 32:
+                    r.font.size = self.pt("title")
+            else:
+                ph.left, ph.top, ph.width, ph.height = (Inches(v) for v in tbox)
+                tf = ph.text_frame
+                tf.word_wrap = True
+                tf.vertical_anchor = MSO_ANCHOR.TOP
+                tf.margin_left = tf.margin_right = Inches(0.05)
+                p = tf.paragraphs[0]
+                p.alignment = PP_ALIGN.LEFT
+                r = p.add_run()
+                r.text = title
+                self._style_run(r, "title", bold=True, color="primary", font=self.font_title)
         if subtitle:
             self._text(slide, *sbox, subtitle, size="subtitle", color="neutral_mid")
             return CONTENT_TOP_K_SUB if kicker else CONTENT_TOP_SUB
@@ -310,7 +375,7 @@ class DeckBuilder:
         if left:
             self._text(slide, x, y, w - 3.0, h, left, size="footer", color="neutral_mid", anchor=MSO_ANCHOR.MIDDLE)
         self._text(slide, x + w - 1.0, y, 1.0, h, str(self.page), size="footer", color="neutral_mid", align="right", anchor=MSO_ANCHOR.MIDDLE)
-        if self.logo_position == "footer":
+        if self.logo_position == "footer" and not self.template_branding:
             if self.logo:
                 slide.shapes.add_picture(self.logo, Inches(10.6), Inches(6.83), height=Inches(0.3))
             elif self.brand:
@@ -337,6 +402,9 @@ class DeckBuilder:
 
     def _content_slide(self, spec_title, subtitle=None, source=None, notes=None, kicker=None, callout=None):
         slide = self._new_slide(with_title=True)
+        for ph in list(slide.placeholders):
+            if "TITLE" not in str(ph.placeholder_format.type):
+                ph._element.getparent().remove(ph._element)
         top = self._title(slide, spec_title, subtitle, kicker)
         self._footer(slide, source)
         self._notes(slide, notes)
@@ -354,6 +422,15 @@ class DeckBuilder:
     # --------------------------------------------------------------- slides
     def add_cover(self, title: str, subtitle: str | None = None, author: str | None = None, date: str | None = None,
                   notes: str | None = None, kicker: str | None = None, thesis: str | None = None):
+        if self.template_branding:
+            s = self.prs.slides.add_slide(self._layouts["cover"])
+            self.page += 1
+            self._fill_placeholders(s, title, subtitle or (thesis or ""))
+            meta = " | ".join(v for v in (author, date or self.date) if v)
+            if meta:
+                self._text(s, 0.8, 6.2, 11.7, 0.5, meta, size="cover_meta", color="neutral_mid")
+            self._notes(s, notes)
+            return s
         s = self._new_slide()
         self._fill_bg(s, "primary_dark")
         self._rect(s, 0, 6.9, SLIDE_W, 0.6, fill="accent")
@@ -377,7 +454,25 @@ class DeckBuilder:
         self._notes(s, notes)
         return s
 
+    def _fill_placeholders(self, slide, title: str, subtitle: str = ""):
+        """Preenche titulo e subtitulo/corpo do layout do template; remove placeholders vazios."""
+        for ph in list(slide.placeholders):
+            kind = str(ph.placeholder_format.type)
+            if "TITLE" in kind and "SUB" not in kind:
+                ph.text_frame.text = title
+            elif ("SUBTITLE" in kind or "BODY" in kind) and subtitle:
+                ph.text_frame.text = subtitle
+                subtitle = ""
+            else:
+                ph._element.getparent().remove(ph._element)
+
     def add_section(self, title: str, number: str | None = None, subtitle: str | None = None, notes: str | None = None):
+        if self.template_branding:
+            s = self.prs.slides.add_slide(self._layouts["section"])
+            self.page += 1
+            self._fill_placeholders(s, f"{number}. {title}" if number else title, subtitle or "")
+            self._notes(s, notes)
+            return s
         s = self._new_slide()
         self._fill_bg(s, "primary")
         if number:
@@ -498,7 +593,23 @@ class DeckBuilder:
             self._bullets(s, x + 0.15, top + 1.0, w - 0.3, card_h - 1.0, opt.get("points", []), size=text_size)
         return s
 
-    def add_table(self, title: str, columns: list[str], rows: list[list], subtitle: str | None = None, align: list[str] | None = None,
+    def add_table(self, title: str, columns: list[str], rows: list[list], max_rows: int = 10, paginate: bool = True, **kw):
+        """Tabela; acima de max_rows linhas, divide em varios slides '(i/n)' (anexos)."""
+        if not paginate or len(rows) <= max_rows:
+            return self._add_table_page(title, columns, rows, **kw)
+        chunks = [rows[i:i + max_rows] for i in range(0, len(rows), max_rows)]
+        last = None
+        for i, chunk in enumerate(chunks, start=1):
+            kw2 = dict(kw)
+            if i > 1:
+                kw2["total_row"] = False
+                kw2.pop("highlight_rows", None)
+            elif kw.get("total_row"):
+                kw2["total_row"] = False
+            last = self._add_table_page(f"{title} ({i}/{len(chunks)})", columns, chunk, **kw2)
+        return last
+
+    def _add_table_page(self, title: str, columns: list[str], rows: list[list], subtitle: str | None = None, align: list[str] | None = None,
                   col_widths: list[float] | None = None, total_row: bool = False, highlight_rows: list[int] | None = None,
                   status_columns: list[int] | None = None, source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None, font_size: float | None = None):
         s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
@@ -895,6 +1006,12 @@ class DeckBuilder:
         return s
 
     def add_closing(self, title: str, subtitle: str | None = None, notes: str | None = None):
+        if self.template_branding:
+            s = self.prs.slides.add_slide(self._layouts["cover"])
+            self.page += 1
+            self._fill_placeholders(s, title, subtitle or "")
+            self._notes(s, notes)
+            return s
         s = self._new_slide()
         self._fill_bg(s, "primary_dark")
         self._text(s, 0.8, 2.6, 11.7, 1.4, title, size="closing", bold=True, color="FFFFFF", anchor=MSO_ANCHOR.BOTTOM, font=self.font_title)
@@ -927,8 +1044,15 @@ class DeckBuilder:
     @classmethod
     def from_spec(cls, spec: dict, template: str | None = None) -> "DeckBuilder":
         meta = spec.get("meta", {})
+        template = template or meta.get("template")
+        if template and not Path(template).exists() and (ROOT / template).exists():
+            template = str(ROOT / template)
+        confidentiality = meta.get("confidentiality")
+        if not confidentiality and meta.get("exposure"):
+            confidentiality = {"interno": "Uso interno", "interareas": "Uso interno", "externo": "Confidencial"}.get(meta["exposure"])
         db = cls(palette=meta.get("palette", "corporativa-azul"), font_scale=meta.get("font_scale"),
-                 confidentiality=meta.get("confidentiality"), logo=meta.get("logo"), template=template,
+                 confidentiality=confidentiality, logo=meta.get("logo"), template=template,
+                 template_layouts=meta.get("template_layouts"), template_branding=meta.get("template_branding", False),
                  brand=meta.get("brand"), deck_name=meta.get("deck_name"), date=meta.get("date"),
                  logo_light=meta.get("logo_light"), logo_position=meta.get("logo_position", "footer"))
         for sl in spec.get("slides", []):

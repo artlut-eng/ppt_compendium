@@ -14,20 +14,21 @@ Idioma: português (pt-BR). Formato padrão dos decks: **16:9 (13,333 × 7,5 pol
 6. Monte o deck com os **modelos de slide** de [`04-modelos-de-slides/`](04-modelos-de-slides/README.md).
 7. Escreva títulos-conclusão com o [`banco de títulos`](01-fundamentos/banco-de-titulos.md) e aplique **paletas, tipografia e escolha de gráficos** de [`01-fundamentos/`](01-fundamentos/) e [`05-artefatos-visuais/`](05-artefatos-visuais/README.md).
 8. Gere o arquivo com o código de [`06-codigo/`](06-codigo/README.md) a partir de uma spec no formato [`schemas/deck-spec.schema.json`](schemas/deck-spec.schema.json).
-9. Valide com os **checklists** de [`07-checklists/`](07-checklists/) e o validador `06-codigo/python-pptx/audit_deck.py`; separe fatos, inferências e recomendações ([`00-guia/fatos-inferencias-recomendacoes.md`](00-guia/fatos-inferencias-recomendacoes.md)).
+9. Para melhorar um deck que já existe, siga [`00-guia/revisao-de-deck-existente.md`](00-guia/revisao-de-deck-existente.md) (`extract_deck.py`, `score_deck.py`).
+10. Valide com os **checklists** de [`07-checklists/`](07-checklists/) e o validador `06-codigo/python-pptx/audit_deck.py`; separe fatos, inferências e recomendações ([`00-guia/fatos-inferencias-recomendacoes.md`](00-guia/fatos-inferencias-recomendacoes.md)).
 
 ## Estrutura
 
 | Pasta | Conteúdo |
 |---|---|
-| `00-guia/` | Fluxo de decisão, briefing (mensagem central, exposição, identidade), prompt base para agentes, fatos × inferências × recomendações, glossário |
+| `00-guia/` | Fluxo de decisão, briefing, prompt base para agentes, da base ao deck, revisão de deck existente, fatos × inferências × recomendações, glossário |
 | `01-fundamentos/` | Princípios de design, tipografia, cores, grid, storytelling, acessibilidade, banco de títulos, formatação numérica |
 | `02-publicos/` | Perfis por nível (estratégico, tático, operacional, externo) e por estilo de comunicação (vermelho, amarelo, verde, azul) |
 | `03-tipos-de-apresentacao/` | 16 tipos (status de projeto, financeiro, vendas, pitch, plano estratégico, análise de processo, portfólio, KPIs de área, progresso...) com estrutura slide a slide e spec |
 | `04-modelos-de-slides/` | 20 modelos de slide (capa, KPI, tabela, timeline, takeaways, barras de progresso...) + campos comuns (kicker, callout, cabeçalho, logotipo) com anatomia e coordenadas |
-| `05-artefatos-visuais/` | Paletas em JSON, guia de escolha de gráficos, ícones e formas, logotipo e marca (com placeholders) |
-| `06-codigo/` | Bibliotecas base em python-pptx e PptxGenJS, gerador a partir da spec, perfil de base de dados, formatação numérica, renderizador de miniaturas (PowerPoint) e validador automático de decks |
-| `07-checklists/` | Verificações antes da entrega, por público, por nível de exposição e auditoria de arquivo |
+| `05-artefatos-visuais/` | Paletas em JSON, escolha de gráficos, ícones e formas, logotipo e marca, template corporativo (com exemplo) |
+| `06-codigo/` | Bibliotecas base em python-pptx e PptxGenJS, gerador a partir da spec, perfil de base de dados, formatação numérica, extração/reconstrução de decks existentes, pontuação pela rubrica, miniaturas (PowerPoint) e validador automático |
+| `07-checklists/` | Pré-entrega, por público, por nível de exposição, auditoria de arquivo e rubrica de qualidade (0 a 100) |
 | `schemas/` | JSON Schema da spec de deck + `exemplos/` (uma spec por tipo, extraídas da documentação) |
 | `examples/` | Decks `.pptx` gerados a partir de `schemas/exemplos/` pelo código base, com miniaturas PNG em `examples/thumbnails/` |
 

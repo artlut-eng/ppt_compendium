@@ -104,7 +104,10 @@ Mapeie cada ponto da narrativa para um modelo em `04-modelos-de-slides/`. Combin
 
 1. Rode `06-codigo/python-pptx/audit_deck.py <deck> --audience <nível> --expect-logo` e renderize as miniaturas (`render_thumbnails.py`).
 2. Percorra `07-checklists/pre-entrega.md`, `revisao-por-publico.md`, `nivel-de-exposicao.md` e `auditoria-de-arquivo.md`.
-3. Entregue: resumo da narrativa, roteiro, decisões de design (paleta, fontes, logotipo), dados a confirmar e tabela de auditoria (formato em `prompt-base-para-agentes.md`).
+3. Pontue com `score_deck.py` e preencha os critérios manuais da `07-checklists/rubrica-de-qualidade.md`; abaixo de 85, retrabalhe.
+4. Entregue: resumo da narrativa, roteiro, decisões de design (paleta, fontes, logotipo), dados a confirmar, tabela de auditoria e pontuação (formato em `prompt-base-para-agentes.md`).
+
+Pedido de **revisão de um deck existente**: siga [`revisao-de-deck-existente.md`](revisao-de-deck-existente.md) (extrair, diagnosticar títulos, decidir entre editar e reconstruir).
 
 ## Regras invioláveis
 

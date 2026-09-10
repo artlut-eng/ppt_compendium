@@ -116,6 +116,45 @@
             "cover_only"
           ],
           "default": "footer"
+        },
+        "template": {
+          "type": "string",
+          "description": "Arquivo .pptx/.potx corporativo usado como base (mestre, layouts, tema)"
+        },
+        "template_layouts": {
+          "type": "object",
+          "description": "Mapeamento opcional {cover, section, content, blank} para nome ou indice de layout do template",
+          "properties": {
+            "cover": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            },
+            "section": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            },
+            "content": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            },
+            "blank": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            }
+          }
+        },
+        "template_branding": {
+          "type": "boolean",
+          "default": false,
+          "description": "true: o template ja traz logo, fundos e rodape; o gerador nao desenha cabecalho/logo/fundos e usa os placeholders do template em capa e secoes"
         }
       }
     },
@@ -596,6 +635,15 @@
             "type": "integer"
           },
           "description": "Colunas cujo texto (Verde/Amarelo/Vermelho, Alta/Media/Baixa, success/warning/danger) recebe fundo colorido"
+        },
+        "max_rows": {
+          "type": "integer",
+          "default": 10,
+          "description": "Acima disso a tabela e dividida em varios slides (i/n)"
+        },
+        "paginate": {
+          "type": "boolean",
+          "default": true
         }
       }
     },

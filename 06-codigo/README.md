@@ -35,6 +35,16 @@ python 06-codigo/python-pptx/profile_data.py base.xlsx --cutoff 2026-09-10 --spe
 ```
 Relatório Markdown/JSON com colunas, cobertura, período, registros futuros, alertas (coortes imaturas, campos vazios, outliers, duplicatas), KPIs, segmentações e gráficos sugeridos, mais um esqueleto de spec com placeholders. Ver `00-guia/da-base-ao-deck.md`. `fmt.py` centraliza a formatação numérica pt-BR (`01-fundamentos/formatacao-numerica.md`).
 
+## Revisão de deck existente e rubrica
+```bash
+python 06-codigo/python-pptx/extract_deck.py deck.pptx --out outline.md --to-spec spec_aprox.json
+python 06-codigo/python-pptx/score_deck.py deck.pptx --audience tatico --manual A3=2,B3=1
+```
+`extract_deck.py` produz o outline (teste dos títulos, textos com fontes, dados dos gráficos e tabelas, diagnóstico) e uma spec aproximada para reconstruir o deck no padrão do compêndio. `score_deck.py` preenche a folha da rubrica (`07-checklists/rubrica-de-qualidade.md`) com os critérios automáticos. Fluxo em `00-guia/revisao-de-deck-existente.md`.
+
+## Template corporativo
+`meta.template` + `meta.template_branding: true` (ou `--template`) fazem o gerador preencher os layouts do arquivo da empresa em vez de desenhar identidade. Ver `05-artefatos-visuais/template-corporativo.md`. Tabelas com mais de `max_rows` (10) linhas são paginadas automaticamente em slides `(i/n)`.
+
 ## Miniaturas (Windows + PowerPoint)
 ```bash
 pip install pywin32

@@ -817,6 +817,238 @@
       }
     },
     {
+      "type": "section",
+      "number": "A",
+      "title": "Anexos"
+    },
+    {
+      "type": "table",
+      "kicker": "Anexo",
+      "title": "Tabela longa paginada automaticamente (25 linhas)",
+      "columns": [
+        "ID",
+        "Projeto",
+        "Status",
+        "Risco",
+        "Conclusão",
+        "Orçamento"
+      ],
+      "rows": [
+        [
+          "P-001",
+          "Projeto 1",
+          "Em andamento",
+          "Médio",
+          "31%",
+          "R$ 1,1 mi"
+        ],
+        [
+          "P-002",
+          "Projeto 2",
+          "Em andamento",
+          "Médio",
+          "32%",
+          "R$ 1,2 mi"
+        ],
+        [
+          "P-003",
+          "Projeto 3",
+          "Validação",
+          "Médio",
+          "33%",
+          "R$ 1,3 mi"
+        ],
+        [
+          "P-004",
+          "Projeto 4",
+          "Em andamento",
+          "Alto",
+          "34%",
+          "R$ 1,4 mi"
+        ],
+        [
+          "P-005",
+          "Projeto 5",
+          "Em andamento",
+          "Médio",
+          "35%",
+          "R$ 1,5 mi"
+        ],
+        [
+          "P-006",
+          "Projeto 6",
+          "Validação",
+          "Médio",
+          "36%",
+          "R$ 1,6 mi"
+        ],
+        [
+          "P-007",
+          "Projeto 7",
+          "Em andamento",
+          "Médio",
+          "37%",
+          "R$ 1,7 mi"
+        ],
+        [
+          "P-008",
+          "Projeto 8",
+          "Em andamento",
+          "Alto",
+          "38%",
+          "R$ 1,8 mi"
+        ],
+        [
+          "P-009",
+          "Projeto 9",
+          "Validação",
+          "Médio",
+          "39%",
+          "R$ 1,9 mi"
+        ],
+        [
+          "P-010",
+          "Projeto 10",
+          "Em andamento",
+          "Médio",
+          "40%",
+          "R$ 2,0 mi"
+        ],
+        [
+          "P-011",
+          "Projeto 11",
+          "Em andamento",
+          "Médio",
+          "41%",
+          "R$ 2,1 mi"
+        ],
+        [
+          "P-012",
+          "Projeto 12",
+          "Validação",
+          "Alto",
+          "42%",
+          "R$ 2,2 mi"
+        ],
+        [
+          "P-013",
+          "Projeto 13",
+          "Em andamento",
+          "Médio",
+          "43%",
+          "R$ 2,3 mi"
+        ],
+        [
+          "P-014",
+          "Projeto 14",
+          "Em andamento",
+          "Médio",
+          "44%",
+          "R$ 2,4 mi"
+        ],
+        [
+          "P-015",
+          "Projeto 15",
+          "Validação",
+          "Médio",
+          "45%",
+          "R$ 2,5 mi"
+        ],
+        [
+          "P-016",
+          "Projeto 16",
+          "Em andamento",
+          "Alto",
+          "46%",
+          "R$ 2,6 mi"
+        ],
+        [
+          "P-017",
+          "Projeto 17",
+          "Em andamento",
+          "Médio",
+          "47%",
+          "R$ 2,7 mi"
+        ],
+        [
+          "P-018",
+          "Projeto 18",
+          "Validação",
+          "Médio",
+          "48%",
+          "R$ 2,8 mi"
+        ],
+        [
+          "P-019",
+          "Projeto 19",
+          "Em andamento",
+          "Médio",
+          "49%",
+          "R$ 2,9 mi"
+        ],
+        [
+          "P-020",
+          "Projeto 20",
+          "Em andamento",
+          "Alto",
+          "50%",
+          "R$ 3,0 mi"
+        ],
+        [
+          "P-021",
+          "Projeto 21",
+          "Validação",
+          "Médio",
+          "51%",
+          "R$ 3,1 mi"
+        ],
+        [
+          "P-022",
+          "Projeto 22",
+          "Em andamento",
+          "Médio",
+          "52%",
+          "R$ 3,2 mi"
+        ],
+        [
+          "P-023",
+          "Projeto 23",
+          "Em andamento",
+          "Médio",
+          "53%",
+          "R$ 3,3 mi"
+        ],
+        [
+          "P-024",
+          "Projeto 24",
+          "Validação",
+          "Alto",
+          "54%",
+          "R$ 3,4 mi"
+        ],
+        [
+          "P-025",
+          "Projeto 25",
+          "Em andamento",
+          "Médio",
+          "55%",
+          "R$ 3,5 mi"
+        ]
+      ],
+      "status_columns": [
+        3
+      ],
+      "align": [
+        "left",
+        "left",
+        "left",
+        "center",
+        "right",
+        "right"
+      ],
+      "source": "Base de portfólio (exemplo)"
+    },
+    {
       "type": "closing",
       "title": "Próxima revisão: 15/09",
       "subtitle": "pmo@empresa.com | Anexos: cronograma completo"

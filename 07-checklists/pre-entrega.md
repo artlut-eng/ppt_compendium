@@ -46,4 +46,5 @@ Percorra antes de entregar qualquer deck. Itens marcados com (auto) podem ser ve
 - [ ] Anexos depois do encerramento, com divisória "Anexos".
 - [ ] Dados confidenciais removidos ou marcados quando o deck circula externamente.
 - [ ] Números de página nos slides de conteúdo. (auto)
+- [ ] Pontuação da rubrica (`score_deck.py` + critérios manuais) igual ou acima de 85, ou ressalvas justificadas (`rubrica-de-qualidade.md`).
 - [ ] Ortografia revisada; datas e nomes conferidos.

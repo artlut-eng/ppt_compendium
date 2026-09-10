@@ -1,0 +1,272 @@
+{
+  "meta": {
+    "title": "Teste de template corporativo",
+    "audience": "tatico",
+    "type": "catalogo",
+    "palette": "corporativa-azul",
+    "author": "PPT Compendium",
+    "date": "set/2026",
+    "confidentiality": "Uso interno",
+    "brand": "Empresa Exemplo",
+    "deck_name": "Catálogo de modelos",
+    "exposure": "interno",
+    "template": "05-artefatos-visuais/template-exemplo.pptx",
+    "template_branding": true
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "Catálogo",
+      "title": "Catálogo de modelos de slide",
+      "subtitle": "Um slide de cada tipo suportado pela spec",
+      "thesis": "Todos os modelos geram slides dentro do grid, com cabeçalho, kicker, logotipo e callouts opcionais.",
+      "notes": "Deck de teste: exercita todos os modelos."
+    },
+    {
+      "type": "section",
+      "number": "1",
+      "title": "Abertura",
+      "subtitle": "Sumário, KPIs e número grande"
+    },
+    {
+      "type": "kpi_row",
+      "kicker": "Visão geral",
+      "title": "Seis KPIs cabem em uma linha com fonte reduzida",
+      "kpis": [
+        {
+          "label": "Segurança",
+          "value": "0",
+          "delta": "142 dias",
+          "status": "success"
+        },
+        {
+          "label": "Produção",
+          "value": 4120,
+          "delta": "meta 4.500",
+          "status": "danger"
+        },
+        {
+          "label": "Qualidade",
+          "value": "1,8%",
+          "delta": "meta 2%",
+          "status": "success"
+        },
+        {
+          "label": "OEE",
+          "value": "68%",
+          "delta": "meta 75%",
+          "status": "danger"
+        },
+        {
+          "label": "OTIF",
+          "value": "96%",
+          "delta": "meta 95%",
+          "status": "success"
+        },
+        {
+          "label": "Custo",
+          "value": 1234567,
+          "delta": "no orçamento",
+          "status": "neutral",
+          "format": "currency"
+        }
+      ],
+      "bullets": [
+        "Contexto opcional abaixo dos cartões",
+        "Segunda linha de contexto"
+      ],
+      "source": "MES",
+      "callout": {
+        "kind": "conclusion",
+        "label": "Conclusão",
+        "text": "Três indicadores no vermelho concentram-se na Linha 2; o restante segue no alvo."
+      }
+    },
+    {
+      "type": "kpi_row",
+      "kicker": "KPIs com descrição",
+      "title": "Quatro KPIs com linha de cobertura sob o delta",
+      "kpis": [
+        {
+          "label": "Fora do prazo",
+          "value": "76%",
+          "delta": "54 de 71",
+          "status": "danger",
+          "description": "classificadas como atrasadas"
+        },
+        {
+          "label": "Atraso médio",
+          "value": "62 dias",
+          "delta": "mediana 61",
+          "status": "danger",
+          "description": "entre os itens atrasados"
+        },
+        {
+          "label": "Risco alto",
+          "value": "70%",
+          "delta": "50 solicitações",
+          "status": "warning",
+          "description": "nível de risco registrado"
+        },
+        {
+          "label": "Saving",
+          "value": "4,3%",
+          "delta": "R$ 68,6 mil",
+          "status": "success",
+          "description": "só itens com valor contratado (n=50)"
+        }
+      ],
+      "source": "Base de solicitações (n=71)",
+      "callout": {
+        "kind": "warning",
+        "label": "Cuidado de leitura",
+        "text": "21 solicitações ainda não possuem valor contratado; o saving reflete apenas itens contratados."
+      }
+    },
+    {
+      "type": "section",
+      "number": "2",
+      "title": "Dados"
+    },
+    {
+      "type": "chart",
+      "kicker": "Ranking",
+      "title": "Barras horizontais ordenadas com destaque em accent",
+      "subtitle": "R$ mi, agosto/26",
+      "chart_type": "bar",
+      "categories": [
+        "Sudeste",
+        "Sul",
+        "Nordeste",
+        "Centro-Oeste"
+      ],
+      "series": [
+        {
+          "name": "Receita",
+          "values": [
+            2.0,
+            1.35,
+            0.8,
+            0.58
+          ]
+        }
+      ],
+      "highlight_index": 0,
+      "number_format": "0.00",
+      "source": "CRM"
+    },
+    {
+      "type": "chart",
+      "kicker": "Evolução",
+      "title": "Linha com meta tracejada, comentários e callout de recomendação",
+      "chart_type": "line",
+      "categories": [
+        "S28",
+        "S29",
+        "S30",
+        "S31",
+        "S32",
+        "S33",
+        "S34"
+      ],
+      "series": [
+        {
+          "name": "Planejado",
+          "values": [
+            40,
+            45,
+            50,
+            55,
+            60,
+            64,
+            68
+          ]
+        },
+        {
+          "name": "Real",
+          "values": [
+            40,
+            44,
+            48,
+            52,
+            56,
+            59,
+            62
+          ]
+        }
+      ],
+      "commentary": [
+        "Gap abre a partir da S31",
+        "Causa: homologação do fornecedor",
+        "Recuperação prevista na S38"
+      ],
+      "source": "Cronograma",
+      "callout": {
+        "kind": "recommendation",
+        "label": "Recomendação",
+        "text": "Acionar o fornecedor alternativo e replanejar os testes integrados."
+      }
+    },
+    {
+      "type": "chart",
+      "title": "Composição com colunas empilhadas (sem kicker)",
+      "chart_type": "stacked_column",
+      "categories": [
+        "1T",
+        "2T",
+        "3T"
+      ],
+      "series": [
+        {
+          "name": "Produto A",
+          "values": [
+            10,
+            12,
+            14
+          ]
+        },
+        {
+          "name": "Produto B",
+          "values": [
+            6,
+            7,
+            9
+          ]
+        },
+        {
+          "name": "Serviços",
+          "values": [
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "source": "ERP"
+    },
+    {
+      "type": "chart",
+      "kicker": "Composição",
+      "title": "Rosca com até 4 fatias",
+      "chart_type": "doughnut",
+      "categories": [
+        "Troca de ferramenta",
+        "Falta de material",
+        "Falha hidráulica",
+        "Outros"
+      ],
+      "series": [
+        {
+          "name": "min",
+          "values": [
+            120,
+            95,
+            50,
+            45
+          ]
+        }
+      ],
+      "source": "Apontamento de paradas"
+    }
+  ]
+}
