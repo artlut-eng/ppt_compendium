@@ -26,6 +26,19 @@
 ```
 Regras de uso das cores: `01-fundamentos/cores-e-paletas.md`.
 
+## Paletas disponíveis
+| Paleta | Uso |
+|---|---|
+| `corporativa-azul` | padrão corporativo, projetos, tático |
+| `financeira-sobria` | financeiro, conselho, estratégico |
+| `vendas-energetica` | vendas, propostas, pitch |
+| `operacional-alto-contraste` | chão de fábrica, TV |
+| `industria` | indústria e engenharia (azul-aço + laranja de segurança) |
+| `saude` | saúde, farmacêutica, laboratório (verde-petróleo) |
+| `tecnologia` | software e produtos digitais (índigo + ciano + magenta) |
+| `varejo-servicos` | varejo, consumo, serviços (vinho + dourado) |
+| `educacao-publico` | educação, setor público, terceiro setor (verde-floresta + amarelo) |
+
 ## Adicionar paleta de marca
 1. Copie `corporativa-azul.json` para `<marca>.json`.
 2. Substitua `primary`, `primary_dark`, `secondary`, `accent` pelas cores da marca.

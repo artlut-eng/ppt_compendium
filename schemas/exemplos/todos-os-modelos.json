@@ -369,6 +369,119 @@
       "source": "DRE gerencial"
     },
     {
+      "type": "waterfall",
+      "kicker": "Ponte de EBITDA",
+      "title": "Ganho de custo compensou volume menor",
+      "subtitle": "R$ mi, 2T26 vs. orçamento",
+      "items": [
+        {
+          "label": "EBITDA orçado",
+          "value": 7.7,
+          "total": true
+        },
+        {
+          "label": "Volume",
+          "value": -0.9
+        },
+        {
+          "label": "Preço",
+          "value": 0.3
+        },
+        {
+          "label": "Custo",
+          "value": 1.4
+        },
+        {
+          "label": "Despesas",
+          "value": -0.3
+        },
+        {
+          "label": "EBITDA real",
+          "value": 8.2,
+          "total": true
+        }
+      ],
+      "decimals": 1,
+      "source": "DRE gerencial, jun/26"
+    },
+    {
+      "type": "pareto",
+      "kicker": "Causas",
+      "title": "Troca de ferramenta e falta de material somam 70% das paradas",
+      "categories": [
+        "Troca de ferramenta",
+        "Falta de material",
+        "Falha hidráulica",
+        "Ajuste",
+        "Outros"
+      ],
+      "values": [
+        120,
+        95,
+        50,
+        30,
+        15
+      ],
+      "unit": "min",
+      "source": "Apontamento de paradas, semana 36",
+      "callout": {
+        "kind": "recommendation",
+        "label": "Foco",
+        "text": "SMED no turno C e kit de material de 2 h na linha atacam 70% do tempo parado."
+      }
+    },
+    {
+      "type": "gantt",
+      "kicker": "Cronograma",
+      "title": "Go-live em março, com piloto em janeiro",
+      "periods": [
+        "set",
+        "out",
+        "nov",
+        "dez",
+        "jan",
+        "fev",
+        "mar"
+      ],
+      "tasks": [
+        {
+          "name": "Diagnóstico",
+          "start": 0,
+          "end": 1.5,
+          "status": "success"
+        },
+        {
+          "name": "Desenho e piloto",
+          "start": 1.5,
+          "end": 4,
+          "status": "warning",
+          "label": "piloto em 1 rota"
+        },
+        {
+          "name": "Integração TMS-ERP",
+          "start": 2,
+          "end": 5
+        },
+        {
+          "name": "Implantação",
+          "start": 4,
+          "end": 6
+        },
+        {
+          "name": "Treinamento",
+          "start": 5.5,
+          "end": 6.5
+        },
+        {
+          "name": "Go-live",
+          "start": 6.5,
+          "milestone": true
+        }
+      ],
+      "today": 2.3,
+      "source": "Plano do projeto, base 10/09"
+    },
+    {
       "type": "progress_bars",
       "kicker": "Qualidade do dado",
       "title": "Barras de progresso com status por linha",

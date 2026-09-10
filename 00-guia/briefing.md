@@ -47,6 +47,8 @@ A mesma informação pode ser adequada para o próprio time e inadequada para um
 - Sem informação de pessoas identificáveis; ranking só por faixa ou anonimizado.
 - Rodapé: "Uso interno" ou "Confidencial - <empresa>".
 
+Rodapé automático: quando `meta.confidentiality` não é informado, o gerador usa "Uso interno" para `interno`/`interareas` e "Confidencial" para `externo`.
+
 **Externo**
 - Passe cada slide pelo filtro: "se isso vazasse, prejudicaria a empresa, um cliente, um fornecedor ou uma pessoa?" Se sim, remova ou generalize.
 - Resultados apenas os já divulgados ou autorizados pela liderança/jurídico; sem margem, custo unitário ou preço de outros clientes.

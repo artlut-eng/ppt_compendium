@@ -7,14 +7,14 @@
 | Como evoluiu em poucos períodos (até 6)? | Colunas | `column` | Real vs. ano anterior lado a lado |
 | Quem é maior / ranking? | Barras horizontais ordenadas | `bar` | Ordem decrescente; destaque em `accent` para o item da mensagem |
 | Real vs. meta por categoria? | Colunas ou barras agrupadas | `column` / `bar` com 2 séries | Meta em `neutral_mid`, real em `primary` |
-| Quais são as principais causas? | Pareto | `bar` decrescente (+ linha acumulada quando suportado) | Até 8 causas; "outros" por último e pequeno |
+| Quais são as principais causas? | Pareto | `pareto` (formas, com linha acumulada e limiar 80%) | Até 8 causas; "outros" por último e pequeno |
 | Como se compõe o total? | Colunas empilhadas | `stacked_column` | Até 5 partes; 100% quando o total não importa |
 | Qual a participação de poucas partes? | Pizza / rosca | `pie` / `doughnut` | Até 4 fatias; maior fatia começando às 12h; rótulos com % |
-| De onde veio a variação entre A e B? | Waterfall (ponte) | `column` com positivos/negativos (nativo quando disponível) | Início e fim em `primary`, ganhos `success`, perdas `danger` |
+| De onde veio a variação entre A e B? | Waterfall (ponte) | `waterfall` (formas) | Início e fim em `primary`, ganhos `success`, perdas `danger` |
 | Qual o funil / conversão por etapa? | Barras horizontais decrescentes | `bar` | Valor e % de conversão em cada etapa |
 | Como está vs. faixa aceitável (dia a dia)? | Run chart | `line` com linha(s) de meta/limite | 10 a 30 pontos; sem suavização |
 | Relação entre duas variáveis? | Dispersão | (usar imagem ou biblioteca externa) | Raro em decks executivos |
-| Distribuição no tempo por item (Gantt)? | Barras por linha | formas, não gráfico nativo | Ver `04-modelos-de-slides/timeline-roadmap.md` |
+| Distribuição no tempo por item (Gantt)? | Gantt | `gantt` (formas) | Ver `04-modelos-de-slides/gantt.md` |
 
 ## Regras gerais
 1. **Um gráfico por slide** e o título do slide é a conclusão dele.

@@ -5,7 +5,7 @@ Bibliotecas base para transformar uma **spec JSON** (`schemas/deck-spec.schema.j
 | Pasta | Linguagem | Estado |
 |---|---|---|
 | [`python-pptx/`](python-pptx/README.md) | Python 3.10+, `python-pptx` | Completo: 19 modelos de slide, kicker/callout/cabeçalho/logotipo, validação de spec, geração dos exemplos, miniaturas e auditoria |
-| [`pptxgenjs/`](pptxgenjs/README.md) | Node 18+, `pptxgenjs` | Base: capa, seção, bullets, KPIs, gráfico, tabela, plano de ação, encerramento |
+| [`pptxgenjs/`](pptxgenjs/README.md) | Node 18+, `pptxgenjs` | Completo: os 23 modelos, kicker/callout/logotipo, paginação de tabelas; sem template corporativo |
 
 ## Fluxo
 ```

@@ -1,0 +1,35 @@
+{
+  "name": "educacao-publico",
+  "description": "Educacao, setor publico e terceiro setor: verde-floresta e amarelo, sobrio e acessivel.",
+  "use_for": [
+    "educacao",
+    "setor-publico",
+    "ong",
+    "treinamento"
+  ],
+  "font": {
+    "title": "Arial",
+    "body": "Arial"
+  },
+  "colors": {
+    "primary": "1F5A3A",
+    "primary_dark": "133A25",
+    "secondary": "5B9A6E",
+    "accent": "E5B800",
+    "neutral_dark": "333333",
+    "neutral_mid": "8C8C8C",
+    "neutral_light": "F2F2F2",
+    "background": "FFFFFF",
+    "success": "2E7D32",
+    "warning": "F9A825",
+    "danger": "C62828",
+    "chart": [
+      "1F5A3A",
+      "5B9A6E",
+      "E5B800",
+      "8C8C8C",
+      "A9D3B4",
+      "F2DD7A"
+    ]
+  }
+}

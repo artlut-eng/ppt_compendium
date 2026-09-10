@@ -28,12 +28,12 @@ from pptx.chart.data import CategoryChartData
 from pptx.dml.color import RGBColor
 from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
 from pptx.enum.dml import MSO_LINE_DASH_STYLE
-from pptx.enum.shapes import MSO_SHAPE
+from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE
 from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 from pptx.oxml.ns import qn
 from pptx.util import Inches, Pt
 
-from fmt import auto as fmt_auto
+from fmt import auto as fmt_auto, fmt_number
 
 ROOT = Path(__file__).resolve().parents[2]
 PALETTES_DIR = ROOT / "05-artefatos-visuais" / "paletas"
@@ -993,6 +993,127 @@ class DeckBuilder:
             self._bullets(s, *tb, bullets, size=14)
         return s
 
+    def _line(self, slide, x1, y1, x2, y2, color="neutral_mid", width=1.0, dash=False):
+        ln = slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT, Inches(x1), Inches(y1), Inches(x2), Inches(y2))
+        ln.line.color.rgb = self.c(color)
+        ln.line.width = Pt(width)
+        if dash:
+            ln.line.dash_style = MSO_LINE_DASH_STYLE.DASH
+        return ln
+
+    def add_waterfall(self, title: str, items: list[dict], subtitle: str | None = None, decimals: int = 1, unit: str = "",
+                      source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        """Ponte (waterfall) com formas: items = [{label, value, total?}]; totais em primary, ganhos success, perdas danger."""
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
+        n = len(items)
+        px, py, pw, ph = 0.5, top + 0.35, CONTENT_W, self.bottom - top - 1.15
+        # cumulativo
+        levels, cum = [], 0.0
+        for it in items:
+            v = float(it.get("value", 0))
+            if it.get("total"):
+                levels.append((0.0, v)); cum = v
+            else:
+                levels.append((cum, cum + v)); cum += v
+        lo = min(0.0, min(min(a, b) for a, b in levels))
+        hi = max(max(a, b) for a, b in levels)
+        span = (hi - lo) or 1.0
+        y_of = lambda v: py + ph - (v - lo) / span * ph  # noqa: E731
+        slot = pw / n
+        bw = slot * 0.62
+        self._line(s, px, y_of(0), px + pw, y_of(0), color="neutral_mid", width=0.75)
+        prev_top = None
+        for i, (it, (a, b)) in enumerate(zip(items, levels)):
+            x = px + i * slot + (slot - bw) / 2
+            v = float(it.get("value", 0))
+            color = "primary" if it.get("total") else ("success" if v >= 0 else "danger")
+            y1, y2 = y_of(max(a, b)), y_of(min(a, b))
+            self._rect(s, x, y1, bw, max(y2 - y1, 0.03), fill=color)
+            label = (f"{'+' if (v > 0 and not it.get('total')) else ''}{fmt_number(v, decimals)}{(' ' + unit) if unit else ''}")
+            self._text(s, x - 0.3, y1 - 0.38, bw + 0.6, 0.35, label, size=12, bold=True, color=color if not it.get("total") else "neutral_dark", align="center", anchor=MSO_ANCHOR.BOTTOM)
+            self._text(s, px + i * slot, py + ph + 0.08, slot, 0.6, str(it.get("label", "")), size=11, color="neutral_dark", align="center")
+            if prev_top is not None:
+                self._line(s, x - (slot - bw), prev_top, x, prev_top, color="neutral_mid", width=0.75, dash=True)
+            prev_top = y_of(b)
+        return s
+
+    def add_pareto(self, title: str, categories: list[str], values: list[float], subtitle: str | None = None, sort: bool = True,
+                   threshold: float = 80.0, unit: str = "", source: str | None = None, notes: str | None = None,
+                   kicker: str | None = None, callout: dict | None = None):
+        """Pareto com formas: barras decrescentes + linha de % acumulado; barras ate o limiar em accent."""
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
+        pairs = list(zip(categories, [float(v) for v in values]))
+        if sort:
+            pairs.sort(key=lambda kv: -kv[1])
+        total = sum(v for _, v in pairs) or 1.0
+        n = len(pairs)
+        px, py, pw, ph = 0.5, top + 0.4, CONTENT_W - 1.2, self.bottom - top - 1.3
+        vmax = max(v for _, v in pairs) or 1.0
+        slot = pw / n
+        bw = slot * 0.6
+        self._line(s, px, py + ph, px + pw, py + ph, color="neutral_mid", width=0.75)
+        cum, pts = 0.0, []
+        reached = False
+        for i, (cat, v) in enumerate(pairs):
+            x = px + i * slot + (slot - bw) / 2
+            h = v / vmax * ph
+            color = "accent" if not reached else "primary"
+            self._rect(s, x, py + ph - h, bw, h, fill=color)
+            self._text(s, x - 0.2, py + ph - h - 0.32, bw + 0.4, 0.3, fmt_number(v) + (f" {unit}" if unit else ""), size=11, bold=True, align="center", anchor=MSO_ANCHOR.BOTTOM)
+            self._text(s, px + i * slot, py + ph + 0.06, slot, 0.7, cat, size=11, align="center")
+            cum += v
+            pct = 100 * cum / total
+            pts.append((x + bw / 2, py + ph - pct / 100 * ph, pct))
+            if pct >= threshold:
+                reached = True
+        for (x1, y1, _), (x2, y2, _) in zip(pts, pts[1:]):
+            self._line(s, x1, y1, x2, y2, color="neutral_dark", width=1.75)
+        for x, y, pct in pts:
+            self._rect(s, x - 0.07, y - 0.07, 0.14, 0.14, fill="neutral_dark", shape=MSO_SHAPE.OVAL)
+            self._text(s, x - 0.5, y - 0.4, 1.0, 0.3, f"{fmt_number(pct)}%", size=10, color="neutral_dark", align="center", anchor=MSO_ANCHOR.BOTTOM)
+        ty = py + ph - threshold / 100 * ph
+        self._line(s, px, ty, px + pw, ty, color="neutral_mid", width=0.75, dash=True)
+        self._text(s, px + pw + 0.05, ty - 0.15, 1.1, 0.3, f"{fmt_number(threshold)}% acum.", size=10, color="neutral_mid", anchor=MSO_ANCHOR.MIDDLE)
+        return s
+
+    def add_gantt(self, title: str, periods: list[str], tasks: list[dict], subtitle: str | None = None, today: float | None = None,
+                  source: str | None = None, notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        """Gantt simplificado: tasks = [{name, start, end, status?, milestone?}] com start/end em indice de periodo (fracao ok)."""
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
+        name_w = 3.0
+        gx, gy, gw = 0.5 + name_w, top + 0.15, CONTENT_W - name_w
+        n_p = max(len(periods), 1)
+        cw = gw / n_p
+        head_h = 0.4
+        row_h = min(0.5, (self.bottom - gy - head_h - 0.1) / max(len(tasks), 1))
+        gh = head_h + row_h * len(tasks)
+        self._rect(s, gx, gy, gw, head_h, fill="primary")
+        for i, per in enumerate(periods):
+            self._text(s, gx + i * cw, gy, cw, head_h, str(per), size=11, bold=True, color="FFFFFF", align="center", anchor=MSO_ANCHOR.MIDDLE)
+        for j, tk in enumerate(tasks):
+            y = gy + head_h + j * row_h
+            if j % 2 == 1:
+                self._rect(s, 0.5, y, CONTENT_W, row_h, fill="neutral_light")
+            self._text(s, 0.55, y, name_w - 0.1, row_h, str(tk.get("name", "")), size=12, anchor=MSO_ANCHOR.MIDDLE)
+            st = tk.get("status")
+            color = st if st in ("success", "warning", "danger") else "primary"
+            start = float(tk.get("start", 0))
+            end = float(tk.get("end", start + 1))
+            if tk.get("milestone"):
+                mx = gx + start * cw
+                self._rect(s, mx - 0.14, y + row_h / 2 - 0.14, 0.28, 0.28, fill=color, shape=MSO_SHAPE.DIAMOND)
+            else:
+                self._rect(s, gx + start * cw, y + row_h * 0.25, max((end - start) * cw, 0.05), row_h * 0.5, fill=color)
+                if tk.get("label"):
+                    self._text(s, gx + start * cw + 0.05, y, (end - start) * cw, row_h, str(tk["label"]), size=9, bold=True, color="FFFFFF", anchor=MSO_ANCHOR.MIDDLE)
+        for i in range(n_p + 1):
+            self._line(s, gx + i * cw, gy + head_h, gx + i * cw, gy + gh, color="neutral_light", width=0.5)
+        if today is not None:
+            tx = gx + float(today) * cw
+            self._line(s, tx, gy, tx, gy + gh, color="accent", width=1.5, dash=True)
+            self._text(s, tx - 0.4, gy + gh + 0.02, 0.8, 0.3, "Hoje", size=10, bold=True, color="accent", align="center")
+        return s
+
     def add_quote(self, text: str, author: str | None = None, dark: bool = False, notes: str | None = None):
         s = self._new_slide()
         if dark:
@@ -1036,6 +1157,7 @@ class DeckBuilder:
             "comparison": self.add_comparison, "timeline": self.add_timeline, "process": self.add_process,
             "matrix_2x2": self.add_matrix_2x2, "action_plan": self.add_action_plan, "quote": self.add_quote, "closing": self.add_closing,
             "takeaways": self.add_takeaways, "progress_bars": self.add_progress_bars, "image": self.add_image,
+            "waterfall": self.add_waterfall, "pareto": self.add_pareto, "gantt": self.add_gantt,
         }
         if t not in dispatch:
             raise ValueError(f"Tipo de slide desconhecido: {t!r}. Tipos validos: {sorted(dispatch)}")

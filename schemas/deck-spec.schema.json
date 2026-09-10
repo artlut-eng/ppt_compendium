@@ -268,6 +268,15 @@
         },
         {
           "$ref": "#/$defs/image"
+        },
+        {
+          "$ref": "#/$defs/waterfall"
+        },
+        {
+          "$ref": "#/$defs/pareto"
+        },
+        {
+          "$ref": "#/$defs/gantt"
         }
       ]
     },
@@ -1226,6 +1235,163 @@
         "alt": {
           "type": "string",
           "description": "Texto alternativo (acessibilidade); padrao: caption ou titulo"
+        }
+      }
+    },
+    "waterfall": {
+      "type": "object",
+      "required": [
+        "type",
+        "title",
+        "items"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "waterfall"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value"
+            ],
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "total": {
+                "type": "boolean",
+                "description": "true para barras de total (inicio/fim), que partem de zero"
+              }
+            }
+          }
+        },
+        "decimals": {
+          "type": "integer",
+          "default": 1
+        },
+        "unit": {
+          "type": "string"
+        }
+      }
+    },
+    "pareto": {
+      "type": "object",
+      "required": [
+        "type",
+        "title",
+        "categories",
+        "values"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "pareto"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 10
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "sort": {
+          "type": "boolean",
+          "default": true
+        },
+        "threshold": {
+          "type": "number",
+          "default": 80,
+          "description": "% acumulado que separa as causas em accent"
+        },
+        "unit": {
+          "type": "string"
+        }
+      }
+    },
+    "gantt": {
+      "type": "object",
+      "required": [
+        "type",
+        "title",
+        "periods",
+        "tasks"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "gantt"
+        },
+        "periods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 16
+        },
+        "tasks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "start"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              },
+              "status": {
+                "$ref": "#/$defs/status"
+              },
+              "milestone": {
+                "type": "boolean"
+              },
+              "label": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "today": {
+          "type": "number",
+          "description": "Posicao de hoje em indice de periodo (fracao permitida)"
         }
       }
     }

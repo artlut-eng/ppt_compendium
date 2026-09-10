@@ -25,7 +25,7 @@ Idioma: português (pt-BR). Formato padrão dos decks: **16:9 (13,333 × 7,5 pol
 | `01-fundamentos/` | Princípios de design, tipografia, cores, grid, storytelling, acessibilidade, banco de títulos, formatação numérica |
 | `02-publicos/` | Perfis por nível (estratégico, tático, operacional, externo) e por estilo de comunicação (vermelho, amarelo, verde, azul) |
 | `03-tipos-de-apresentacao/` | 16 tipos (status de projeto, financeiro, vendas, pitch, plano estratégico, análise de processo, portfólio, KPIs de área, progresso...) com estrutura slide a slide e spec |
-| `04-modelos-de-slides/` | 20 modelos de slide (capa, KPI, tabela, timeline, takeaways, barras de progresso...) + campos comuns (kicker, callout, cabeçalho, logotipo) com anatomia e coordenadas |
+| `04-modelos-de-slides/` | 23 modelos de slide (capa, KPI, tabela, timeline, takeaways, barras de progresso...) + campos comuns (kicker, callout, cabeçalho, logotipo) com anatomia e coordenadas |
 | `05-artefatos-visuais/` | Paletas em JSON, escolha de gráficos, ícones e formas, logotipo e marca, template corporativo (com exemplo) |
 | `06-codigo/` | Bibliotecas base em python-pptx e PptxGenJS, gerador a partir da spec, perfil de base de dados, formatação numérica, extração/reconstrução de decks existentes, pontuação pela rubrica, miniaturas (PowerPoint) e validador automático |
 | `07-checklists/` | Pré-entrega, por público, por nível de exposição, auditoria de arquivo e rubrica de qualidade (0 a 100) |
@@ -41,15 +41,18 @@ Idioma: português (pt-BR). Formato padrão dos decks: **16:9 (13,333 × 7,5 pol
 
 ## Status
 
+v0.4 — v0.3 + da base ao deck, slide de imagem, banco de títulos, formatação numérica, revisão de deck existente, rubrica, paginação de tabelas, template corporativo, waterfall/Pareto/Gantt, paletas por setor, versão JS completa, guias em inglês.
+
 v0.3 — v0.2 + prompt base para agentes (modos direto/guiado), fatos × inferências × recomendações, 4 novos tipos (análise de processo, portfólio, KPIs de área, progresso), callout/kicker/cabeçalho/logotipo em todos os slides, modelos takeaways e barras de progresso, validador automático e placeholders de logo.
 
 ## Roadmap sugerido
 
 - [x] Exemplos `.pptx` gerados para cada tipo de apresentação (`examples/`)
-- [ ] Versão JS completa (comparison, timeline, process, matrix_2x2, quote)
+- [x] Versão JS completa (23 modelos; sem template corporativo)
 - [x] Miniaturas (PNG) de todos os exemplos (`examples/thumbnails/`, geradas por `render_thumbnails.py` via PowerPoint)
-- [ ] Templates `.potx` corporativos
-- [ ] Paletas por segmento (indústria, saúde, tecnologia, varejo)
+- [x] Template corporativo (`meta.template`, `template_branding`) com exemplo
+- [x] Paletas por segmento (indústria, saúde, tecnologia, varejo/serviços, educação/público)
 - [ ] Biblioteca de ícones SVG neutros
 - [x] Validador automático de deck (`audit_deck.py`)
 - [ ] Exemplos com identidade de marca real (paleta + logo) via fork privado
+- [ ] Guias completos em inglês (hoje: `README.en.md` e `00-guia/como-usar.en.md`)

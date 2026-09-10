@@ -1,0 +1,34 @@
+{
+  "name": "industria",
+  "description": "Industrial: azul-aco e laranja de seguranca; alto contraste para chao de fabrica e engenharia.",
+  "use_for": [
+    "revisao-operacional",
+    "analise-de-processo",
+    "industria"
+  ],
+  "font": {
+    "title": "Arial",
+    "body": "Arial"
+  },
+  "colors": {
+    "primary": "1C3F60",
+    "primary_dark": "10283F",
+    "secondary": "4A7BA6",
+    "accent": "F26A21",
+    "neutral_dark": "333333",
+    "neutral_mid": "8C8C8C",
+    "neutral_light": "F2F2F2",
+    "background": "FFFFFF",
+    "success": "2E7D32",
+    "warning": "F9A825",
+    "danger": "C62828",
+    "chart": [
+      "1C3F60",
+      "4A7BA6",
+      "F26A21",
+      "8C8C8C",
+      "9CC3E0",
+      "F7B98A"
+    ]
+  }
+}

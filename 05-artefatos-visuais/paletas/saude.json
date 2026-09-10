@@ -1,0 +1,35 @@
+{
+  "name": "saude",
+  "description": "Saude e ciencias da vida: verde-petroleo e azul claro, tom sereno e confiavel.",
+  "use_for": [
+    "saude",
+    "farmaceutica",
+    "laboratorio",
+    "relatorio-de-progresso"
+  ],
+  "font": {
+    "title": "Calibri",
+    "body": "Calibri"
+  },
+  "colors": {
+    "primary": "0F5C5C",
+    "primary_dark": "083B3B",
+    "secondary": "3FA7A7",
+    "accent": "E07A1F",
+    "neutral_dark": "333333",
+    "neutral_mid": "8C8C8C",
+    "neutral_light": "F2F2F2",
+    "background": "FFFFFF",
+    "success": "2E7D32",
+    "warning": "F9A825",
+    "danger": "C62828",
+    "chart": [
+      "0F5C5C",
+      "3FA7A7",
+      "E07A1F",
+      "8C8C8C",
+      "A6D8D8",
+      "F2B983"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "tecnologia",
+  "description": "Tecnologia e produtos digitais: indigo e ciano, destaque magenta; moderna sem perder contraste.",
+  "use_for": [
+    "tecnologia",
+    "software",
+    "pitch-investidores",
+    "produto"
+  ],
+  "font": {
+    "title": "Segoe UI",
+    "body": "Segoe UI"
+  },
+  "colors": {
+    "primary": "2B2D7A",
+    "primary_dark": "1B1D52",
+    "secondary": "2FA4D9",
+    "accent": "E4368B",
+    "neutral_dark": "333333",
+    "neutral_mid": "8C8C8C",
+    "neutral_light": "F2F2F2",
+    "background": "FFFFFF",
+    "success": "2E7D32",
+    "warning": "F9A825",
+    "danger": "C62828",
+    "chart": [
+      "2B2D7A",
+      "2FA4D9",
+      "E4368B",
+      "8C8C8C",
+      "9DB8F0",
+      "F4A4CB"
+    ]
+  }
+}

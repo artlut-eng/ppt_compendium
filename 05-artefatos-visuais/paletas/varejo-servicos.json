@@ -1,0 +1,35 @@
+{
+  "name": "varejo-servicos",
+  "description": "Varejo, consumo e servicos: vinho e dourado, calor e proximidade com o cliente.",
+  "use_for": [
+    "varejo",
+    "servicos",
+    "relatorio-de-vendas",
+    "all-hands"
+  ],
+  "font": {
+    "title": "Calibri",
+    "body": "Calibri"
+  },
+  "colors": {
+    "primary": "7A1F3D",
+    "primary_dark": "4E1327",
+    "secondary": "C9566E",
+    "accent": "E8A33D",
+    "neutral_dark": "333333",
+    "neutral_mid": "8C8C8C",
+    "neutral_light": "F2F2F2",
+    "background": "FFFFFF",
+    "success": "2E7D32",
+    "warning": "F9A825",
+    "danger": "C62828",
+    "chart": [
+      "7A1F3D",
+      "C9566E",
+      "E8A33D",
+      "8C8C8C",
+      "E8A9B8",
+      "F5D39A"
+    ]
+  }
+}

@@ -56,6 +56,9 @@ db.save("atlas.pptx")
 | `add_takeaways(title, items)` | `takeaways` | `takeaways.md` |
 | `add_progress_bars(title, items, max_value, columns, highlight_index)` | `progress_bars` | `progress-bars.md` |
 | `add_image(title, image, caption, layout, bullets, highlights, alt)` | `image` | `imagem.md` |
+| `add_waterfall(title, items, decimals, unit)` | `waterfall` | `waterfall.md` |
+| `add_pareto(title, categories, values, sort, threshold, unit)` | `pareto` | `pareto.md` |
+| `add_gantt(title, periods, tasks, today)` | `gantt` | `gantt.md` |
 
 Todos os métodos de conteúdo aceitam também `subtitle`, `source` (rodapé), `notes` (notas do apresentador), `kicker` (rótulo acima do título) e `callout` (`{kind, label, text}`). O construtor aceita `brand`, `deck_name`, `date`, `logo`, `logo_light` e `logo_position` (cabeçalho e logotipo em todos os slides; ver `04-modelos-de-slides/cabecalho-kicker-e-logo.md`).
 
@@ -75,6 +78,5 @@ Todos os métodos de conteúdo aceitam também `subtitle`, `source` (rodapé), `
 5. Rode `build_examples.py`.
 
 ## Limitações conhecidas
-- Waterfall não é nativo em python-pptx: use `column` com valores positivos/negativos ou construa com formas.
-- Pareto com linha acumulada exige gráfico combinado (não suportado nativamente); use `bar` decrescente.
+- Waterfall, Pareto e Gantt são construídos com formas (`add_waterfall`, `add_pareto`, `add_gantt`), editáveis como objetos, não como gráfico nativo.
 - Fontes precisam existir na máquina que abre o arquivo (Calibri, Arial e Segoe UI são seguras no Windows/Office).
