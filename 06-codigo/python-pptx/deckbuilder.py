@@ -33,6 +33,8 @@ from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 from pptx.oxml.ns import qn
 from pptx.util import Inches, Pt
 
+from fmt import auto as fmt_auto
+
 ROOT = Path(__file__).resolve().parents[2]
 PALETTES_DIR = ROOT / "05-artefatos-visuais" / "paletas"
 
@@ -442,7 +444,7 @@ class DeckBuilder:
             self._rect(s, x, y, w, card_h, fill="neutral_light")
             self._rect(s, x, y, w, 0.08, fill=bar)
             self._text(s, x + 0.15, y + 0.25, w - 0.3, 0.4, str(k.get("label", "")).upper(), size="kpi_label", color="neutral_mid")
-            val = str(k.get("value", ""))
+            val = fmt_auto(k.get("value", ""), k.get("format"))
             vsize = value_size if len(val) <= 6 else max(20, int(value_size * 6 / len(val) * 1.15))
             self._text(s, x + 0.15, y + 0.65, w - 0.3, 1.1, val, size=vsize, bold=True, color="neutral_dark", anchor=MSO_ANCHOR.MIDDLE)
             if k.get("delta"):
@@ -567,6 +569,7 @@ class DeckBuilder:
         h = self.bottom - top - 0.1
         gframe = s.shapes.add_chart(xl_type, Inches(cx), Inches(top + 0.1), Inches(cw), Inches(h), data)
         chart = gframe.chart
+        self._set_alt(gframe, title)
         chart.has_title = False
         chart.font.size = self.pt("chart")
         chart.font.name = self.font_body
@@ -822,6 +825,63 @@ class DeckBuilder:
                        color=color if st else "neutral_dark", anchor=MSO_ANCHOR.MIDDLE)
         return s
 
+    def _resolve(self, path: str) -> str:
+        for cand in (Path(path), ROOT / path):
+            if cand.exists():
+                return str(cand)
+        raise FileNotFoundError(f"Imagem nao encontrada: {path}")
+
+    @staticmethod
+    def _set_alt(shape, text: str | None):
+        if text:
+            for el in shape._element.xpath(".//p:cNvPr"):
+                el.set("descr", str(text))
+
+    def add_image(self, title: str, image: str, caption: str | None = None, layout: str = "full", bullets: list[str] | None = None,
+                  highlights: list[dict] | None = None, alt: str | None = None, subtitle: str | None = None, source: str | None = None,
+                  notes: str | None = None, kicker: str | None = None, callout: dict | None = None):
+        """Imagem/print ajustada a area de conteudo, com legenda, destaques numerados e texto alternativo."""
+        s, top = self._content_slide(title, subtitle, source, notes, kicker, callout)
+        path = self._resolve(image)
+        cap_h = 0.45 if caption else 0.0
+        avail_h = self.bottom - top - 0.1 - cap_h
+        if layout == "left":
+            box, tb = (0.5, top + 0.1, 8.0, avail_h), (8.8, top + 0.1, 4.03, avail_h)
+        elif layout == "right":
+            box, tb = (4.83, top + 0.1, 8.0, avail_h), (0.5, top + 0.1, 4.03, avail_h)
+        else:
+            box, tb = (0.5, top + 0.1, CONTENT_W, avail_h), None
+        try:
+            from PIL import Image as _Img
+            with _Img.open(path) as im:
+                iw, ih = im.size
+        except Exception:  # noqa: BLE001
+            iw, ih = 16, 9
+        bx, by, bw, bh = box
+        scale = min(bw / iw, bh / ih)
+        w, h = iw * scale, ih * scale
+        x, y = bx + (bw - w) / 2, by + (bh - h) / 2
+        pic = s.shapes.add_picture(path, Inches(x), Inches(y), Inches(w), Inches(h))
+        pic.line.color.rgb = self.c("neutral_light")
+        pic.line.width = Pt(0.75)
+        self._set_alt(pic, alt or caption or title)
+        for i, hl in enumerate(highlights or []):
+            hx, hy = x + float(hl.get("x", 0)) * w, y + float(hl.get("y", 0)) * h
+            hw, hh = float(hl.get("w", 0.2)) * w, float(hl.get("h", 0.2)) * h
+            self._rect(s, hx, hy, hw, hh, fill=None, line="accent", line_width=2.25)
+            num = str(hl.get("number", i + 1))
+            circ = self._rect(s, hx - 0.18, hy - 0.18, 0.36, 0.36, fill="accent", line="FFFFFF", shape=MSO_SHAPE.OVAL, line_width=1.0)
+            circ.text_frame.text = num
+            circ.text_frame.margin_left = circ.text_frame.margin_right = Inches(0)
+            circ.text_frame.paragraphs[0].alignment = PP_ALIGN.CENTER
+            circ.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
+            self._style_run(circ.text_frame.paragraphs[0].runs[0], 11, bold=True, color="FFFFFF")
+        if caption:
+            self._text(s, bx, by + bh + 0.05, bw, 0.4, caption, size=11, italic=True, color="neutral_mid", align="center")
+        if tb and bullets:
+            self._bullets(s, *tb, bullets, size=14)
+        return s
+
     def add_quote(self, text: str, author: str | None = None, dark: bool = False, notes: str | None = None):
         s = self._new_slide()
         if dark:
@@ -858,7 +918,7 @@ class DeckBuilder:
             "chart": self.add_chart, "table": self.add_table, "bullets": self.add_bullets, "two_column": self.add_two_column,
             "comparison": self.add_comparison, "timeline": self.add_timeline, "process": self.add_process,
             "matrix_2x2": self.add_matrix_2x2, "action_plan": self.add_action_plan, "quote": self.add_quote, "closing": self.add_closing,
-            "takeaways": self.add_takeaways, "progress_bars": self.add_progress_bars,
+            "takeaways": self.add_takeaways, "progress_bars": self.add_progress_bars, "image": self.add_image,
         }
         if t not in dispatch:
             raise ValueError(f"Tipo de slide desconhecido: {t!r}. Tipos validos: {sorted(dispatch)}")

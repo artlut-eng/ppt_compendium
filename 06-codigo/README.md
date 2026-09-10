@@ -29,6 +29,12 @@ python 06-codigo/python-pptx/build_examples.py
 ```
 Extrai o bloco JSON de cada arquivo em `03-tipos-de-apresentacao/`, valida contra o schema, salva em `schemas/exemplos/` e gera um `.pptx` por tipo em `examples/`. Se um exemplo da documentação quebrar, a documentação está errada.
 
+## Perfil de base de dados
+```bash
+python 06-codigo/python-pptx/profile_data.py base.xlsx --cutoff 2026-09-10 --spec esqueleto.json --title "Título"
+```
+Relatório Markdown/JSON com colunas, cobertura, período, registros futuros, alertas (coortes imaturas, campos vazios, outliers, duplicatas), KPIs, segmentações e gráficos sugeridos, mais um esqueleto de spec com placeholders. Ver `00-guia/da-base-ao-deck.md`. `fmt.py` centraliza a formatação numérica pt-BR (`01-fundamentos/formatacao-numerica.md`).
+
 ## Miniaturas (Windows + PowerPoint)
 ```bash
 pip install pywin32

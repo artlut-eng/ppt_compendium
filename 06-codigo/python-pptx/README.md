@@ -2,8 +2,9 @@
 
 ## Instalação
 ```bash
-pip install python-pptx jsonschema
+pip install python-pptx jsonschema pandas openpyxl pillow pywin32
 ```
+(`pandas`/`openpyxl` para `profile_data.py`, `pillow` para imagens e miniaturas, `pywin32` para renderizar via PowerPoint no Windows.)
 
 ## Uso a partir de spec
 ```bash
@@ -53,7 +54,8 @@ db.save("atlas.pptx")
 | `add_quote(text, author, dark)` | `quote` | `citacao-destaque.md` |
 | `add_closing(title, subtitle)` | `closing` | `encerramento.md` |
 | `add_takeaways(title, items)` | `takeaways` | `takeaways.md` |
-| `add_progress_bars(title, items, max, columns, highlight_index)` | `progress_bars` | `progress-bars.md` |
+| `add_progress_bars(title, items, max_value, columns, highlight_index)` | `progress_bars` | `progress-bars.md` |
+| `add_image(title, image, caption, layout, bullets, highlights, alt)` | `image` | `imagem.md` |
 
 Todos os métodos de conteúdo aceitam também `subtitle`, `source` (rodapé), `notes` (notas do apresentador), `kicker` (rótulo acima do título) e `callout` (`{kind, label, text}`). O construtor aceita `brand`, `deck_name`, `date`, `logo`, `logo_light` e `logo_position` (cabeçalho e logotipo em todos os slides; ver `04-modelos-de-slides/cabecalho-kicker-e-logo.md`).
 

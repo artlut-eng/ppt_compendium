@@ -226,6 +226,9 @@
         },
         {
           "$ref": "#/$defs/progress_bars"
+        },
+        {
+          "$ref": "#/$defs/image"
         }
       ]
     },
@@ -382,7 +385,11 @@
                 "type": "string"
               },
               "value": {
-                "type": "string"
+                "type": [
+                  "string",
+                  "number"
+                ],
+                "description": "Texto ja formatado ou numero (formatado automaticamente em pt-BR)"
               },
               "delta": {
                 "type": "string"
@@ -393,6 +400,15 @@
               "description": {
                 "type": "string",
                 "description": "Linha curta de contexto/cobertura sob o delta"
+              },
+              "format": {
+                "type": "string",
+                "enum": [
+                  "currency",
+                  "pct",
+                  "int"
+                ],
+                "description": "Formato automatico quando value e numero"
               }
             }
           }
@@ -1090,6 +1106,78 @@
         },
         "highlight_index": {
           "type": "integer"
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "required": [
+        "type",
+        "title",
+        "image"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/common"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "image"
+        },
+        "image": {
+          "type": "string",
+          "description": "Caminho da imagem (absoluto, relativo ao cwd ou a raiz do repositorio)"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "layout": {
+          "type": "string",
+          "enum": [
+            "full",
+            "left",
+            "right"
+          ],
+          "default": "full",
+          "description": "full: imagem ocupa a area; left/right: imagem de um lado e bullets do outro"
+        },
+        "bullets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "highlights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "w": {
+                "type": "number"
+              },
+              "h": {
+                "type": "number"
+              },
+              "number": {
+                "type": [
+                  "string",
+                  "integer"
+                ]
+              }
+            }
+          },
+          "description": "Retangulos de destaque em coordenadas normalizadas (0 a 1) da imagem, numerados"
+        },
+        "alt": {
+          "type": "string",
+          "description": "Texto alternativo (acessibilidade); padrao: caption ou titulo"
         }
       }
     }

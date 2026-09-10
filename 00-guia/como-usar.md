@@ -19,6 +19,8 @@ Pedido do usuário
 
 ## Passo 0 — Briefing
 
+Se o pedido vier com planilha ou base de dados, rode primeiro o perfil (`06-codigo/python-pptx/profile_data.py base.xlsx --cutoff AAAA-MM-DD --spec esqueleto.json`) e siga [`da-base-ao-deck.md`](da-base-ao-deck.md): corte temporal, cobertura, coortes imaturas, KPIs e gráficos candidatos.
+
 Antes de qualquer escolha, descubra com o usuário (ver [`briefing.md`](briefing.md)):
 1. **Mensagem central** em uma frase e **o que deve acontecer depois** (decidir, aprovar, alinhar, informar, vender).
 2. **Nível de exposição**: `interno` (tudo pode entrar, inclusive riscos crus), `interareas` (fraquezas só com plano, sem culpar áreas, sem dados de pessoas) ou `externo` (só o que a empresa autoriza publicar). Na dúvida, `interareas`.
@@ -74,7 +76,7 @@ Catálogo completo: [`03-tipos-de-apresentacao/README.md`](../03-tipos-de-aprese
    - Tático → **situação → análise → plano de ação**.
    - Operacional → **status → desvios → ações → responsáveis**.
    - Externo/persuasivo → **problema → solução → prova → chamada para ação**.
-3. Cada slide recebe um **título-conclusão** (frase afirmativa). Teste: lendo só os títulos em sequência, a história faz sentido?
+3. Cada slide recebe um **título-conclusão** (frase afirmativa; fórmulas e pares ruim/bom em `01-fundamentos/banco-de-titulos.md`). Teste: lendo só os títulos em sequência, a história faz sentido?
 
 ## Passo 4 — Escolher modelos de slide
 
@@ -82,12 +84,13 @@ Mapeie cada ponto da narrativa para um modelo em `04-modelos-de-slides/`. Combin
 
 - Campos comuns em todo slide de conteúdo: `kicker` (rótulo de seção acima do título) e `callout` (caixa rotulada de conclusão / ressalva / recomendação / decisão). Ver `04-modelos-de-slides/callout.md` e `cabecalho-kicker-e-logo.md`.
 - Abertura: `capa` (com `thesis` quando houver tese central) → `agenda` (opcional se < 8 slides) → `sumario-executivo`
-- Corpo: `kpi-dashboard`, `grafico`, `tabela`, `progress-bars`, `comparacao`, `timeline-roadmap`, `processo-fluxo` (com métricas por etapa), `matriz-2x2`, `riscos-e-issues`, `takeaways`
+- Corpo: `kpi-dashboard`, `grafico`, `tabela`, `progress-bars`, `imagem` (prints com destaques numerados), `comparacao`, `timeline-roadmap`, `processo-fluxo` (com métricas por etapa), `matriz-2x2`, `riscos-e-issues`, `takeaways`
 - Fechamento: `proximos-passos` → `encerramento`
 
 ## Passo 5 — Aplicar regras visuais
 
 - Paleta: escolha em `05-artefatos-visuais/paletas/` pelo tipo/setor. Nunca invente mais de 1 cor de destaque além da paleta.
+- Números: `01-fundamentos/formatacao-numerica.md` (R$ mil/mi, 1 casa, "x de y (z%)", p.p.).
 - Tipografia: `01-fundamentos/tipografia.md`. Padrão: títulos 28–36 pt, corpo 14–18 pt, mínimo 12 pt (operacional em TV: mínimo 18 pt).
 - Gráficos: `05-artefatos-visuais/graficos/escolha-do-grafico.md`. Um gráfico por slide, sempre com o título dizendo a conclusão.
 

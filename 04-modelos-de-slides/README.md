@@ -26,6 +26,7 @@ Padrões reutilizáveis de **um slide**. Cada arquivo traz: quando usar, anatomi
 | Encerramento | `closing` | Último slide: pedido, contato, próxima revisão | [`encerramento.md`](encerramento.md) |
 | Leitura executiva / takeaways | `takeaways` | 2 a 4 pontos numerados lado a lado (leitura, direcionadores, fases) | [`takeaways.md`](takeaways.md) |
 | Barras de progresso / distribuição | `progress_bars` | 3 a 12 itens com valor proporcional e cor por status (qualidade de dado, carga, distribuição) | [`progress-bars.md`](progress-bars.md) |
+| Imagem / print de tela | `image` | Prints com destaques numerados, fotos, diagramas; layouts full/left/right | [`imagem.md`](imagem.md) |
 | Callout rotulado | campo `callout` | Caixa de conclusão / ressalva / recomendação / decisão no rodapé de qualquer slide | [`callout.md`](callout.md) |
 | Cabeçalho, kicker e logotipo | `meta.brand`, `kicker`, `meta.logo` | Identidade e navegação em todos os slides | [`cabecalho-kicker-e-logo.md`](cabecalho-kicker-e-logo.md) |
 
